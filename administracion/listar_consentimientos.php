@@ -72,7 +72,14 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
                           </div></td>
                         <td class="text-center">
                         <a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a>
+                        <?php if($row['codigo'] == "9. FT-PA-GI-HC-064"){?>
+                        <a class="btn btn-warning" title="Editar" href="<?php echo "Controlador/Editar_Consentimiento_Encuesta.php?cod_consentimiento=" . $row['codigo'] ?>"><span class="fa fa-pencil-square-o" style="color: black;"></span></a>
                         <a class="btn btn-danger" title="Deshabilitar" href="<?php echo "Controlador/Desactivar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ."&id_estado=" . $row['id_estado'] ?>"><span class="fa fa-minus-circle" style="color: white;"></span></a>                     
+                     
+                        <?php }else{?>
+                          <a class="btn btn-warning" title="Editar" href="<?php echo "Controlador/Editar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ?>"><span class="fa fa-pencil-square-o" style="color: white;"></span></a>
+                        <a class="btn btn-danger" title="Deshabilitar" href="<?php echo "Controlador/Desactivar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ."&id_estado=" . $row['id_estado'] ?>"><span class="fa fa-minus-circle" style="color: white;"></span></a>                     
+                      <?php }?>
                       </td>
                       <?php elseif($row['id_estado'] == 2):?>
                         <td class="text-center"><?php echo $estado;?><br><div class="progress progress-sm">

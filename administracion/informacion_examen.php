@@ -48,7 +48,7 @@ $cod_examen = $_GET['cod_examen'];
 $id_estado = new EstadoDao();
 $conexion = new conexion();
 $conexion = $conexion->connect(); 
-$consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion,id_estado FROM consentimiento as con, consent_examen as conexam where con.codigo=conexam.cod_consentimiento and conexam.cod_examen = $cod_examen";
+$consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion,id_estado,conexam.cod_examen FROM consentimiento as con, consent_examen as conexam where con.codigo=conexam.cod_consentimiento and conexam.cod_examen = $cod_examen";
 ?>
 <table id="minhatabela" class="display responsive table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                 <br>
@@ -74,7 +74,7 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
                           </div></td>
                         <td class="text-center">
                         <a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a>
-                        <a class="btn btn-danger" title="Deshabilitar" href="<?php echo "Controlador/Desactivar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ."&id_estado=" . $row['id_estado'] ?>"><span class="fa fa-minus-circle" style="color: white;"></span></a>                     
+                        <a class="btn btn-danger" title="Eliminar" href="<?php echo "Controlador/Eliminar_Consentimiento_Examen.php?cod_consentimiento=" . $row['codigo'] ."&cod_examen=" . $row['cod_examen'] ?>"><span class="fa fa-minus-circle" style="color: white;"></span></a>                     
                       </td>
                       <?php elseif($row['id_estado'] == 2):?>
                         <td class="text-center"><?php echo $estado;?><br><div class="progress progress-sm">
@@ -82,7 +82,7 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
                           </div></td>
                         <td class="text-center">
                         <a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a>
-                        <a class="btn btn-success" title="Habilitar" href="<?php echo "Controlador/Desactivar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ."&id_estado=" . $row['id_estado'] ?>"><span class="fa fa-check-circle" style="color: white;"></span></a>                     
+                        <a class="btn btn-success" title="Eliminar" href="<?php echo "Controlador/Eliminar_Consentimiento_Examen.php?cod_consentimiento=" . $row['codigo'] ."&cod_examen=" . $row['cod_examen'] ?>"><span class="fa fa-check-circle" style="color: white;"></span></a>                     
                       </td>
                         <?php endif;?>
                     </tr>  

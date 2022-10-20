@@ -21,6 +21,16 @@ endforeach;
     return $nombre;
     }
 
+    public function Eliminar_Examen_Consentimiento($cod_examen,$cod_consentimiento){
+        $sq="DELETE FROM consent_examen WHERE cod_examen= :cod_examen and cod_consentimiento= :cod_consentimiento";
+        $result=$this->conexion->prepare($sq);
+        $result->execute(array(
+            ':cod_examen' =>"".$cod_examen."",
+            ':cod_consentimiento' =>"".$cod_consentimiento.""
+          ));
+        $results = $result -> fetchAll();
+    }
+
     public function Consultar_Archivo_Consentimiento($codigo){
         $sq="SELECT * FROM consentimiento as cons WHERE cons.codigo= :codigo";
 $result=$this->conexion->prepare($sq);
@@ -96,6 +106,43 @@ foreach($results as $fila):
 endforeach;
 return $dir;
 }
+
+public function Consultar_Consentimiento_Detalles($id_consentimiento){
+    $sq="SELECT * FROM consentimiento_detalle WHERE cod_consentimiento= :id_consentimiento";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':id_consentimiento' =>"".$id_consentimiento.""
+));
+$results = $result -> fetchAll();
+$dir = array();
+$cont = 0;
+foreach($results as $fila):
+        $dir[$cont] = $fila["cod_consentimiento"];
+        $cont++;
+        $dir[$cont] = $fila["nombre"];
+        $cont++;
+        $dir[$cont] = $fila["descripcion"];
+        $cont++;
+        $dir[$cont] = $fila["objetivo"];
+        $cont++;
+        $dir[$cont] = $fila["beneficio"];
+        $cont++;
+        $dir[$cont] = $fila["riesgo"];
+        $cont++;
+        $dir[$cont] = $fila["existe_alternativa"];
+        $cont++;
+        $dir[$cont] = $fila["alternativa"];
+        $cont++;
+        $dir[$cont] = $fila["decision"];
+        $cont++;
+        $dir[$cont] = $fila["revocatoria"];
+        $cont++;
+        $dir[$cont] = $fila["profesional_firma"];
+        $cont++;
+endforeach;
+return $dir;
+}
+
 public function Validar_Consentimientos_Cita_Firmados($id_cita){
     $sq="SELECT COUNT(id_cita) AS cantidad FROM cita_consent WHERE id_estado=6 and id_cita= :id_cita";
 $result=$this->conexion->prepare($sq);
@@ -167,6 +214,24 @@ $sq->bindValue(':revocatoria',$revocatoria);
 $sq->bindValue(':profesional_firma',$profesional_firma);
 $sq->execute();
 return $sq;
+}
+
+public function Actualizar_Consentimiento_Detalle($cod_consentimiento,$nombre,$descripcion,$objetivo,$beneficio,$riesgo,$existe_alternativa,$alternativa,$decision,$revocatoria,$profesional_firma){
+    $sq ="UPDATE consentimiento_detalle SET descripcion=:descripcion, objetivo=:objetivo, beneficio=:beneficio, riesgo=:riesgo, existe_alternativa=:existe_alternativa, alternativa=:alternativa, decision=:decision, revocatoria=:revocatoria, profesional_firma=:profesional_firma WHERE cod_consentimiento= :cod_consentimiento";
+    $result=$this->conexion->prepare($sq);
+    $result->execute(array(
+        ':descripcion' =>"".$descripcion."",
+        ':objetivo' =>"".$objetivo."",
+        ':beneficio' =>"".$beneficio."",
+        ':riesgo' =>"".$riesgo."",
+        ':existe_alternativa' =>"".$existe_alternativa."",
+        ':alternativa' =>"".$alternativa."",
+        ':decision' =>"".$decision."",
+        ':revocatoria' =>"".$revocatoria."",
+        ':profesional_firma' =>"".$profesional_firma."",
+        ':cod_consentimiento' =>"".$cod_consentimiento.""
+      ));
+      return $result->rowCount();
 }
 public function Obtener_Id_Cita(){
     $sq="SELECT MAX(id_cita) ultimo FROM cita";
