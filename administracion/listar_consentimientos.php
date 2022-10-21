@@ -44,9 +44,7 @@ include_once '../modelDao/EstadoDao.php';
 $id_estado = new EstadoDao();
 $conexion = new conexion();
 $conexion = $conexion->connect(); 
-$consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion,id_estado FROM consentimiento";
-
-
+$consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,SUBSTRING(descripcion,1,45) descripcion,id_estado FROM consentimiento";
 ?>
  <table id="minhatabela" class="display responsive table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                 <br>

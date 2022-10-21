@@ -76,7 +76,7 @@ $consulta = "SELECT * FROM cita order by fecha DESC";
                         <td class="text-center"><?php echo $row['apellido_paciente']; ?></td>
                         <td class="text-center"><?php echo $row['documento']; ?></td>
                         <td class="text-center"><?php $cod = $row['cod_examen']; echo $examen->Consultar_Examen_Por_ID($cod); ?></td>
-                        <td class="text-center"><?php echo $row['hora']; ?></td>
+                        <td class="text-center"><?php echo $row['fecha']; ?></td>
                         <?php if($row['id_estado']==3):?>
                         <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -133,7 +133,8 @@ $(document).ready(function() {
 var table = $('#minhatabela').DataTable( {
   destroy: true,
   deferRender:    true, 
-  autoWidth: false,     
+  autoWidth: false,  
+  "order": [[ 5, "desc" ]],   
   "search": {
     "regex": true,
     "caseInsensitive": false,
@@ -165,7 +166,7 @@ var table = $('#minhatabela').DataTable( {
                     "colvis": "Visibilidad"
                 },              
 },});
-    
+
 function aviso(url){
         alertify.confirm('<Strong>¡Adventercia!</Strong>',"¿Esta Seguro de Marcar como NO Asistida?",
   function() {     

@@ -39,9 +39,7 @@ $historial = $_GET["historial"];
 ?>
 <div class="container-fluid col-11 mx-auto" style="margin-top: 65px;">
 <div class="row">
-              <div class="row col-sm-12 text-left mb-2 d-flex">
-              <div class="col-sm-12 text-secondary"><h4>Solicite la Firma al Paciente/Representante Legal</h4></div>
-</div>
+              
 <div class="row col-sm-12 text-left mb-3 d-flex">
               <div class="col-sm-12 text-center mb-3">
                   <?php 
@@ -50,6 +48,9 @@ $historial = $_GET["historial"];
                    if(@file_get_contents('firma_paciente_temp/firma_paciente_temp.png') || $historial=="true"){
                     
                     }else{?>
+                    <div class="row col-sm-12 text-left mb-2 d-flex">
+              <div class="col-sm-12 text-secondary"><h4>Solicite la Firma al Paciente/Representante Legal</h4></div>
+</div>
    <div id="canva">
    <canvas id='canvas' width="600" height="200" style='border: 1px solid #CCC;'>
        <p>Tu navegador no soporta canvas</p>
