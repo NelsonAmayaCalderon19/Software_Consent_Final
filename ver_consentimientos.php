@@ -126,8 +126,15 @@ $historial = $_GET["historial"];
 <?php }} ?>
               </div>
        </div>
+       <div class="row col-sm-12 text-left mb-3 d-flex">         
+              <div class="col-sm-12 text-right" style="display: block;">
+                  <!--<a class="btn btn-success" href="crear_consentimiento.php"></a>-->
+                  <button type="button" class="btn btn-success" data-toggle="modal" id="select" data-target="#exampleModal">
+                  Anexar Consentimiento
+</button>
+              </div>
+       </div>
 <div class="col-sm-12 card shadow mb-3">
-
 <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-address-book-o"></i> Consentimientos informados</h6>
             </div>
@@ -213,12 +220,58 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
               </div>-->
                           </div> 
 </div>
+<form name="f1" id="formElement"  method='post' action="Controlador/Anexar_Consentimiento_Cita.php?id_cita=<?php echo $id_cita?>&cod_examen=<?php echo $cod_examen?>" ENCTYPE='multipart/form-data'>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Seleccione el/los Consentimientos a Anexar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php
+      $consulta = "SELECT con.codigo,con.descripcion FROM consentimiento as con WHERE con.id_estado=1 and con.codigo NOT IN (SELECT cit.cod_consentimiento FROM cita_consent as cit WHERE cit.id_cita=$id_cita)";
 
-<!--<script src="vendor2/jquery/jquery.min.js"></script>-->
+?>
+            <table id="minhatabela2" class="display responsive table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                <br>
+                <thead>
+                    <tr>
+                        <th class="text-center">CONSENTIMIENTO</th>
+                        <!--<th class="text-center">OBJETIVO</th>-->
+                        <!--<th class="text-center">EXAMEN</th>-->
+                        <th class="text-center">ANEXAR</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <?php foreach ($conexion->query($consulta) as $row) { ?>
+                    <tr>
+                        <td class="text-center"><?php echo $row['descripcion']; ?></td>
+                        <td class="text-center"><div class="form-check">
+  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo']; ?>" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+  </label>
+</div></td>
+                       
+                    </tr>  
+                    <?php } ?>   
+                </tbody>
+            </table> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <input class="btn btn-success btn-confirma" type="submit" name="btnConfirma" id="btnConfirma" value="Confirmar" /> 
+ 
+      </div>
+    </div>
+  </div>
+</div>
+                    </form>
   <script src="vendor2/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor2/jquery-easing/jquery.easing.min.js"></script>
    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
- <!-- <script src="vendor/chart.js/Chart.min.js"></script>-->
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
@@ -226,7 +279,9 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-  
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                    --><script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script type="text/javascript" language="javascript" >
 
 $(document).ready(function() {
@@ -243,8 +298,8 @@ var table = $('#minhatabela').DataTable( {
   },language: {
       "sProcessing":     "Procesando...",
                 "sLengthMenu":     "Mostrar _MENU_ registros",
-                "sZeroRecords":    "No se encontraron Proyectos",
-                "sEmptyTable":     "Ningún dato disponible en esta tabla :(",
+                "sZeroRecords":    "No se encontraron Consentimientos",
+                "sEmptyTable":     "No Existen Consentimientos Anexados a la Cita Medica :(",
                 "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
                 "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
                 "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
@@ -268,6 +323,59 @@ var table = $('#minhatabela').DataTable( {
                     "colvis": "Visibilidad"
                 },              
 },});
+
+
+var table = $('#minhatabela2').DataTable( {
+  destroy: true,
+  deferRender:    true, 
+  autoWidth: false,     
+  "search": {
+    "regex": true,
+    "caseInsensitive": false,
+  },language: {
+      "sProcessing":     "Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron Consentimientos",
+                "sEmptyTable":     "No Hay Consentimientos Disponibles :(",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                },
+                "buttons": {
+                    "copy": "Copiar",
+                    "colvis": "Visibilidad"
+                },              
+},});
+
+$(document).ready(function() {
+    $('#select').click(function() {
+        $(":checkbox").prop('checked', false);
+    })
+});
+    </script>
+    <script>
+      var table = $('#minhatabela2');
+
+      if (tabla.firstChild) {
+        
+        document.getElementById("btnConfirma").setAttribute("disabled","true");
+      }else{
+        document.getElementById("btnConfirma").setAttribute("disabled","false");
+      }
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

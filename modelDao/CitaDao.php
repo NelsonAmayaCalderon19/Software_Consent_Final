@@ -260,6 +260,16 @@ public function Actualizar_Cita_($id_cita,$tipo_documento,$sexo){
       return $result->rowCount();
 }
 
+public function Actualizar_Cita_Sexo($id_cita,$sexo){
+    $sq ="UPDATE cita SET sexo=:sexo WHERE id_cita= :id_cita";
+    $result=$this->conexion->prepare($sq);
+    $result->execute(array(
+        ':sexo' =>"".$sexo."",
+        ':id_cita' =>"".$id_cita."",
+      ));
+      return $result->rowCount();
+}
+
 public function Eliminar_Consentimientos_Cita($id_cita){
     $sq = "DELETE FROM cita_consent WHERE id_cita= :id_cita";
     $result=$this->conexion->prepare($sq);

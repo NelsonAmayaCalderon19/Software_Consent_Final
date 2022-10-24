@@ -167,6 +167,16 @@ public function Actualizar_Estado_Cita($id_cita){
           return $result->rowCount();
 }
 
+public function Retornar_Estado_Inicial_Cita($id_cita){
+    $sq ="UPDATE cita SET id_estado=3 WHERE id_cita= :id_cita";
+        $result=$this->conexion->prepare($sq);
+        $result->execute(array(   
+            ':id_cita' =>"".$id_cita.""
+            
+          ));
+          return $result->rowCount();
+}
+
 public function Guardar_Consentimiento($codigo,$descripcion,$ruta_archivo){
     $datos = new Consentimiento($codigo,$descripcion,$ruta_archivo,1);
     $consulta = "INSERT INTO consentimiento(codigo,descripcion,ruta_archivo,id_estado) 

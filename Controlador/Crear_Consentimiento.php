@@ -129,6 +129,7 @@ $templateWord = new TemplateProcessor('../formatos/' . $ruta);
       $procedimiento = $_POST['procedimiento'];
       $telefono = $_POST['telefono'];
       $selectsexo = $_POST['selectsexo'];
+      $cita->Actualizar_Cita_Sexo($id_cita,$selectsexo);
       $edad = $_POST['edad'];
       $peso = $_POST['peso'];
       $talla = $_POST['talla'];
