@@ -72,14 +72,15 @@ $consulta = "SELECT * FROM profesional";
                             <td class="text-center"><?php echo $estado[0];?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                           </div></td>
-                          <td class="text-center"><!--<a class="btn btn-warning" title="Editar" href="<?php echo "Controlador/Actualizar_Profesional.php?documento=" . $row['documento'] ?>"><span class="fa fa-pencil-square-o" style="color: white;"></span></a>
-                        --><a class="btn btn-danger" title="Desactivar" href="<?php echo "Controlador/InActivar_Profesional.php?documento=" . $row['documento'] ."&id_estado=" . $row['id_estado'] ?>"><span class="fa fa-minus-circle" style="color: white;"></span></a></td>
+                          <td class="text-center">
+                          <a class="btn btn-warning" title="Editar" href="<?php echo "editar_profesional.php?documento=" . $row['documento'] ?>"><span class="fa fa-pencil-square-o" style="color: white;"></span></a>
+                            <a class="btn btn-danger" title="Desactivar" href="<?php echo "Controlador/InActivar_Profesional.php?documento=" . $row['documento'] ."&id_estado=" . $row['id_estado'] ?>"><span class="fa fa-minus-circle" style="color: white;"></span></a></td>
                         <?php elseif($row['id_estado'] == 2):?>
                             <td class="text-center"><?php echo $estado[0];?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                           </div></td>
-                          <td class="text-center"><!--<a class="btn btn-warning" title="Editar" href="<?php echo "Controlador/Actualizar_Profesional.php?documento=" . $row['documento'] ?>"><span class="fa fa-pencil-square-o" style="color: white;"></span></a>
-                        --><a class="btn btn-success" title="Activar" href="<?php echo "Controlador/InActivar_Profesional.php?documento=" . $row['documento'] ."&id_estado=" . $row['id_estado'] ?>"><span class="fa fa-check-circle" style="color: white;"></span></a></td>
+                          <td class="text-center">
+                        <a class="btn btn-success" title="Activar" href="<?php echo "Controlador/InActivar_Profesional.php?documento=" . $row['documento'] ."&id_estado=" . $row['id_estado'] ?>"><span class="fa fa-check-circle" style="color: white;"></span></a></td>
                         <?php endif;?>
                         
                     </tr>  

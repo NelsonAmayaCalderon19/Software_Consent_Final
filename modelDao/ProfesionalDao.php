@@ -18,6 +18,18 @@ class ProfesionalDao extends Profesional{
           return $result->rowCount();
     }
 
+    public function Actualizar_Profesional($documento,$nombre,$cargo){
+        $datos = new Profesional($documento,$nombre,"",$cargo,"");
+        $sq ="UPDATE profesional SET nombre_completo=:nombre, id_cargo=:cargo WHERE documento= :documento";
+        $result=$this->conexion->prepare($sq);
+        $result->execute(array(
+            ':nombre' =>"".$datos->getNombre()."",
+            ':cargo' =>"".$datos->getCargo()."",
+            ':documento' =>"".$datos->getDocumento().""
+          ));
+          return $result->rowCount();
+    }
+
     public function Registrar_Profesional($documento,$nombre,$firma_jpeg,$id_cargo,$id_estado){
         $datos = new Profesional($documento,$nombre,$firma_jpeg,$id_cargo,$id_estado);
         $consulta = "INSERT INTO profesional(documento,nombre_completo,firma_jpeg,id_cargo,id_estado) 
@@ -61,6 +73,26 @@ class ProfesionalDao extends Profesional{
             $dir[$cont] = $fila["documento"];
             $cont++;
             $dir[$cont] = $fila["nombre_completo"];
+            $cont++;
+    endforeach;
+    return $dir;
+    }
+
+    public function Consultar_Datos_Profesional($id){
+        $sq="SELECT * FROM profesional as cit WHERE cit.documento= :id";
+    $result=$this->conexion->prepare($sq);
+    $result->execute(array(
+    ':id' =>"".$id.""
+    ));
+    $results = $result -> fetchAll();
+    $dir = array();
+    $cont = 0;
+    foreach($results as $fila):
+            $dir[$cont] = $fila["documento"];
+            $cont++;
+            $dir[$cont] = $fila["nombre_completo"];
+            $cont++;
+            $dir[$cont] = $fila["id_cargo"];
             $cont++;
     endforeach;
     return $dir;

@@ -34,5 +34,16 @@ foreach($results as $fila):
 endforeach;
     return $datos->getNombre();
 }
+
+public function Actualizar_Clave_Usuario($documento,$clave){
+    $datos = new Usuario($documento,$clave);
+    $sq ="UPDATE usuario SET clave=MD5(:clave) WHERE documento= :documento";
+    $result=$this->conexion->prepare($sq);
+    $result->execute(array(
+        ':clave' =>"".$datos->getClave()."",
+        ':documento' =>"".$datos->getDocumento().""
+      ));
+      return $result->rowCount();
+}
 }
 ?>
