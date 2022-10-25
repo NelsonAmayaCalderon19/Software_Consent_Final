@@ -260,17 +260,18 @@
     min-height: 100vh;
     display: block;
     background-color: #f7f7f7;
-    padding: 173px 55px 55px 55px;
+    padding: 13px 55px 55px 55px;
   }
   
   .login100-form-title {
     width: 100%;
     display: block;
     font-family: Poppins-Regular;
-    font-size: 30px;
+    font-size: 20px;
     color: #333333;
     line-height: 1.2;
     text-align: center;
+    margin-top:10px;
   }
   
   
@@ -306,7 +307,7 @@
     width: 100%;
     padding-left: 24px;
     left: 0;
-    top: 30px;
+    top: 10px;
   
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
@@ -322,7 +323,7 @@
     font-size: 18px;
     color: #555555;
     line-height: 1.2;
-    padding: 0 26px;
+    padding: 0 10px;
   }
   
   input.input100 {
@@ -522,16 +523,21 @@
     .login100-more {
       display: none;
     }
+    .descripcion{
+      display: none;
+    }
   }
   
   @media (max-width: 576px) {
     .login100-form {
       padding-left: 15px;
       padding-right: 15px;
-      padding-top: 70px;
+      padding-top: 20px;
+    }
+    .descripcion{
+      display: none;
     }
   }
-  
   
   /*------------------------------------------------------------------
   [ Alert validate ]*/

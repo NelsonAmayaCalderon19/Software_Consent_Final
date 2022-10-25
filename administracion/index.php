@@ -25,7 +25,7 @@
 	<link rel="stylesheet" type="text/css" href="../vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../css/util.css">
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/mainn.css">
 <!--===============================================================================================-->
 </head>
 <body style="background-color: #666666;">
@@ -34,7 +34,12 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="Controlador/Validar_Sesion.php" method="get">
-					<span class="login100-form-title p-b-43">
+				<img src="../images/logo_inicio_sesion.jpg" class="img-fluid" alt="">
+				<p class="descripcion"><strong>¿QUE ES EL CONSENTIMIENTO INFORMADO? </strong>
+Es un procedimiento a través del cual un paciente es informado respecto a
+todos los alcances de los procedimientos diagnósticos o terapéuticos que le serán practicados y que le permite decidir si acepta o rechaza
+la alternativa propuesta por el profesional de salud con total conocimiento de esta decisión.</p>
+				<span class="login100-form-title p-b-20">
 						Iniciar Sesión - Administrador
 					</span>
 					
@@ -56,16 +61,6 @@
                     <h6>¡Credenciales Incorrectas!</h6>
                 <?php endif; ?>
             </div>
-					<div class="flex-sb-m w-full p-t-3 p-b-15">
-					<div>
-							
-							</div>
-						<div>
-							<a href="#" class="txt1">
-								Forgot Password?
-							</a>
-						</div>
-					</div>
 			
 
 					<div class="container-login100-form-btn">
