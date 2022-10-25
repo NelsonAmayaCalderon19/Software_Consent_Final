@@ -6,14 +6,22 @@
   ?>
   <?php 
       include_once '../../Conexion/Conexion.php';
-      //require '../../modelo/Usuario.php';
       require '../../modelo/Consentimiento.php';
-      include_once '../../modeldao/ConsentimientoDao.php';
+      include_once '../../modelDao/ConsentimientoDao.php';
+      include_once '../../js/script_sweet.js';
 
       $codigo = $_GET['cod_examen'];
-      $cod_consentimiento = $_GET['cod_consentimiento'];
-      
+      $cod_consentimiento = $_GET['cod_consentimiento'];      
       $examen = new ConsentimientoDao();
+      header("Refresh: 1; URL=../informacion_examen.php?cod_examen=" .$codigo);
+
+        echo '<script>
+        Swal.fire({
+         icon: "success",
+         title: "Proceso Exitoso",
+         text: "Consentimiento Eliminado del Examen Satisfactoriamente",
+         showConfirmButton:false,
+         });
+        </script>';
       $examen->Eliminar_Examen_Consentimiento($codigo,$cod_consentimiento);
-      header("location:../informacion_examen.php?cod_examen=" .$codigo);
       ?>

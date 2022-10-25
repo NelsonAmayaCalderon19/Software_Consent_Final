@@ -74,7 +74,7 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
                           </div></td>
                         <td class="text-center">
                         <a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a>
-                        <a class="btn btn-danger" title="Eliminar" href="<?php echo "Controlador/Eliminar_Consentimiento_Examen.php?cod_consentimiento=" . $row['codigo'] ."&cod_examen=" . $row['cod_examen'] ?>"><span class="fa fa-minus-circle" style="color: white;"></span></a>                     
+                        <a class="btn btn-danger" title="Eliminar" href="<?php echo "Controlador/Eliminar_Consentimiento_Examen.php?cod_consentimiento=" . $row['codigo'] ."&cod_examen=" . $row['cod_examen'] ?>"><span class="fa fa-close" style="color: white;"></span></a>                     
                       </td>
                       <?php elseif($row['id_estado'] == 2):?>
                         <td class="text-center"><?php echo $estado;?><br><div class="progress progress-sm">
@@ -82,7 +82,7 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
                           </div></td>
                         <td class="text-center">
                         <a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?cod_consentimiento=" . $row['codigo'] ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a>
-                        <a class="btn btn-success" title="Eliminar" href="<?php echo "Controlador/Eliminar_Consentimiento_Examen.php?cod_consentimiento=" . $row['codigo'] ."&cod_examen=" . $row['cod_examen'] ?>"><span class="fa fa-check-circle" style="color: white;"></span></a>                     
+                        <a class="btn btn-success" title="Eliminar" href="<?php echo "Controlador/Eliminar_Consentimiento_Examen.php?cod_consentimiento=" . $row['codigo'] ."&cod_examen=" . $row['cod_examen'] ?>"><span class="fa fa-close" style="color: white;"></span></a>                     
                       </td>
                         <?php endif;?>
                     </tr>  
