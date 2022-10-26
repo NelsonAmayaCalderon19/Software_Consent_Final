@@ -85,6 +85,17 @@ endforeach;
           return $result->rowCount();
     }
 
+    public function Actualizar_Firma_Consentimiento($id_cita,$id_consentimiento,$firma_temp){
+        $sq ="UPDATE cita_consent SET  firma_temp=:firma_temp WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
+        $result=$this->conexion->prepare($sq);
+        $result->execute(array(
+            ':firma_temp' =>"".$firma_temp."",
+            ':id_cita' =>"".$id_cita."",
+            ':cod_consentimiento' =>"".$id_consentimiento.""
+          ));
+          return $result->rowCount();
+    }
+
 
 public function Consultar_Consentimiento_Paciente($id_cita,$id_consentimiento){
     $sq="SELECT * FROM cita_consent WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
@@ -102,6 +113,27 @@ foreach($results as $fila):
         $dir[$cont] = $fila["cod_consentimiento"];
         $cont++;
         $dir[$cont] = $fila["archivo_adjunto"];
+        $cont++;
+endforeach;
+return $dir;
+}
+
+public function Consultar_Firma_Consentimiento_Paciente($id_cita,$id_consentimiento){
+    $sq="SELECT * FROM cita_consent WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':id_cita' =>"".$id_cita."",
+    ':cod_consentimiento' =>"".$id_consentimiento.""
+));
+$results = $result -> fetchAll();
+$dir = array();
+$cont = 0;
+foreach($results as $fila):
+        $dir[$cont] = $fila["id_cita"];
+        $cont++;
+        $dir[$cont] = $fila["cod_consentimiento"];
+        $cont++;
+        $dir[$cont] = $fila["firma_temp"];
         $cont++;
 endforeach;
 return $dir;

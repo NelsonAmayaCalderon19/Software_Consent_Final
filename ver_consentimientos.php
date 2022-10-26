@@ -32,7 +32,12 @@
 include_once 'Conexion/Conexion.php';
 require 'modelo/Cita.php';
 include_once 'modelDao/CitaDao.php';
+require 'modelo/Consentimiento.php';
+include_once 'modelDao/ConsentimientoDao.php';
+$conexion = new conexion();
+$conexion = $conexion->connect(); 
 $citam = new CitaDao(); 
+$consentimiento = new ConsentimientoDao(); 
 $id_cita = $_GET["id_cita"];
 $cod_examen = $_GET["cod_examen"];
 $historial = $_GET["historial"];
@@ -44,9 +49,14 @@ $historial = $_GET["historial"];
               <div class="col-sm-12 text-center mb-3">
                   <?php 
                  $estado_cita = $citam->Consultar_Estado_cita($id_cita);
+                 $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
+                 foreach ($conexion->query($consulta) as $row) {
+                  $cod_consentimiento = $row['cod_consentimiento'];
+                 $firma_temp = $consentimiento->Consultar_Firma_Consentimiento_Paciente($id_cita,$cod_consentimiento);
+                 }
                  if($estado_cita=="3"){
-                   if(@file_get_contents('firma_paciente_temp/firma_paciente_temp.png') || $historial=="true"){
-                    
+                   //if(@file_get_contents('firma_paciente_temp/firma_paciente_temp.png') || $historial=="true"){
+                    if($firma_temp[2] != "" || $historial=="true"){
                     }else{?>
                     <div class="row col-sm-12 text-left mb-2 d-flex">
               <div class="col-sm-12 text-secondary"><h4>Solicite la Firma al Paciente/Representante Legal</h4></div>
@@ -58,7 +68,7 @@ $historial = $_GET["historial"];
    <firma id="firma"></firma>
    <signature></signature>
  
-   <form id='formCanvas' method='post' action="Controlador/control_imagen.php?id_cita=<?php echo $id_cita?>&cod_examen=<?php echo $cod_examen?>&firma=1" ENCTYPE='multipart/form-data'>
+   <form id='formCanvas' method='post' action="Controlador/control_imagen.php?id_cita=<?php echo $id_cita?>&cod_examen=<?php echo $cod_examen?>&cod_consentimiento=<?php echo $cod_consentimiento?>&firma=1" ENCTYPE='multipart/form-data'>
      <button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Limpiar</button>
        
        <input type='hidden' name='imagen' id='imagen' />
@@ -145,15 +155,14 @@ require 'modelo/Estado.php';
 include_once 'modelDao/EstadoDao.php';
 require 'modelo/Examen.php';
 include_once 'modelDao/ExamenDao.php';
-require 'modelo/Consentimiento.php';
-include_once 'modelDao/ConsentimientoDao.php';
+//require 'modelo/Consentimiento.php';
+//include_once 'modelDao/ConsentimientoDao.php';
 $estado = new EstadoDao();
 $examen = new ExamenDao();
-$consentimiento = new ConsentimientoDao();
+//$consentimiento = new ConsentimientoDao();
 
 
-$conexion = new conexion();
-$conexion = $conexion->connect(); 
+
 $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
 
 ?>
