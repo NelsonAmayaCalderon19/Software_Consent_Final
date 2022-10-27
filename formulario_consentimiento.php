@@ -177,6 +177,7 @@ $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$i
 <?php $datoscargo = $prof->Consultar_Cargo_por_Descripcion($row['profesional_firma']); 
 $cargo = $datoscargo[0];?>
 <?php $consul_cargo = "SELECT * FROM profesional as prof where prof.id_estado=1 and prof.id_cargo= $cargo";?>
+<?php if($row['profesional_firma'] == "MEDICO"){ ?>
 <label for="validationCustomSelect"><?php echo $row['profesional_firma']; ?><span style="color:red;"> (*)</span></label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -193,6 +194,22 @@ $cargo = $datoscargo[0];?>
               
   </select>
 </div>
+<?php }else{?>
+  <label for="validationCustomSelect"><?php echo $row['profesional_firma']; ?><span style="color:red;"></span></label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-user"></i></label>
+  </div>
+         <select class="custom-select" id="validationCustomSelect" name="selectprofesional" aria-describedby="inputGroupPrepend" >
+         <option value="">Seleccione</option>
+         <?php foreach ($conexion->query($consul_cargo) as $ro) { ?>
+                        <option value="<?php echo $ro['documento']; ?>"><?php echo $ro['nombre_completo'];?></option>
+                        <?php } ?>  
+              
+  </select>
+</div>
+
+  <?php } ?>
 
 <table class="table">
   <thead class="thead-light">

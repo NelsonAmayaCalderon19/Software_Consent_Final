@@ -198,6 +198,12 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
                             <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                           </div></td>
                           <td class="text-center"><a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?id_cita=" . $row['id_cita'] ."&cod_consentimiento=" . $row['cod_consentimiento'] . "&cod_examen=" . $cod_examen ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a></td>
+                          <?php elseif($row['id_estado']==9):?>
+                            <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
+                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div></td>
+                          <td class="text-center"><a class="btn btn-success" title="Asignar" onclick="editar(this.id)" id="<?php echo $row['cod_consentimiento'] ?>"><span class="fa fa-user-plus" style="color: white;"></span></a></td>
+                          
                           <?php elseif($row['id_estado']==6 && $historial == "true"):?>
                             <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -278,6 +284,56 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
   </div>
 </div>
                     </form>
+
+
+                    <form name="f2" id="formElement2"  method='post' ENCTYPE='multipart/form-data'>
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Seleccione el Enfermo que realizó el Procedimiento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <p id="variable"></p>
+        <?php
+      $consulta = "SELECT con.nombre_completo, con.documento FROM profesional as con WHERE con.id_cargo=2 and con.id_estado=1";
+
+?>
+            <table id="minhatabela3" class="display responsive table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                <br>
+                <thead>
+                    <tr>
+                        <th class="text-center">ENFERMERO/A</th>
+                        <th class="text-center">ASIGNAR</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <?php foreach ($conexion->query($consulta) as $row) { ?>
+                    <tr>
+                        <td class="text-center"><?php echo $row['nombre_completo']; ?></td>
+                        <td class="text-center"><div class="form-check">
+  <input class="form-radio-input" name="selectprofesional" type="radio" value="<?php echo $row['documento']; ?>" id="flexCheckDefault">
+  <label class="form-radio-label" for="flexCheckDefault">
+  </label>
+</div></td>
+                       
+                    </tr>  
+                    <?php } ?>   
+                </tbody>
+            </table> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <input class="btn btn-success btn-acepta2" type="submit" name="btnAcepta2" id="btnAcepta2" value="Confirmar" /> 
+ 
+      </div>
+    </div>
+  </div>
+</div>
+                    </form>
   <script src="vendor2/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor2/jquery-easing/jquery.easing.min.js"></script>
    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -288,9 +344,14 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                    --><script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+    function editar(este) {
+      var ModalEdit = new bootstrap.Modal(exampleModal2, {}).show();
+      document.forms['formElement2'].action = "Controlador/Crear_Consentimiento.php?id_cita=<?php echo $id_cita?>&cod_consentimiento="+este+"&cod_examen=<?php echo $cod_examen?>";
+    }
+  </script>
 <script type="text/javascript" language="javascript" >
 
 $(document).ready(function() {
@@ -302,8 +363,8 @@ var table = $('#minhatabela').DataTable( {
   deferRender:    true, 
   autoWidth: false,     
   "search": {
-    "regex": true,
-    "caseInsensitive": false,
+    "regex": false,
+    "caseInsensitive": true,
   },language: {
       "sProcessing":     "Procesando...",
                 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -339,8 +400,8 @@ var table = $('#minhatabela2').DataTable( {
   deferRender:    true, 
   autoWidth: false,     
   "search": {
-    "regex": true,
-    "caseInsensitive": false,
+    "regex": false,
+    "caseInsensitive": true,
   },language: {
       "sProcessing":     "Procesando...",
                 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -370,12 +431,56 @@ var table = $('#minhatabela2').DataTable( {
                 },              
 },});
 
+var table = $('#minhatabela3').DataTable( {
+  destroy: true,
+  deferRender:    true, 
+  autoWidth: false,     
+  "search": {
+    "regex": false,
+    "caseInsensitive": true,
+  },language: {
+      "sProcessing":     "Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron Enfermeros",
+                "sEmptyTable":     "No Hay Enfermeros Disponibles :(",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                },
+                "buttons": {
+                    "copy": "Copiar",
+                    "colvis": "Visibilidad"
+                },              
+},});
+
 $(document).ready(function() {
     $('#select').click(function() {
         $(":checkbox").prop('checked', false);
     })
 });
+
+$(document).ready(function() {
+    $('#select2').click(function() {
+        $(":radio").prop('checked', false);
+    })
+});
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script>
       var table = $('#minhatabela2');
 
@@ -386,10 +491,6 @@ $(document).ready(function() {
         document.getElementById("btnConfirma").setAttribute("disabled","false");
       }
     </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-   
     <?php include "includes/footer.php";?>
     <script type="text/javascript">
     /* Variables de Configuracion */

@@ -29,11 +29,11 @@ if (isset($_POST['imagen'])) {
     
     // funcion para gusrfdar la imagen base64 en el servidor
     // el nombre debe tener la extension
-    function uploadImgBase64 ($base64, $id_cit, $cod_consent){
+    function uploadImgBase64 ($base64, $id_cit){
         // decodificamos el base64
         $datosBase64 = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64));
         // definimos la ruta donde se guardara en el server
-        $path= '../firma_paciente_temp/'.$id_cit. '-'.$cod_consent.'.png';
+        $path= '../firma_paciente_temp/'.$id_cit.'.png';
         
         // guardamos la imagen en el server
         if(!file_put_contents($path, $datosBase64)){
@@ -44,8 +44,8 @@ if (isset($_POST['imagen'])) {
             $consentimiento = new ConsentimientoDao(); 
             $id_cita = $_GET["id_cita"];
             $cod_consentimiento = $_GET["cod_consentimiento"];
-            $nombre = $id_cita. '-'.$cod_consentimiento.'.png';
-            $consentimiento->Actualizar_Firma_Consentimiento($id_cita,$cod_consentimiento,$nombre);
+            $nombre = $id_cita.'.png';
+            $consentimiento->Actualizar_Firma_Consentimiento($id_cita,$nombre);
             // retorno si todo fue bien
             header("location:../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen . "&historial=false");
             return true;
@@ -53,7 +53,7 @@ if (isset($_POST['imagen'])) {
     }
     
     // llamamos a la funcion uploadImgBase64( img_base64, nombre_fina.png) 
-    uploadImgBase64($_POST['imagen'], $id_cita,$cod_consentimiento);
+    uploadImgBase64($_POST['imagen'], $id_cita);
     }
 
     header("location:../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen . "&historial=false");
