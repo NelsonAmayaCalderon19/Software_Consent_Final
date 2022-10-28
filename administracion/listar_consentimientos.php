@@ -107,48 +107,6 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,SUBSTRING(d
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-  
-<script type="text/javascript" language="javascript" >
-
-$(document).ready(function() {
-  $("#Date_search").val("");
-});
-
-var table = $('#minhatabela').DataTable( {
-  destroy: true,
-  deferRender:    true, 
-  autoWidth: false,     
-  "search": {
-    "regex": true,
-    "caseInsensitive": false,
-  },language: {
-      "sProcessing":     "Procesando...",
-                "sLengthMenu":     "Mostrar _MENU_ registros",
-                "sZeroRecords":    "No se encontraron Proyectos",
-                "sEmptyTable":     "Ningún dato disponible en esta tabla :(",
-                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix":    "",
-                "sSearch":         "Buscar:",
-                "sUrl":            "",
-                "sInfoThousands":  ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst":    "Primero",
-                    "sLast":     "Último",
-                    "sNext":     "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "oAria": {
-                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                },
-                "buttons": {
-                    "copy": "Copiar",
-                    "colvis": "Visibilidad"
-                },              
-},});
-    </script>
+    <script src="js/listar_consentimientos.js"></script>
  </body>
 </html>

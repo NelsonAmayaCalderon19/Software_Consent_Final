@@ -25,9 +25,13 @@ session_start();
     <body>
     <?php 
       include_once '../Conexion/Conexion.php'; 
+      require '../modelo/Examen.php';
+      include_once '../modelDao/ExamenDao.php';
       $conexion = new conexion();
 $conexion = $conexion->connect(); 
 $cod_examen = $_GET['cod_examen'];
+$examen = new ExamenDao();
+$nom_examen = $examen->Consultar_Examen_Por_ID($cod_examen);
       ?>
 <?php include "includes/header.php";?>
 <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
@@ -38,12 +42,19 @@ $cod_examen = $_GET['cod_examen'];
             </div>
             <div class="col-sm-12 card-body">
             <form method="post" action="Controlador/Anexar_Consentimiento_Examen.php">
-            <label for="validationCustomNombre">Codigo Examen <span style="color:red;">(*)</span></label>
+            <label for="validationCustomNombre">Codigo Examen</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-code"></i></span>
   </div>
     <input type="text" class="form-control" value="<?php echo $cod_examen; ?>" name="codigo_examen" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
+<label for="validationCustomNombre">Nombre Examen</label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-code"></i></span>
+  </div>
+    <input type="text" class="form-control" value="<?php echo $nom_examen; ?>" name="nombre_examen" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
 </div>
 <?php $listar_consentimientos = "select con.codigo,con.descripcion from consentimiento as con where not exists (select * from consent_examen as conexam where con.codigo=conexam.cod_consentimiento and conexam.cod_examen =$cod_examen)";?>
 <label for="validationCustomResponsable">Seleccione los consentimientos Relacionados con el Examen <span style="color:red;">(*)</span></label>

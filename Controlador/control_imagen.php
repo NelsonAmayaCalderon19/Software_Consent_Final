@@ -41,11 +41,11 @@ if (isset($_POST['imagen'])) {
             return false;
         }
         else{
-            $consentimiento = new ConsentimientoDao(); 
-            $id_cita = $_GET["id_cita"];
-            $cod_consentimiento = $_GET["cod_consentimiento"];
+            //$consentimiento = new ConsentimientoDao(); 
+            //$id_cita = $_GET["id_cita"];
+            //$cod_consentimiento = $_GET["cod_consentimiento"];
             $nombre = $id_cita.'.png';
-            $consentimiento->Actualizar_Firma_Consentimiento($id_cita,$nombre);
+            //$consentimiento->Actualizar_Firma_Consentimiento($id_cita,$nombre);
             // retorno si todo fue bien
             header("location:../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen . "&historial=false");
             return true;

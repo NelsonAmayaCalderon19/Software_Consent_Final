@@ -128,6 +128,22 @@ endforeach;
 return $dir;
 }
 
+public function Consultar_Firma_Cita($id_cita){
+    $sq="SELECT * FROM cita_consent WHERE id_cita= :id_cita ";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':id_cita' =>"".$id_cita.""
+));
+$results = $result -> fetchAll();
+$dir = array();
+$cont = 0;
+foreach($results as $fila):
+        $dir[$cont] = $fila["firma_temp"];
+        $cont++;
+endforeach;
+return $dir;
+}
+
 public function Consultar_Firma_Consentimiento_Paciente($id_cita,$id_consentimiento){
     $sq="SELECT * FROM cita_consent WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
 $result=$this->conexion->prepare($sq);
@@ -224,6 +240,7 @@ foreach($results as $fila):
 endforeach;
     return $cantidad;
 }
+
 
 public function Actualizar_Estado_Cita($id_cita){
     $sq ="UPDATE cita SET id_estado=4 WHERE id_cita= :id_cita";

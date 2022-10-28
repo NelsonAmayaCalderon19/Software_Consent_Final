@@ -87,6 +87,7 @@ $conexion = $conexion->connect();
   </div>
   <br><br>
   <div class="col-12 text-center justify-content-center row">
+    <a class="btn btn-warning mr-3" href="personal.php">Volver</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" value="Aceptar" /> 
     
                           </div>
@@ -95,21 +96,12 @@ $conexion = $conexion->connect();
 </div>
 </div>
 </div>
+  </div>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>   
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script>
-function mostrar2(dato2) {
-  if (dato2 == 3 || dato2 == 4) {
-    document.getElementById("password").style.display = "block";
-  }
-  if(dato2 == 1 || dato2 == 2){
-    document.getElementById("password").style.display = "none";
-  }
-}
-
-    </script>
+    <script src="js/registrar_profesional.js"></script>
 <?php include "includes/footer.php";?>
 </body>
 </html>

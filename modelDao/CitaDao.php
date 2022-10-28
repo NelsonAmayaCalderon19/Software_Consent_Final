@@ -302,5 +302,19 @@ public function listar(){
         return false;
     }
 }
+
+public function Validar_Estado_Cita_Sin_Pendientes($id_estado){
+    $sq="SELECT COUNT(citcon.cod_consentimiento) as total FROM cita as cit, cita_consent as citcon WHERE citcon.id_estado=9 and citcon.id_cita=cit.id_cita and cit.id_estado= :id_estado";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':id_estado' =>"".$id_estado.""
+  ));
+$results = $result -> fetchAll();
+
+foreach($results as $fila):
+        $cantidad = $fila["total"];
+endforeach;
+    return $cantidad;
+}
 }
 ?>

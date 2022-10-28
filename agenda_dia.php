@@ -90,8 +90,12 @@ $consulta = $cita->listar();
                         <a class="btn btn-danger" title="No Asistió" href="javascript:;" onclick="aviso('Controlador/Cita_No_Asistida.php?id_cita= <?php echo $row['id_cita'] ?>'); return false;"><span class="fa fa-close" style="color: white;"></span></a></td>
                         <?php elseif($row['id_estado']==4):?>
                           <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div></td>
+                          <?php if($cita->Validar_Estado_Cita_Sin_Pendientes($row['id_estado'])=="0"){?>
+                          <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div><?php }else{?> 
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="50"></div>
+                          </div>
+                            <?php }?></td>
                           <td class="text-center"><a class="btn btn-primary" title="Ver Detalles" href="<?php echo "ver_consentimientos.php?id_cita=" . $row['id_cita'] ."&cod_examen=" . $row['cod_examen']. "&historial=false" ?>"><span class="fa fa-eye" style="color: white;" disabled></span></a>
                        </td>
                           <?php else:?>
@@ -122,63 +126,7 @@ $consulta = $cita->listar();
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  
-<script type="text/javascript" language="javascript" >
-
-$(document).ready(function() {
-  $("#Date_search").val("");
-});
-
-var table = $('#minhatabela').DataTable( {
-  destroy: true,
-  deferRender:    true, 
-  autoWidth: false,     
-  "search": {
-    "regex": true,
-    "caseInsensitive": false,
-  },language: {
-      "sProcessing":     "Procesando...",
-                "sLengthMenu":     "Mostrar _MENU_ registros",
-                "sZeroRecords":    "No se encontraron Proyectos",
-                "sEmptyTable":     "Ningún dato disponible en esta tabla :(",
-                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix":    "",
-                "sSearch":         "Buscar:",
-                "sUrl":            "",
-                "sInfoThousands":  ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst":    "Primero",
-                    "sLast":     "Último",
-                    "sNext":     "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "oAria": {
-                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                },
-                "buttons": {
-                    "copy": "Copiar",
-                    "colvis": "Visibilidad"
-                },              
-},});
-    
-function aviso(url){
-        alertify.confirm('<Strong>¡Adventercia!</Strong>',"¿Esta Seguro de Marcar como NO Asistida?",
-  function() {     
-    alertify.success('Cita No Asistida');   
-    document.location = url;
-return true;
-
-  },
-  function() {      
-    alertify.error('Proceso Interrumpido');
-  }
-);
-};
-</script>
+  <script src="js/agenda_dia.js"></script>
 </body>
 </html>
 

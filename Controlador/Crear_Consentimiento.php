@@ -22,7 +22,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
       $id_cita = $_GET["id_cita"];
       $id_consentimiento = $_GET["cod_consentimiento"];
       $cod_examen = $_GET["cod_examen"];
-      $ruta_firma = $consentimiento->Consultar_Firma_Consentimiento_Paciente($id_cita,$id_consentimiento);
+      $ruta_firma = $id_cita.".png";
       //$firma = $_GET["firma"];
       $id_estado;
       if(filter_input(INPUT_POST, 'btnAcepta') || filter_input(INPUT_POST, 'btnAcepta2')){
@@ -76,11 +76,11 @@ if($_POST["flexRadioDefault"] == "Sí"){
     $templateWord->setValue('rec',"");
     $id_estado="7";
     if($nombre_representante == ""){
-    $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma[2],'swh'=>'250'));
+    $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
     $templateWord->setValue('cedula_paciente',$documento);
     $templateWord->setValue('firma_representante',"");
   }else{
-      $templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma[2],'swh'=>'250'));
+      $templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
       $templateWord->setValue('firma_paciente_acepta',"");
       $templateWord->setValue('cedula_paciente',"");
     }
@@ -89,11 +89,11 @@ if($_POST["flexRadioDefault"] == "Sí"){
     $templateWord->setValue('ace',"");
     $id_estado="8";
     if($nombre_representante == ""){
-      $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma[2],'swh'=>'250'));
+      $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
       $templateWord->setValue('cedula_paciente',$documento);
       $templateWord->setValue('firma_representante',"");
     }else{
-        $templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma[2],'swh'=>'250'));
+        $templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
         $templateWord->setValue('firma_paciente_acepta',"");
         $templateWord->setValue('cedula_paciente',"");
       }
@@ -112,13 +112,13 @@ $archivo_binario = (file_get_contents('../formatos/Plantilla/'. $ruta));
 $consentimiento->Actualizar_Cita_Consentimiento($id_cita,$id_consentimiento,$id_estado,$archivo_binario);
 $validarConsentCita=$consentimiento->Validar_Consentimientos_Cita_Firmados($id_cita);
 $validar_Sin_Firma_Venopuncion=$consentimiento->Validar_Consentimientos_Cita_Firmados_Sin_Firma_Pendiente($id_cita);
-
+$validar_Pendientes=$consentimiento->Validar_Consentimientos_Cita_Pendientes($id_cita);
 if($validarConsentCita=="0"){
   array_map('unlink', array_filter(
-    (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma[2]))));
+    (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
 $consentimiento->Actualizar_Estado_Cita($id_cita);
 
-}if($validar_Sin_Firma_Venopuncion!="0"){
+}if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
 }
       //echo $ruta." ".$nombre_paciente." ".$apellido_paciente." ".$tipo_documento." ".$documento." ".$aseguradora." ".$regimen;
@@ -171,17 +171,17 @@ $templateWord->setValue('fecha',$fecha);
 $templateWord->setValue('hora',$hora);
 $templateWord->setValue('inquietud',$inquietudes);
 $templateWord->setValue('respuesta',$respuesta);
-$ruta_firma = $consentimiento->Consultar_Firma_Consentimiento_Paciente($id_cita,$id_consentimiento);
+$ruta_firma = $id_cita.".png";
 if($_POST["flexRadioDefault"] == "Sí"){
 $templateWord->setValue('ace',"X");
 $templateWord->setValue('rec',"");
 $id_estado="7";
 if($nombre_representante == ""){
-$templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma[2],'swh'=>'250'));
+$templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
 $templateWord->setValue('cedula_paciente',$documento);
 $templateWord->setValue('firma_representante',"");
 }else{
-$templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma[2],'swh'=>'250'));
+$templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
 $templateWord->setValue('firma_paciente_acepta',"");
 $templateWord->setValue('cedula_paciente',"");
 }
@@ -190,11 +190,11 @@ $templateWord->setValue('rec',"X");
 $templateWord->setValue('ace',"");
 $id_estado="8";
 if($nombre_representante == ""){
-$templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma[2],'swh'=>'250'));
+$templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
 $templateWord->setValue('cedula_paciente',$documento);
 $templateWord->setValue('firma_representante',"");
 }else{
-$templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma[2],'swh'=>'250'));
+$templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
 $templateWord->setValue('firma_paciente_acepta',"");
 $templateWord->setValue('cedula_paciente',"");
 }
@@ -240,7 +240,7 @@ $validar_Pendientes=$consentimiento->Validar_Consentimientos_Cita_Pendientes($id
 
 if($validarConsentCita=="0"){
 array_map('unlink', array_filter(
-(array) array_merge(glob("../firma_paciente_temp/".$ruta_firma[2]))));
+(array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
 $consentimiento->Actualizar_Estado_Cita($id_cita);
 
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
@@ -458,13 +458,13 @@ $archivo_binario = (file_get_contents('../formatos/Plantilla/'. $ruta));
 $consentimiento->Actualizar_Cita_Consentimiento($id_cita,$id_consentimiento,$id_estado,$archivo_binario);
 $validarConsentCita=$consentimiento->Validar_Consentimientos_Cita_Firmados($id_cita);
 $validar_Sin_Firma_Venopuncion=$consentimiento->Validar_Consentimientos_Cita_Firmados_Sin_Firma_Pendiente($id_cita);
-
+$validar_Pendientes=$consentimiento->Validar_Consentimientos_Cita_Pendientes($id_cita);
 if($validarConsentCita=="0"){
   array_map('unlink', array_filter(
-    (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma[2]))));
+    (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
 $consentimiento->Actualizar_Estado_Cita($id_cita);
 
-}if($validar_Sin_Firma_Venopuncion!="0"){
+}if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
 }
       header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
