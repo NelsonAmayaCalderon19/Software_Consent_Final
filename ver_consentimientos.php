@@ -124,6 +124,7 @@ $historial = $_GET["historial"];
 <?php }} ?>
               </div>
        </div>
+       <?php if($historial=="false"){?>
        <div class="row col-sm-12 text-left mb-3 d-flex">         
               <div class="col-sm-12 text-right" style="display: block;">
                   <button type="button" class="btn btn-success" data-toggle="modal" id="select" data-target="#exampleModal">
@@ -131,6 +132,7 @@ $historial = $_GET["historial"];
 </button>
               </div>
        </div>
+       <?php }?>
 <div class="col-sm-12 card shadow mb-3">
 <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-address-book-o"></i> Consentimientos informados</h6>
