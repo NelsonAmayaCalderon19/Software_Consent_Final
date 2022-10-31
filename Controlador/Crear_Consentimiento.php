@@ -28,7 +28,9 @@ use PhpOffice\PhpWord\TemplateProcessor;
       if(filter_input(INPUT_POST, 'btnAcepta') || filter_input(INPUT_POST, 'btnAcepta2')){
       
       $ruta = $consentimiento->Consultar_Archivo_Consentimiento($id_consentimiento);
-      if($id_consentimiento != "FT-PA-GI-HC-069"){
+      $firmante_rol = $consentimiento->Consultar_Firmante_Consentimiento($id_consentimiento);
+      if($firmante_rol[0]=="MEDICO"){
+      //if($id_consentimiento != "FT-PA-GI-HC-069"){
 
 $templateWord = new TemplateProcessor('../formatos/' . $ruta);
  

@@ -16,10 +16,12 @@
         $consentimientos=$_POST["selectconsentimiento"]; 
 
         $cod_examen = $examen->Crear_Examen($descripcion);
+        if($consentimientos[0]!=""){
         for ($i=0;$i<count($consentimientos);$i++)    
 {     
   $examen->crear_Examen_Consentimiento($cod_examen,$consentimientos[$i]); 
 }
+        }
         if($examen){
           
             header("location:../examenes.php");

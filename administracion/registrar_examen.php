@@ -50,7 +50,7 @@ $conexion = $conexion->connect();
 <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-files-o"></i></span>
   </div>
-    <select class="custom-select" id="validationCustomResponsable" name="selectconsentimiento[]" aria-describedby="inputGroupPrepend" multiple required=""> 
+    <select class="custom-select" id="validationCustomResponsable" name="selectconsentimiento[]" aria-describedby="inputGroupPrepend" multiple> 
     <?php foreach ($conexion->query($listar_consentimientos) as $row) { ?>
     <option value="<?php echo $row['codigo']; ?>"><?php echo $row['descripcion']; ?></option>
                                 <?php }?>

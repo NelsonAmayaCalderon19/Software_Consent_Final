@@ -73,6 +73,21 @@ endforeach;
     return $nombre;
     }
 
+
+    public function Consultar_Firmante_Consentimiento($codigo){
+        $sq="SELECT * FROM consentimiento_detalle WHERE cod_consentimiento= :codigo";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':codigo' =>"".$codigo.""
+  ));
+$results = $result -> fetchAll();
+
+foreach($results as $fila):
+        $nombre = $fila["profesional_firma"];
+endforeach;
+    return $nombre;
+    }
+
     public function Actualizar_Cita_Consentimiento($id_cita,$id_consentimiento,$id_estado,$archivo_adjunto){
         $sq ="UPDATE cita_consent SET id_estado=:id_estado, archivo_adjunto=:archivo_adjunto WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
         $result=$this->conexion->prepare($sq);
