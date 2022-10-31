@@ -91,7 +91,7 @@ $consulta = $cita->listar();
                         <a class="btn btn-danger" title="No Asistió" href="javascript:;" onclick="aviso('Controlador/Cita_No_Asistida.php?id_cita= <?php echo $row['id_cita'] ?>'); return false;"><span class="fa fa-close" style="color: white;"></span></a></td>
                         <?php elseif($row['id_estado']==4):?>
                           <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
-                          <?php if($cita->Validar_Estado_Cita_Sin_Pendientes($row['id_estado'])=="0"){?>
+                          <?php if($cita->Validar_Estado_Cita_Sin_Pendientes($row['id_cita'])=="0"){?>
                           <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                           </div><?php }else{?> 
                             <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="50"></div>

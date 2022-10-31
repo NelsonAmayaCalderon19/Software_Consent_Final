@@ -33,9 +33,11 @@ $consentimiento -> Guardar_Consentimiento_Examen($miSelectExamen[$i],$codigo);
 $nombre = $_POST['nombre_procedimiento'];
 $objetivo = $_POST['objetivo'];
 $descripcion = $_POST['descripcion'];
-//$reemp = str_replace("\r\n", "</br>", $_POST['beneficios']);
+
 //$beneficios =  json_encode($reemp);
 $beneficios = $_POST['beneficios'];
+/*$reemp = nl2br(htmlentities($beneficios));
+$reemp = str_replace('\n', '</w:t><w:br/><w:t>', $beneficios);*/
 $riesgos = $_POST['riesgos'];
 $alternativas = $_POST['alternativas'];
 if($miSelectalternativas=="Si"){

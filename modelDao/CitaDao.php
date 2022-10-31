@@ -303,11 +303,11 @@ public function listar(){
     }
 }
 
-public function Validar_Estado_Cita_Sin_Pendientes($id_estado){
-    $sq="SELECT COUNT(citcon.cod_consentimiento) as total FROM cita as cit, cita_consent as citcon WHERE citcon.id_estado=9 and citcon.id_cita=cit.id_cita and cit.id_estado= :id_estado";
+public function Validar_Estado_Cita_Sin_Pendientes($id_cita){
+    $sq="SELECT COUNT(citcon.cod_consentimiento) as total FROM cita_consent as citcon WHERE citcon.id_estado=9 and citcon.id_cita=:id_cita";
 $result=$this->conexion->prepare($sq);
 $result->execute(array(
-    ':id_estado' =>"".$id_estado.""
+    ':id_cita' =>"".$id_cita.""
   ));
 $results = $result -> fetchAll();
 
