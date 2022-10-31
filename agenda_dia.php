@@ -35,6 +35,7 @@ $conexion = new conexion();
 $conexion = $conexion->connect(); 
 $cita = new CitaDao();
 $consulta = $cita->listar_citas_Pendientes();
+date_default_timezone_set("America/Bogota");
 ?>
               <div class="col-sm-10 text-secondary"><h4>Agenda del Dia: <?php $fechaActual = date('d-m-Y'); echo $fechaActual?> -> Citas Pendientes: <?php echo $consulta['cantidad_total'];?></h4></div>
               <div class="col-sm-2 text-right">

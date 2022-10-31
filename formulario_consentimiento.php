@@ -54,7 +54,7 @@ $consentimiento = new ConsentimientoDao();
 $conexion = new conexion();
 $conexion = $conexion->connect(); ?>
 <?php include "includes/header.php";
-if($_GET["cod_consentimiento"] != "9. FT-PA-GI-HC-064"){
+if($_GET["cod_consentimiento"] != "FT-PA-GI-HC-064"){
 $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$id_consentimiento'";?>
     
     <?php foreach ($conexion->query($consulta) as $row) { ?>

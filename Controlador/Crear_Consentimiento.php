@@ -247,9 +247,6 @@ $consentimiento->Actualizar_Estado_Cita($id_cita);
   $consentimiento->Actualizar_Estado_Cita($id_cita);
 }
 
-//echo $ruta." ".$nombre_paciente." ".$apellido_paciente." ".$tipo_documento." ".$documento." ".$aseguradora." ".$regimen;
-/*echo $nombre_paciente;
-echo $apellido_paciente;*/
 header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
 
       }
