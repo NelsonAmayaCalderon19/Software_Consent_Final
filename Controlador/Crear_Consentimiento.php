@@ -129,8 +129,8 @@ $consentimiento->Actualizar_Estado_Cita($id_cita);
       header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
       unlink('../formatos/Plantilla/'. $ruta);
       }else{
-        if(@file_get_contents('../archivo_temp/'.$id_cita.'.docx')){
-        $templateWord = new TemplateProcessor('../archivo_temp/'.$id_cita.'.docx');
+        if(@file_get_contents('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx')){
+        $templateWord = new TemplateProcessor('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx');
         
         }else{
 $templateWord = new TemplateProcessor('../formatos/' . $ruta);
@@ -221,11 +221,11 @@ $templateWord->setValue('firma_paciente_rechaza', "");
 $templateWord->setValue('firma_representante_rechaza',"");
 //$templateWord->setImageValue('firma_profesional', array('src' => '../FirmasProfesionales/' . $firmaProfesional[0],'swh'=>'250'));
 
-$templateWord->saveAs('../archivo_temp/'.$id_cita.'.docx');
+$templateWord->saveAs('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx');
 
-$archivo_binario = (file_get_contents('../archivo_temp/'.$id_cita.'.docx'));
+$archivo_binario = (file_get_contents('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx'));
 if($_POST["selectprofesional"] != "" || $id_estado=="8"){
-  unlink('../archivo_temp/'.$id_cita.'.docx');
+  unlink('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx');
   if($id_estado!= ""){
   $consentimiento->Actualizar_Cita_Consentimiento($id_cita,$id_consentimiento,$id_estado,$archivo_binario);
   }else{
@@ -234,7 +234,7 @@ if($_POST["selectprofesional"] != "" || $id_estado=="8"){
 $validarConsentCita=$consentimiento->Validar_Consentimientos_Cita_Firmados($id_cita);
 
   }else{
-$consentimiento->Actualizar_Estado_Consentimiento_Venopuncion($id_cita,$id_consentimiento,9);
+$consentimiento->Actualizar_Estado_Consentimiento_Venopuncion($id_cita,$id_consentimiento,10);
 $validar_Sin_Firma_Venopuncion=$consentimiento->Validar_Consentimientos_Cita_Firmados_Sin_Firma_Pendiente($id_cita);
 $validar_Pendientes=$consentimiento->Validar_Consentimientos_Cita_Pendientes($id_cita);
 
@@ -435,11 +435,11 @@ $templateWord->setValue('hosp_cual',$cual_hospitalizacion);
 if($flex_procedimiento== "SI"){
   $templateWord->setValue('rec_sed_si',"X");
   $templateWord->setValue('rec_sed_no',"");
-  $id_estado="7";
+  $id_estado="9";
 }else if($flex_procedimiento =="NO"){
   $templateWord->setValue('rec_sed_no',"X");
   $templateWord->setValue('rec_sed_si',"");
-  $id_estado="8";
+  $id_estado="9";
 }
 
 $templateWord->setValue('medicamento1',$medicamento1);

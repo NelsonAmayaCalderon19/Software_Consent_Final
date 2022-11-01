@@ -8,8 +8,8 @@ $(document).ready(function() {
     deferRender:    true, 
     autoWidth: false,     
     "search": {
-      "regex": true,
-      "caseInsensitive": false,
+      "regex": false,
+      "caseInsensitive": true,
     },language: {
         "sProcessing":     "Procesando...",
                   "sLengthMenu":     "Mostrar _MENU_ registros",

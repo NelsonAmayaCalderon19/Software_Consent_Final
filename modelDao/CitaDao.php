@@ -304,7 +304,7 @@ public function listar(){
 }
 
 public function Validar_Estado_Cita_Sin_Pendientes($id_cita){
-    $sq="SELECT COUNT(citcon.cod_consentimiento) as total FROM cita_consent as citcon WHERE citcon.id_estado=9 and citcon.id_cita=:id_cita";
+    $sq="SELECT COUNT(citcon.cod_consentimiento) as total FROM cita_consent as citcon WHERE citcon.id_estado=10 and citcon.id_cita=:id_cita";
 $result=$this->conexion->prepare($sq);
 $result->execute(array(
     ':id_cita' =>"".$id_cita.""

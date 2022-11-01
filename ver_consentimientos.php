@@ -180,6 +180,12 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
                           <td class="text-center"><a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?id_cita=" . $row['id_cita'] ."&cod_consentimiento=" . $row['cod_consentimiento'] . "&cod_examen=" . $cod_examen ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a></td>
                           <?php elseif($row['id_estado']==9):?>
                             <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div></td>
+                          <td class="text-center"><a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?id_cita=" . $row['id_cita'] ."&cod_consentimiento=" . $row['cod_consentimiento'] . "&cod_examen=" . $cod_examen ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a></td>
+                          
+                          <?php elseif($row['id_estado']==10):?>
+                            <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                           </div></td>
                           <td class="text-center"><a class="btn btn-success" title="Asignar" onclick="editar(this.id)" id="<?php echo $row['cod_consentimiento'] ?>"><span class="fa fa-user-plus" style="color: white;"></span></a></td>
@@ -323,7 +329,7 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
     document.forms['formElement2'].action = "Controlador/Crear_Consentimiento.php?id_cita=<?php echo $id_cita?>&cod_consentimiento="+este+"&cod_examen=<?php echo $cod_examen?>";
   }
   </script>
-    <script src="js/ver_consentimientos_2.js"></script>
+    <script src="javaScript/ver_consentimientos_2.js"></script>
 </body>
 </html>
 

@@ -6,15 +6,14 @@ $(document).ready(function() {
   var table = $('#minhatabela').DataTable( {
     destroy: true,
     deferRender:    true, 
-    autoWidth: false,  
-    "order": [[ 5, "desc" ]],   
+    autoWidth: false,     
     "search": {
-      "regex": true,
-      "caseInsensitive": false,
+      "regex": false,
+      "caseInsensitive": true,
     },language: {
         "sProcessing":     "Procesando...",
                   "sLengthMenu":     "Mostrar _MENU_ registros",
-                  "sZeroRecords":    "No se encontraron Proyectos",
+                  "sZeroRecords":    "No se encontraron Resultados",
                   "sEmptyTable":     "Ningún dato disponible en esta tabla :(",
                   "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
                   "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
@@ -39,7 +38,7 @@ $(document).ready(function() {
                       "colvis": "Visibilidad"
                   },              
   },});
-  
+      
   function aviso(url){
           alertify.confirm('<Strong>¡Adventercia!</Strong>',"¿Esta Seguro de Marcar como NO Asistida?",
     function() {     
@@ -53,3 +52,4 @@ $(document).ready(function() {
     }
   );
   };
+  

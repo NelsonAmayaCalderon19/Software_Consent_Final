@@ -144,7 +144,17 @@ class TemplateProcessor
             $this->temporaryDocumentFooters[$index] = $this->setValueForPart($this->temporaryDocumentFooters[$index], $search, $replace, $limit);
         }
     }
+    public function cloneRowAndSetValues($search, $values): void
+    {
+        $this->cloneRow($search, count($values));
 
+        foreach ($values as $rowKey => $rowData) {
+            $rowNumber = $rowKey + 1;
+            foreach ($rowData as $macro => $replace) {
+                $this->setValue($macro . '#' . $rowNumber, $replace);
+            }
+        }
+    }
     /**
      * Returns array of all variables in template.
      *

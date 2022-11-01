@@ -217,7 +217,7 @@ return $dir;
 }
 
 public function Validar_Consentimientos_Cita_Firmados($id_cita){
-    $sq="SELECT COUNT(id_cita) AS cantidad FROM cita_consent WHERE id_Estado NOT BETWEEN 7 AND 8 AND id_cita= :id_cita";
+    $sq="SELECT COUNT(id_cita) AS cantidad FROM cita_consent WHERE id_Estado NOT BETWEEN 7 AND 9 AND id_cita= :id_cita";
 $result=$this->conexion->prepare($sq);
 $result->execute(array(
     ':id_cita' =>"".$id_cita.""
@@ -230,7 +230,7 @@ endforeach;
     return $cantidad;
 }
 public function Validar_Consentimientos_Cita_Firmados_Sin_Firma_Pendiente($id_cita){
-    $sq="SELECT COUNT(id_cita) AS cantidad FROM cita_consent WHERE id_Estado=9 AND id_cita= :id_cita";
+    $sq="SELECT COUNT(id_cita) AS cantidad FROM cita_consent WHERE id_Estado=10 AND id_cita= :id_cita";
 $result=$this->conexion->prepare($sq);
 $result->execute(array(
     ':id_cita' =>"".$id_cita.""
