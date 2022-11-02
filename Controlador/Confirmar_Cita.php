@@ -8,7 +8,7 @@
       include_once '../Conexion/Conexion.php';
       require '../modelo/Cita.php';
       include_once '../modelDao/CitaDao.php';
-include_once '../js/script_sweet.js';
+include_once '../javaScript/script_sweet.js';
       $conexion = new conexion();
 $conexion = $conexion->connect();
 $cita = new CitaDao();

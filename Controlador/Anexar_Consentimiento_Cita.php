@@ -10,7 +10,7 @@ require '../modelo/Consentimiento.php';
 include_once '../modelDao/ConsentimientoDao.php';
 require '../modelo/Cita.php';
 include_once '../modelDao/CitaDao.php';
-include_once '../js/script_sweet.js';
+include_once '../javaScript/script_sweet.js';
 $consentimiento = new ConsentimientoDao();
 $cita = new CitaDao();
 $id_cita = $_GET["id_cita"];

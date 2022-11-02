@@ -24,6 +24,21 @@ endforeach;
     return $datos->getCodigo();
     }
 
+    public function Consultar_Cod_Profesional_Registrado($documento){
+        $cod = "";
+        $sq="SELECT * FROM profesional as prof WHERE prof.documento= :documento";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':documento' =>"".$documento.""
+  ));
+$results = $result -> fetchAll();
+
+foreach($results as $fila):
+        $cod = $fila["documento"];
+endforeach;
+    return $cod;
+    }
+
 public function Validar_Fecha($fecha){
     $sub_fecha = $fecha;
     $partes = explode("/", $sub_fecha);
