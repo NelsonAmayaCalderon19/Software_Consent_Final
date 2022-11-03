@@ -8,7 +8,7 @@ if (!isset($_SESSION["usuario"])) {
 include_once '../../Conexion/Conexion.php'; 
 require '../../modelo/Consentimiento.php';
 include_once '../../modelDao/ConsentimientoDao.php';
-require_once dirname(__FILE__).'/PHPWord-master/src/PhpWord/Autoloader.php';
+require_once dirname(__FILE__).'/PHPWord-develop/src/PhpWord/Autoloader.php';
 //use PhpOffice\PhpWord\IOFactory;
 //use PhpOffice\PhpWord\Settings;
 //require('fpdf/fpdf.php');

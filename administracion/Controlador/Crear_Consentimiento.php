@@ -8,14 +8,13 @@ if (!isset($_SESSION["usuario"])) {
 include_once '../../Conexion/Conexion.php'; 
 require '../../modelo/Consentimiento.php';
 include_once '../../modelDao/ConsentimientoDao.php';
-require_once dirname(__FILE__).'/PHPWord-master/src/PhpWord/Autoloader.php';
-//use PhpOffice\PhpWord\IOFactory;
-//use PhpOffice\PhpWord\Settings;
-//require('fpdf/fpdf.php');
+require_once dirname(__FILE__).'/PHPWord-develop/src/PhpWord/Autoloader.php';
 \PhpOffice\PhpWord\Autoloader::register();
-
+use PhpOffice\PhpWord\Element\AbstractContainer;
+use PhpOffice\PhpWord\Element\TextRun;
+use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\TemplateProcessor;
-//$pdf = new FPDF();
+
 if(filter_input(INPUT_POST, 'btnAcepta')){
 $miSelectExamen = $_POST['selectexamen'];
 $miSelectFirmante = $_POST['selectfirmante'];
@@ -34,10 +33,10 @@ $nombre = $_POST['nombre_procedimiento'];
 $objetivo = $_POST['objetivo'];
 $descripcion = $_POST['descripcion'];
 
-//$beneficios =  json_encode($reemp);
 $beneficios = $_POST['beneficios'];
-/*$reemp = nl2br(htmlentities($beneficios));
-$reemp = str_replace('\n', '</w:t><w:br/><w:t>', $beneficios);*/
+$reemp = nl2br(htmlentities($beneficios));
+$texto = new TextRun();
+Html::addHtml($texto, $reemp);
 $riesgos = $_POST['riesgos'];
 $alternativas = $_POST['alternativas'];
 if($miSelectalternativas=="Si"){
@@ -52,7 +51,7 @@ $revocatoria = $_POST['revocatoria'];
 $templateWord->setValue('nombre',$nombre);
 $templateWord->setValue('objetivo',$objetivo);
 $templateWord->setValue('descripcion',$descripcion);
-$templateWord->setValue('beneficios',$beneficios);
+$templateWord->setComplexValue('beneficios',$texto);
 $templateWord->setValue('riesgos',$riesgos);
 $templateWord->setValue('alternativas',$alternativas);
 $templateWord->setValue('decisión',$decision);

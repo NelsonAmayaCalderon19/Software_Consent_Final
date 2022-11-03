@@ -9,7 +9,7 @@
       include_once '../../Conexion/Conexion.php';
       require '../../modelo/Examen.php';
       include_once '../../modelDao/ExamenDao.php';
-      include_once '../../js/script_sweet.js';
+      include_once '../../javaScript/script_sweet.js';
       $examen = new ExamenDao();
 
       if(filter_input(INPUT_POST, 'btnAcepta')){

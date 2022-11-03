@@ -11,7 +11,7 @@
       include_once '../../modelDao/UsuarioDao.php';
       require '../../modelo/Profesional.php';
       include_once '../../modelDao/ProfesionalDao.php';
-      include_once '../../js/script_sweet.js';
+      include_once '../../javaScript/script_sweet.js';
 
       $profesional = new ProfesionalDao();
       $usuario = new UsuarioDao();

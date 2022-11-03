@@ -8,7 +8,7 @@
       include_once '../../Conexion/Conexion.php';
       require '../../modelo/Consentimiento.php';
       include_once '../../modelDao/ConsentimientoDao.php';
-      include_once '../../js/script_sweet.js';
+      include_once '../../javaScript/script_sweet.js';
 
       $codigo = $_GET['cod_examen'];
       $cod_consentimiento = $_GET['cod_consentimiento'];      
