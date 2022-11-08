@@ -50,7 +50,7 @@ $cita = new CitaDao();
         Swal.fire({
          icon: "success",
          title: "Proceso Exitoso",
-         text: "La Cita se Creo Satisfactoriamente",
+         text: "La Cita se Creó Satisfactoriamente",
          showConfirmButton: true,
          confirmButtonText: "Cerrar"
          }).then(function(result){

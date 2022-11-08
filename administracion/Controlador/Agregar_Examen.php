@@ -9,6 +9,7 @@
       include_once '../../Conexion/Conexion.php';
       require '../../modelo/Examen.php';
       include_once '../../modelDao/ExamenDao.php';
+      include_once '../../javaScript/script_sweet.js';
       $examen = new ExamenDao();
 
       if(filter_input(INPUT_POST, 'btnAcepta')){
@@ -23,11 +24,24 @@
 }
         }
         if($examen){
-          
-            header("location:../examenes.php");
+             
+        header("Refresh: 1; URL=../examenes.php");
+
+        echo '<script>
+        Swal.fire({
+         icon: "success",
+         title: "Proceso Exitoso",
+         text: "examen Registrado Satisfactoriamente",
+         showConfirmButton:false,
+         });
+        </script>';
+            }else{
+            echo "No se Inserto";
+            }
+            /*header("location:../examenes.php");
               }else{
               echo "No se Inserto";
-              }
+              }*/
       }
 
       ?>

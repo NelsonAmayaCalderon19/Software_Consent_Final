@@ -11,6 +11,7 @@
       include_once '../../modelDao/UsuarioDao.php';
       require '../../modelo/Profesional.php';
       include_once '../../modelDao/ProfesionalDao.php';
+      include_once '../../javaScript/script_sweet.js';
       
       $profesional = new ProfesionalDao();
 
@@ -31,14 +32,26 @@ if($id_cargo==3 || $id_cargo==4){
     $profesional->Crear_Usuario($documento,$clave);
 }
       if($profesional){
-          
+        header("Refresh: 1; URL=../personal.php");
+
         echo '<script>
+        Swal.fire({
+         icon: "success",
+         title: "Proceso Exitoso",
+         text: "Profesional Registrado Satisfactoriamente",
+         showConfirmButton:false,
+         });
+        </script>';
+            }else{
+            echo "No se Inserto";
+            }
+       /* echo '<script>
                           
              window.location = "../personal.php";
            
         </script>';
             }else{
             echo "No se Inserto";
-            }
+            }*/
 
       ?>

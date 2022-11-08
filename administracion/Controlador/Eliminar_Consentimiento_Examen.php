@@ -19,7 +19,7 @@
         Swal.fire({
          icon: "success",
          title: "Proceso Exitoso",
-         text: "Consentimiento Eliminado del Examen Satisfactoriamente",
+         text: "Consentimiento Eliminado del Examen",
          showConfirmButton:false,
          });
         </script>';

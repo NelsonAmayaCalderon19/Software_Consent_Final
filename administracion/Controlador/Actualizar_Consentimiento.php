@@ -8,6 +8,7 @@ if (!isset($_SESSION["usuario"])) {
 include_once '../../Conexion/Conexion.php'; 
 require '../../modelo/Consentimiento.php';
 include_once '../../modelDao/ConsentimientoDao.php';
+include_once '../../javaScript/script_sweet.js';
 require_once dirname(__FILE__).'/PHPWord-develop/src/PhpWord/Autoloader.php';
 //use PhpOffice\PhpWord\IOFactory;
 //use PhpOffice\PhpWord\Settings;
@@ -64,7 +65,23 @@ $templateWord->setValue('revocatoria',$revocatoria);
 $templateWord->setValue('profesional',$miSelectFirmante);
 $templateWord->saveAs('../../formatos/'. $ruta_archivo);
 $consentimiento -> Actualizar_Consentimiento_Detalle($codigo,$nombre,$descripcion,$objetivo,$beneficios,$riesgos,$miSelectalternativas,$alternativas,$decision,$revocatoria,$miSelectFirmante);
-header("location:../panel_admin.php");
+if($consentimiento){
+          
+  header("Refresh: 1; URL=../panel_admin.php");
+
+  echo '<script>
+  Swal.fire({
+   icon: "success",
+   title: "Proceso Exitoso",
+   text: "Consentimiento Actualizado Satisfactoriamente",
+   showConfirmButton:false,
+   });
+  </script>';
+      }else{
+      echo "No se Inserto";
+      }
+
+//header("location:../panel_admin.php");
 
 }
 ?>
