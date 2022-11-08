@@ -51,7 +51,7 @@ if(filter_input(INPUT_POST, 'btnCargar')){
         foreach($results as $fila):   
           $estad = $consent->Consultar_Estado_Consentimiento($fila["cod_consentimiento"]);
           if($estad=="1") {
-          //$cita->Agregar_Consentimiento_Cita($cod,$fila["cod_consentimiento"],6);
+          $cita->Agregar_Consentimiento_Cita($cod,$fila["cod_consentimiento"],6);
           }
         endforeach;
       }else{

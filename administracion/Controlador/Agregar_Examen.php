@@ -11,20 +11,15 @@
       include_once '../../modelDao/ExamenDao.php';
       include_once '../../javaScript/script_sweet.js';
       $examen = new ExamenDao();
-
       if(filter_input(INPUT_POST, 'btnAcepta')){
         $descripcion = $_POST['nombre_examen'];
-        $consentimientos=$_POST["selectconsentimiento"]; 
-
         $cod_examen = $examen->Crear_Examen($descripcion);
-        if($consentimientos[0]!=""){
-        for ($i=0;$i<count($consentimientos);$i++)    
-{     
-  $examen->crear_Examen_Consentimiento($cod_examen,$consentimientos[$i]); 
-}
+        if(!empty($_POST['check_list'])){
+          foreach($_POST['check_list'] as $selected){
+          $examen->crear_Examen_Consentimiento($cod_examen,$selected); 
+          }  
         }
-        if($examen){
-             
+        if($examen){           
         header("Refresh: 1; URL=../examenes.php");
 
         echo '<script>

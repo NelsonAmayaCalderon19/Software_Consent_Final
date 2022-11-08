@@ -17,18 +17,21 @@ use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 if(filter_input(INPUT_POST, 'btnAcepta')){
-$miSelectExamen = $_POST['selectexamen'];
+
 $miSelectFirmante = $_POST['selectfirmante'];
 $miSelectalternativas = $_POST['selectalternativas'];
 $templateWord = new TemplateProcessor('../../formatos/Plantilla/plantilla2.docx');
 $consentimiento= new ConsentimientoDao();
 $codigo = $_POST["codigo_consentimiento"];
-$descripcion = "FORMATO DE CONSENTIMIENTO INFORMADO DE " . $_POST["nombre_procedimiento"];
-$ruta_archivo = $codigo . " " . $descripcion . ".docx";
+$descripcion = $_POST["nombre_procedimiento"];
+$ruta_archivo = $codigo . "FORMATO DE CONSENTIMIENTO INFORMADO DE " . $descripcion . ".docx";
 $consentimiento -> Guardar_Consentimiento($codigo,$descripcion,$ruta_archivo);
+if(!empty($_POST['selectexamen'])){
+  $miSelectExamen = $_POST['selectexamen'];
 for ($i=0;$i<count($miSelectExamen);$i++)    
 {
 $consentimiento -> Guardar_Consentimiento_Examen($miSelectExamen[$i],$codigo);
+}
 }
 $nombre = $_POST['nombre_procedimiento'];
 $objetivo = $_POST['objetivo'];

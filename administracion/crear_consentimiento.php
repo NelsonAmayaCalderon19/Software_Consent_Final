@@ -48,7 +48,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="codigo_consentimiento" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="codigo_consentimiento" id="validationCustomNombre" aria-describedby="basic-addon3" required>
 </div>
 <label for="validationCustomSelect">Examen Relacionado <span style="color:red;">(*)</span></label>
 
@@ -56,7 +56,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selectexamen[]" aria-describedby="inputGroupPrepend" multiple required>
+         <select class="custom-select" id="validationCustomSelect" name="selectexamen[]" aria-describedby="inputGroupPrepend" multiple>
          <?php foreach ($conexion->query($consul_examen) as $row) { ?>
                         <option value="<?php echo $row['codigo']; ?>"><?php echo $row['descripcion'];?></option>
                         <?php } ?>   
@@ -67,7 +67,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="nombre_procedimiento" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="nombre_procedimiento" id="validationCustomNombre" aria-describedby="basic-addon3" required>
 </div>
 <label for="validationCustomNombre">Descripción del Procedimiento</label>
 <div class="input-group mb-3">

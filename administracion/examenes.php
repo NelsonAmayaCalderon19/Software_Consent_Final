@@ -33,7 +33,6 @@ session_start();
 <div class="row">
 <div class="row col-sm-12 text-left mb-3 d-flex">
 <div class="col-sm-12 text-right mb-3">
-                  <a class="btn btn-primary" href="#">Añadir Examen</a>
                   <button type="button" class="btn btn-primary" data-toggle="modal" id="select" data-target="#exampleModal">
                   Añadir Examen
 </button>
@@ -86,15 +85,27 @@ $consulta = "SELECT * FROM examen";
 </div>
 </div>
                       </div>
-                      <form name="f2" id="formElement2"  method='post' ENCTYPE='multipart/form-data'>
+                      <form name="f2" id="formElement2"  method='post' action="Controlador/Agregar_Examen.php" ENCTYPE='multipart/form-data'>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
+    <div class="modal-content">  
+    <div class="row justify-content-center">
+          
+          <div class="col-sm-10 card-body">
+    <label for="validationCustomNombre">Nombre del Examen <span style="color:red;">(*)</span></label>
+<div class="input-group mb-2">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="" name="nombre_examen" id="validationCustomNombre" aria-describedby="basic-addon3">
+</div>
+</div>
+</div>
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Seleccione el Enfermo que realizó el Procedimiento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      
+<h6>Seleccione los consentimientos Relacionados con el Examen <span style="color:red;">(*)</span></h6>
+        
+          
       </div>
       <div class="modal-body">
       <p id="variable"></p>
@@ -106,7 +117,7 @@ $consulta = "SELECT * FROM examen";
                 <br>
                 <thead>
                     <tr>
-                        <th class="text-center">ENFERMERO/A</th>
+                        <th class="text-center">CONSENTIMIENTO</th>
                         <th class="text-center">ASIGNAR</th>
                     </tr>
                 </thead>
@@ -126,7 +137,7 @@ $consulta = "SELECT * FROM examen";
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <input class="btn btn-success btn-acepta2" type="submit" name="btnAcepta2" id="btnAcepta2" value="Confirmar" /> 
+        <input class="btn btn-success btn-acepta2" type="submit" name="btnAcepta" id="btnAcepta" value="Confirmar" /> 
  
       </div>
     </div>
