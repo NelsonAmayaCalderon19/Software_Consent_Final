@@ -24,7 +24,7 @@ $templateWord = new TemplateProcessor('../../formatos/Plantilla/plantilla2.docx'
 $consentimiento= new ConsentimientoDao();
 $codigo = $_POST["codigo_consentimiento"];
 $descripcion = $_POST["nombre_procedimiento"];
-$ruta_archivo = $codigo . "FORMATO DE CONSENTIMIENTO INFORMADO DE " . $descripcion . ".docx";
+$ruta_archivo = $codigo . " FORMATO DE CONSENTIMIENTO INFORMADO DE " . $descripcion . ".docx";
 $consentimiento -> Guardar_Consentimiento($codigo,$descripcion,$ruta_archivo);
 
 if(!empty($_POST['check_list'])){
