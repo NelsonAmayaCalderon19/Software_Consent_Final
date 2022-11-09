@@ -33,8 +33,11 @@ session_start();
 <div class="row">
 <div class="row col-sm-12 text-left mb-3 d-flex">
 <div class="col-sm-12 text-right mb-3">
-                  <a class="btn btn-primary" href="anexar_consentimiento.php?cod_examen=<?php echo $_GET['cod_examen']; ?>">Anexar Consentimiento</a>
-              </div>
+                  <!--<a class="btn btn-primary" href="anexar_consentimiento.php?cod_examen=<?php echo $_GET['cod_examen']; ?>">Anexar Consentimiento</a>
+-->            <button type="button" class="btn btn-primary" data-toggle="modal" id="select" data-target="#exampleModal">
+Anexar Consentimiento
+</button>
+                </div>
 <div class="col-sm-12 card shadow mb-3">
 <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-address-book-o"></i> Consentimientos Informados Requeridos</h6>
@@ -102,6 +105,53 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
                           </div> 
 </div>
 </div>
+<form name="f2" id="formElement2"  method='post' action="Controlador/Anexar_Consentimiento_Examen.php?cod_examen=<?php echo $_GET['cod_examen'];?>" ENCTYPE='multipart/form-data'>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">  
+      <div class="modal-header">    
+<h4>Seleccione los consentimientos a Anexar al Examen</h4>       
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>       
+      </div>
+      <div class="modal-body">
+      <p id="variable"></p>
+        <?php
+      $consulta = "SELECT con.codigo,con.descripcion FROM consentimiento AS con WHERE NOT exists (SELECT * FROM consent_examen AS conexam WHERE con.codigo=conexam.cod_consentimiento AND conexam.cod_examen =".$_GET['cod_examen'].")";
+
+?>
+            <table id="minhatabela3" class="display responsive table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                <br>
+                <thead>
+                    <tr>
+                        <th class="text-center">CONSENTIMIENTO</th>
+                        <th class="text-center">ASIGNAR</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <?php foreach ($conexion->query($consulta) as $row) { ?>
+                    <tr>
+                    <td class="text-center"><?php echo $row['descripcion']; ?></td>
+                        <td class="text-center"><div class="form-check">
+  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo']; ?>" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+  </label>
+</div></td>                      
+                    </tr>  
+                    <?php } ?>   
+                </tbody>
+            </table> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <input class="btn btn-success btn-acepta2" type="submit" name="btnAcepta" id="btnAcepta" value="Confirmar" /> 
+ 
+      </div>
+    </div>
+  </div>
+</div>
+                    </form>     
 <script src="vendor2/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor2/jquery-easing/jquery.easing.min.js"></script>
    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -115,6 +165,6 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
   <?php include "includes/footer.php";?>
-  <script src="js/informacion_examen.js"></script>
+  <script src="js/informacion_exam.js"></script>
 </body>
 </html>

@@ -13,33 +13,28 @@
       $examen = new ExamenDao();
 
       if(filter_input(INPUT_POST, 'btnAcepta')){
-        $codigo = $_POST['codigo_examen'];
-        $consentimientos=$_POST["selectconsentimiento"]; 
+        $codigo = $_GET['cod_examen'];
+        if(!empty($_POST['check_list'])){
+          foreach($_POST['check_list'] as $selected){
+          $examen->crear_Examen_Consentimiento($codigo,$selected); 
+          }  
+        }
 
-        for ($i=0;$i<count($consentimientos);$i++)    
-{     
-  $examen->crear_Examen_Consentimiento($codigo,$consentimientos[$i]); 
-}
         if($examen){
-          
+                   
+  header("Refresh: 1; URL=../informacion_examen.php?cod_examen=". $codigo ."");
 
-            echo '<script>
-            Swal.fire({
-             icon: "success",
-             title: "Proceso Exitoso",
-             text: "Se Anexó el Consentimiento al Examen Satisfactoriamente",
-             showConfirmButton: true,
-             confirmButtonText: "Cerrar"
-             }).then(function(result){
-                if(result.value){                   
-                 window.location = "../informacion_examen.php?cod_examen='. $codigo .'";
-                }
-             });
-            </script>';
-                }else{
-                echo "No se Inserto";
-                }
-        
+  echo '<script>
+  Swal.fire({
+   icon: "success",
+   title: "Proceso Exitoso",
+   text: "Se Anexó el Consentimiento al Examen Satisfactoriamente",
+   showConfirmButton:false,
+   });
+  </script>';
+      }else{
+      echo "No se Inserto";
+      } 
       }
 
       ?>

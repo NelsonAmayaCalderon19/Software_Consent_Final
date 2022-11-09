@@ -97,7 +97,7 @@ $consulta = "SELECT * FROM examen";
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="nombre_examen" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="nombre_examen" id="validationCustomNombre" aria-describedby="basic-addon3" required>
 </div>
 </div>
 </div>
