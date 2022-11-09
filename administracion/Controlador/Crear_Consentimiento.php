@@ -26,13 +26,19 @@ $codigo = $_POST["codigo_consentimiento"];
 $descripcion = $_POST["nombre_procedimiento"];
 $ruta_archivo = $codigo . "FORMATO DE CONSENTIMIENTO INFORMADO DE " . $descripcion . ".docx";
 $consentimiento -> Guardar_Consentimiento($codigo,$descripcion,$ruta_archivo);
-if(!empty($_POST['selectexamen'])){
+
+if(!empty($_POST['check_list'])){
+  foreach($_POST['check_list'] as $selected){
+  $consentimiento -> Guardar_Consentimiento_Examen($selected,$codigo);
+  }  
+}
+/*if(!empty($_POST['selectexamen'])){
   $miSelectExamen = $_POST['selectexamen'];
 for ($i=0;$i<count($miSelectExamen);$i++)    
 {
 $consentimiento -> Guardar_Consentimiento_Examen($miSelectExamen[$i],$codigo);
 }
-}
+}*/
 $nombre = $_POST['nombre_procedimiento'];
 $objetivo = $_POST['objetivo'];
 $reemp_obj = nl2br(htmlentities($objetivo));

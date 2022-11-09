@@ -79,3 +79,21 @@ $(document).ready(function() {
           $(":checkbox").prop('checked', false);
       })
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById('marcarTodo').addEventListener('click', function(e) {
+          e.preventDefault();
+          seleccionarTodo();
+          //checkAll();
+      });
+  });
+
+    function seleccionarTodo() {
+      for (let i=0; i < document.f2.elements.length; i++) {
+          if(document.f2.elements[i].type === "checkbox") {
+              document.f2.elements[i].checked = true;
+          }
+      }
+
+  }
+

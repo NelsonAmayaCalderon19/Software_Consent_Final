@@ -113,9 +113,14 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
 <h4>Seleccione los consentimientos a Anexar al Examen</h4>       
 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>       
+        </button> 
+            
       </div>
       <div class="modal-body">
+      <!--<p>
+            <a class="btn btn-success" id="marcarTodo">Marcar todos los checkbox</a> |
+            <a class="btn btn-warning" id="desmarcarTodo">Desmarcar todos los checkbox</a>
+        </p>  -->
       <p id="variable"></p>
         <?php
       $consulta = "SELECT con.codigo,con.descripcion FROM consentimiento AS con WHERE NOT exists (SELECT * FROM consent_examen AS conexam WHERE con.codigo=conexam.cod_consentimiento AND conexam.cod_examen =".$_GET['cod_examen'].")";
