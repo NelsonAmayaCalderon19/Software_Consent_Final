@@ -13,7 +13,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<style>
+  #customFile .custom-file-control:lang(en)::after {
+  content: "Selecciona la imagen";
+}
 
+#customFile .custom-file-control:lang(en)::before {
+  content: "Click Aquí";
+}
+
+/*when a value is selected, this class removes the content */
+.custom-file-control.selected:lang(en)::after {
+  content: "" !important;
+}
+
+.custom-file {
+  overflow: hidden;
+}
+.custom-file-control {
+  white-space: nowrap;
+}
+  </style>
     <title>Registrar Profesional</title>
     <?php
 session_start();
@@ -47,20 +68,26 @@ $conexion = $conexion->connect();
 <label for="validationCustomNombre">Documento de Identidad <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-id-card-o"></i></span>
   </div>
     <input type="text" class="form-control" value="" name="documento" id="validationCustomNombre" aria-describedby="basic-addon3">
 </div>
-<label for="validationCustomNombre">Firma - Imagen <span style="color:red;">(*)</span></label>
+<label for="validationCustomNombre">Firma - Imagen </label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fa fa-file-image-o"></i></span>
+    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fa fa-picture-o"></i></span>
   </div>
-  <div class="custom-file">
+  <!--<div class="custom-file">
     <input type="file" accept="image/png,image/jpeg" class="custom-file-input" id="inputGroupFile01"
       aria-describedby="inputGroupFileAddon01" name="firma">
     <label class="custom-file-label" for="inputGroupFile01">Seleccionar Imagen</label>
-  </div>
+  </div>-->
+  <div class="custom-file">
+    <label class="custom-file" id="customFile">
+        <input type="file" accept="image/png,image/jpeg" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp" name="firma">
+        <span class="custom-file-control form-control-file"></span>
+    </label>
+</div>
 </div>
 <?php $consul_cargo = "SELECT * FROM cargo";?>
 
@@ -101,7 +128,7 @@ $conexion = $conexion->connect();
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>   
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script src="js/registrar_profesional.js"></script>
+    <script src="js/registrar_profesionl.js"></script>
 <?php include "includes/footer.php";?>
 </body>
 </html>

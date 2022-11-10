@@ -29,6 +29,16 @@ class ProfesionalDao extends Profesional{
           ));
           return $result->rowCount();
     }
+    public function Actualizar_Firma_Profesional($documento,$firma_jpeg){
+        $datos = new Profesional($documento,"",$firma_jpeg,"","");
+        $sq ="UPDATE profesional SET firma_jpeg=:firma_jpeg WHERE documento= :documento";
+        $result=$this->conexion->prepare($sq);
+        $result->execute(array(
+            ':firma_jpeg' =>"".$datos->getFirma()."",
+            ':documento' =>"".$datos->getDocumento().""
+          ));
+          return $result->rowCount();
+    }
 
     public function Registrar_Profesional($documento,$nombre,$firma_jpeg,$id_cargo,$id_estado){
         $datos = new Profesional($documento,$nombre,$firma_jpeg,$id_cargo,$id_estado);
