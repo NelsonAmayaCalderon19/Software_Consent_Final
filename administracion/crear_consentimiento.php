@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
-	<title>Formulario Consentimiento</title>
+	<title>Nuevo Consentimiento</title>
     <?php
   session_start();
   if (!isset($_SESSION["usuario"])) {
@@ -32,6 +32,10 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
     <?php include "includes/header.php";?>
     <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
           <div class="row">
+          <div class="row col-sm-12 text-left mb-3 d-flex">
+<div class="col-sm-12 text-center mb-3">
+            <h3 class="text-muted">CREACIÓN DE CONSENTIMIENTO INFORMADO</h3>
+                </div>
           <div class="col-sm-12 card shadow mb-3">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> Ingresar Información</h6>
@@ -154,7 +158,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
   </select>
 </div>
 <div class="col-12 text-center justify-content-center row">
-
+<a class="btn btn-warning mr-3" href="panel_admin.php">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" value="Aceptar" /> 
     
                           </div>
@@ -177,7 +181,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>+
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <script src="js/crear_consentimiento.js"></script>
 <?php include "includes/footer.php";?>
 </body>

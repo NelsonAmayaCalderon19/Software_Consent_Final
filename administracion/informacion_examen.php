@@ -29,12 +29,29 @@ session_start();
 </head>
 <body>
 <?php include "includes/header.php";?>
+<?php
+include_once '../Conexion/Conexion.php';
+require '../modelo/Estado.php';
+include_once '../modelDao/EstadoDao.php';
+require '../modelo/Examen.php';
+include_once '../modelDao/ExamenDao.php';
+$cod_examen = $_GET['cod_examen'];
+$id_estado = new EstadoDao();
+$examen = new ExamenDao();
+$conexion = new conexion();
+$conexion = $conexion->connect(); 
+$nombre_Examen = $examen->Consultar_Examen_Por_ID($cod_examen);
+?>
 <div class="container-fluid col-11 mx-auto" style="margin-top: 65px;">
 <div class="row">
 <div class="row col-sm-12 text-left mb-3 d-flex">
-<div class="col-sm-12 text-right mb-3">
-                  <!--<a class="btn btn-primary" href="anexar_consentimiento.php?cod_examen=<?php echo $_GET['cod_examen']; ?>">Anexar Consentimiento</a>
--->            <button type="button" class="btn btn-primary" data-toggle="modal" id="select" data-target="#exampleModal">
+<div class="row col-sm-6 text-left mb-3">
+
+            <h3 class="text-muted"><?php echo $nombre_Examen;?></h3>
+                </div>
+<div class="col-sm-6 text-right mb-3">
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" id="select" data-target="#exampleModal">
 Anexar Consentimiento
 </button>
                 </div>
@@ -44,13 +61,6 @@ Anexar Consentimiento
             </div>
             <div class="col-sm-12 card-body">
             <?php 
-include_once '../Conexion/Conexion.php';
-require '../modelo/Estado.php';
-include_once '../modelDao/EstadoDao.php';
-$cod_examen = $_GET['cod_examen'];
-$id_estado = new EstadoDao();
-$conexion = new conexion();
-$conexion = $conexion->connect(); 
 $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion,id_estado,conexam.cod_examen FROM consentimiento as con, consent_examen as conexam where con.codigo=conexam.cod_consentimiento and conexam.cod_examen = $cod_examen";
 ?>
 <table id="minhatabela" class="display responsive table table-striped table-bordered table-hover" cellspacing="0" width="100%">

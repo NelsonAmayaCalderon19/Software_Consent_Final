@@ -27,14 +27,14 @@
 <div class="container-fluid col-11 mx-auto" style="margin-top: 65px;">
 <div class="row">
 <div class="row col-sm-12 text-left mb-3 d-flex">
-              <div class="col-sm-8 text-secondary"><h4>Consentimientos Informados </h4></div>
+              <div class="col-sm-8 text-secondary"><h4>CONSENTIMIENTOS INFORMADOS </h4></div>
               <div class="col-sm-4 text-right">
                   <a class="btn btn-primary" href="crear_consentimiento.php">Crear Consentimiento</a>
               </div>
        </div>
 <div class="col-sm-12 card shadow mb-3">
 <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-address-book-o"></i> Consentimientos Informados</h6>
+              <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-address-book-o"></i> Listado de Consentimientos</h6>
             </div>
             <div class="col-sm-12 card-body">
             <?php 
