@@ -32,7 +32,6 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
     <?php include "includes/header.php";?>
     <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
           <div class="row">
-          <div class="row col-sm-12 text-left mb-3 d-flex">
 <div class="col-sm-12 text-center mb-3">
             <h3 class="text-muted">CREACIÓN DE CONSENTIMIENTO INFORMADO</h3>
                 </div>
@@ -158,7 +157,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
   </select>
 </div>
 <div class="col-12 text-center justify-content-center row">
-<a class="btn btn-warning mr-3" href="panel_admin.php">Cancelar</a>
+<a class="btn btn-warning mr-3" href="panel_admin.php" style="color: white;">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" value="Aceptar" /> 
     
                           </div>

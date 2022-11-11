@@ -97,3 +97,14 @@ $(document).ready(function() {
 
   }
 
+  function disableSending(select) {
+    // Buscar todos los checkbox con nombre select y que estén marcados
+    if($('input[name="check_list[]"]:checked').length > 0) {
+        // Al menos hay un checkbox marcado, habilitar botón
+        $('#btnAcepta').prop('disabled',false);
+    } else {
+        // No hay checkbox marcado, deshabilitar botón
+        $('#btnAcepta').prop('disabled',true);
+    }
+}
+

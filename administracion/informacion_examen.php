@@ -149,7 +149,7 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
                     <tr>
                     <td class="text-center"><?php echo $row['descripcion']; ?></td>
                         <td class="text-center"><div class="form-check">
-  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo']; ?>" id="flexCheckDefault">
+  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo']; ?>" id="flexCheckDefault" onclick="disableSending(this);">
   <label class="form-check-label" for="flexCheckDefault">
   </label>
 </div></td>                      
@@ -160,7 +160,7 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <input class="btn btn-success btn-acepta2" type="submit" name="btnAcepta" id="btnAcepta" value="Confirmar" /> 
+        <input class="btn btn-success btn-acepta2" type="submit" name="btnAcepta" id="btnAcepta" value="Confirmar" disabled /> 
  
       </div>
     </div>
@@ -180,6 +180,6 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
   <?php include "includes/footer.php";?>
-  <script src="js/informacion_exam.js"></script>
+  <script src="js/informacion_examen.js"></script>
 </body>
 </html>

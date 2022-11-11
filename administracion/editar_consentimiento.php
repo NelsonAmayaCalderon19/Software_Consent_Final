@@ -36,9 +36,12 @@ $consul_todos_examen = "SELECT * FROM examen";
     <?php include "includes/header.php";?>
     <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
           <div class="row">
-          <div class="col-sm-12 card shadow mb-3">
+          <div class="col-sm-12 text-center mb-3">
+            <h3 class="text-muted">ACTUALIZACIÓN DE CONSENTIMIENTO INFORMADO DE <?php echo $consent_det[1]; ?></h3>
+                </div>
+          <div class="col-sm-12 card shadow mb-3">        
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> Ingresar Información</h6>
+              <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> Información del Consentimiento</h6>
             </div>
             <div class="col-sm-12 card-body">
             <form method="post" action="Controlador/Actualizar_Consentimiento.php">
@@ -145,7 +148,7 @@ $consul_todos_examen = "SELECT * FROM examen";
   </select>
 </div>
 <div class="col-12 text-center justify-content-center row">
-
+<a class="btn btn-warning mr-3" href="panel_admin.php" style="color: white;">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" value="Aceptar" /> 
     
                           </div>
