@@ -48,7 +48,7 @@ $consul_todos_examen = "SELECT * FROM examen";
             <label for="validationCustomNombre">Codigo del Consentimiento <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-id-card-o"></i></span>
   </div>
     <input type="text" class="form-control" value="<?php echo $consent_det[0]; ?>" name="codigo_consentimiento" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
 </div>
@@ -70,35 +70,35 @@ $consul_todos_examen = "SELECT * FROM examen";
             <label for="validationCustomNombre">Nombre del Procedimiento <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-medkit"></i></span>
   </div>
     <input type="text" class="form-control" value="<?php echo $consent_det[1]; ?>" name="nombre_procedimiento" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
 </div>
 <label for="validationCustomNombre">Descripción del Procedimiento</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-indent"></i></span>
   </div>
     <textarea class="form-control"  name="descripcion" id="validationCustomNombre" style="height: 7em;" aria-describedby="basic-addon3"><?php echo $consent_det[2]; ?></textarea>
 </div>
 <label for="validationCustomNombre">Objetivo</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-bullseye"></i></span>
   </div>
     <textarea class="form-control"  name="objetivo" id="validationCustomNombre" style="height: 7em;" style="height: 10em;" aria-describedby="basic-addon3"><?php echo $consent_det[3]; ?></textarea>
 </div>
 <label for="validationCustomNombre">Beneficios</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-heart"></i></span>
   </div>
     <textarea class="form-control" name="beneficios" id="validationCustomNombre" style="height: 7em;" aria-describedby="basic-addon3"><?php echo $consent_det[4]; ?></textarea>
 </div>
 <label for="validationCustomNombre">Riesgos</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-exclamation-triangle"></i></span>
   </div>
     <textarea class="form-control" name="riesgos" id="validationCustomNombre" style="height: 10em;" aria-describedby="basic-addon3"><?php echo $consent_det[5]; ?></textarea>
 </div>
@@ -106,7 +106,7 @@ $consul_todos_examen = "SELECT * FROM examen";
 
      <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
+      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-filter"></i></label>
   </div>
          <select class="custom-select" id="validationCustomSelect" name="selectalternativas" aria-describedby="inputGroupPrepend" required>
                         <option value="<?php echo $consent_det[6];?>" selected><?php echo $consent_det[6]; ?></option>
@@ -117,21 +117,21 @@ $consul_todos_examen = "SELECT * FROM examen";
 <label for="validationCustomNombre">Alternativas</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-list-ol"></i></span>
   </div>
     <textarea class="form-control"  name="alternativas" style="height: 10em;" id="validationCustomNombre" aria-describedby="basic-addon3"><?php echo $consent_det[7]; ?></textarea>
 </div>
 <label for="validationCustomNombre">Decisión</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-book"></i></span>
   </div>
     <textarea class="form-control" style="height: 10em;"  name="decision" id="validationCustomNombre" aria-describedby="basic-addon3"><?php echo $consent_det[8]; ?></textarea>
 </div>
 <label for="validationCustomNombre">Revocatoria</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-window-close"></i></span>
   </div>
     <textarea class="form-control"  name="revocatoria" id="validationCustomNombre" style="height: 10em;" aria-describedby="basic-addon3"><?php echo $consent_det[9]; ?></textarea>
 </div>
@@ -139,7 +139,7 @@ $consul_todos_examen = "SELECT * FROM examen";
 
      <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
+      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-user-md"></i></label>
   </div>
          <select class="custom-select" id="validationCustomSelect" name="selectfirmante" aria-describedby="inputGroupPrepend" required>
                         <option value="<?php echo $consent_det[10];?>" selected><?php echo $consent_det[10]; ?></option>
