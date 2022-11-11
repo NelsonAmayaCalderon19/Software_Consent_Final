@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon"  href="../images/pestania.png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-	<title>Formulario Consentimiento</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<title>Actualizar Consentimiento</title>
     <?php
   session_start();
   if (!isset($_SESSION["usuario"])) {
@@ -28,7 +29,7 @@ $id_consentimiento = $_GET["cod_consentimiento"];
 $consent = new ConsentimientoDao();
 $consent_det = $consent->Consultar_Consentimiento_Detalles($id_consentimiento);
 $consul_examen = "SELECT exam.descripcion,exam.codigo FROM examen as exam, consent_examen as excon where excon.cod_examen=exam.codigo and excon.cod_consentimiento='$id_consentimiento'";
-$consul_todos_examen = "SELECT * FROM examen";
+$consul_todos_examen = "SELECT exam.codigo,exam.descripcion FROM examen as exam WHERE exam.id_estado=1 and exam.codigo NOT IN (SELECT cons.cod_examen FROM consent_examen as cons, consentimiento as cit WHERE cons.cod_consentimiento = cit.codigo and cit.codigo='$id_consentimiento');";
 ?>
     </head>
     <body>
@@ -53,19 +54,47 @@ $consul_todos_examen = "SELECT * FROM examen";
     <input type="text" class="form-control" value="<?php echo $consent_det[0]; ?>" name="codigo_consentimiento" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
 </div>
 <label for="validationCustomSelect">Examen Relacionado <span style="color:red;">(*)</span></label>
-
-     <div class="input-group mb-3">
-  <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
-  </div>
-         <select class="custom-select" id="validationCustomSelect" name="selectexamen[]" aria-describedby="inputGroupPrepend" multiple required>
-         <?php foreach ($conexion->query($consul_examen) as $row) { ?>
+<div class="col-sm-12 card-body">
+         <!-- <select class="custom-select" id="validationCustomSelect" name="selectexamen[]" aria-describedby="inputGroupPrepend" multiple required>
+        <?php foreach ($conexion->query($consul_examen) as $row) { ?>
                         <option value="<?php echo $row['codigo']; ?>" selected><?php echo $row['descripcion'];?></option>
                         <?php } ?>
                         <?php foreach ($conexion->query($consul_todos_examen) as $row) { ?>
                         <option value="<?php echo $row['codigo']; ?>"><?php echo $row['descripcion'];?></option>
                         <?php } ?>     
-  </select>
+  </select>-->
+  <table id="minhatabela3" class="display responsive table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                <br>
+                <thead>
+                    <tr>
+                        <th class="text-center">EXAMEN</th>
+                        <th class="text-center">RELACIONAR</th>
+                       
+                    </tr>
+                </thead>
+                <tbody> 
+  <?php foreach ($conexion->query($consul_examen) as $row) { ?>
+                    <tr>
+                    <td class="text-center"><?php echo $row['descripcion'];?></td>
+                        <td class="text-center"><div class="form-check">
+  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo'];?>" id="flexCheckDefault" checked>
+  <label class="form-check-label" for="flexCheckDefault">
+  </label></div>
+  </td>                      
+                    </tr> 
+                    <?php } ?>
+                    <?php foreach ($conexion->query($consul_todos_examen) as $row) { ?>
+                      <tr>
+                    <td class="text-center"><?php echo $row['descripcion'];?></td>
+                        <td class="text-center"><div class="form-check">
+  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo'];?>" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+  </label>
+</td>         
+</tr>        
+                    <?php } ?>
+                    </tbody>
+            </table> 
 </div>
             <label for="validationCustomNombre">Nombre del Procedimiento <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
@@ -149,7 +178,7 @@ $consul_todos_examen = "SELECT * FROM examen";
 </div>
 <div class="col-12 text-center justify-content-center row">
 <a class="btn btn-warning mr-3" href="panel_admin.php" style="color: white;">Cancelar</a>
-<input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" value="Aceptar" /> 
+<input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" value="Actualizar" /> 
     
                           </div>
                          
@@ -165,7 +194,15 @@ $consul_todos_examen = "SELECT * FROM examen";
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>   
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="js/editar_consentimiento.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> 
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="js/editar_consentimient.js"></script>
     <?php include "includes/footer.php";?>
 </body>
 </html>

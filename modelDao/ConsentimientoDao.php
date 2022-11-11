@@ -30,6 +30,14 @@ endforeach;
           ));
         $results = $result -> fetchAll();
     }
+    public function Eliminar_Consent_Examen($cod_consentimiento){
+        $sq="DELETE FROM consent_examen WHERE cod_consentimiento= :cod_consentimiento";
+        $result=$this->conexion->prepare($sq);
+        $result->execute(array(
+            ':cod_consentimiento' =>"".$cod_consentimiento.""
+          ));
+        $results = $result -> fetchAll();
+    }
 
     public function Consultar_Archivo_Consentimiento($codigo){
         $sq="SELECT * FROM consentimiento as cons WHERE cons.codigo= :codigo";
@@ -256,6 +264,21 @@ endforeach;
     return $cantidad;
 }
 
+public function Buscar_Relacion($cod_examen,$cod_consentimiento){
+    $cantidad="";
+    $sq="SELECT cod_examen FROM consent_examen WHERE cod_examen=:cod_examen AND cod_consentimiento= :cod_consentimiento";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':cod_examen' =>"".$cod_examen."",
+    ':cod_consentimiento' =>"".$cod_consentimiento.""
+  ));
+$results = $result -> fetchAll();
+
+foreach($results as $fila):
+        $cantidad = $fila["cod_examen"];
+endforeach;
+    return $cantidad;
+}
 
 public function Actualizar_Estado_Cita($id_cita){
     $sq ="UPDATE cita SET id_estado=4 WHERE id_cita= :id_cita";
