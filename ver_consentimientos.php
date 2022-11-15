@@ -48,7 +48,7 @@ $historial = $_GET["historial"];
                   <?php 
                  $estado_cita = $citam->Consultar_Estado_cita($id_cita);
                  if($estado_cita=="3"){
-                    if(@file_get_contents('firma_paciente_temp/'.$id_cita.'.png') || $historial=="true"){
+                    if(@file_get_contents('firma_paciente_temp/'.$id_cita.'.png') && $_SESSION["nombre_repres"]!="" || $historial=="true"){
                     }else{?>
                     <div class="row col-sm-12 text-left mb-2 d-flex">
               <div class="col-sm-12 text-secondary"><h4>Solicite la Firma al Paciente/Representante Legal</h4></div>

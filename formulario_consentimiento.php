@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-  
   <style>
     .data{
     /*width: 100px;
@@ -407,8 +406,12 @@ $cargo = $datoscargo[0];?>
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="<?php echo $_SESSION["nombre_repres"]; ?>" name="nombre_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
-</div>
+  <?php if($_SESSION["nombre_repres"]==""){ ?>
+    <input type="text" class="form-control" value="" name="nombre_representante" id="validation_Representante" aria-describedby="basic-addon3" readonly="">
+<?php }else{?>
+  <input type="text" class="form-control" value="<?php echo $_SESSION["nombre_repres"]; ?>" name="nombre_representante" id="validation_Representante" aria-describedby="basic-addon3" readonly="">
+  <?php }?>
+  </div>
 </td>
 </tr>
 <tr>
@@ -418,8 +421,12 @@ $cargo = $datoscargo[0];?>
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="<?php echo $_SESSION["parentesco_repres"]; ?>" name="parentesco_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
-</div>
+  <?php if($_SESSION["parentesco_repres"]==""){ ?>
+    <input type="text" class="form-control" value="" name="parentesco_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+    <?php }else{?>
+      <input type="text" class="form-control" value="<?php echo $_SESSION["parentesco_repres"]; ?>" name="parentesco_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+      <?php }?>
+  </div>
 </td>
 </tr>
 <tr>
@@ -429,8 +436,12 @@ $cargo = $datoscargo[0];?>
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-address-card"></i></span>
   </div>
-    <input type="text" class="form-control" value="<?php echo $_SESSION["documento_repres"]; ?>" name="documento_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
-</div>
+  <?php if($_SESSION["documento_repres"]==""){ ?>
+    <input type="text" class="form-control" value="" name="documento_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+    <?php }else{?>
+      <input type="text" class="form-control" value="<?php echo $_SESSION["nombre_repres"]; ?>" name="documento_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+      <?php }?>
+  </div>
 </td>
 </tr>
 </tbody>
@@ -1021,7 +1032,8 @@ Firma Paciente o Representante Legal
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>   
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="javaScript/formulario_consentimiento.js"></script>
+
+   <script src="javaScript/formulario_consentimiento.js"></script>
     <?php include "includes/footer.php";?> 
 </body>
 </html>

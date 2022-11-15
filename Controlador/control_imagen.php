@@ -15,13 +15,18 @@ $_SESSION["documento_repres"] = "";
 $id_cita = $_GET["id_cita"];
 $cod_examen = $_GET["cod_examen"];
 $cod_consentimiento = $_GET["cod_consentimiento"];
+if($_POST["nombre_representante"]!=""){
 $nombre_repres= $_POST["nombre_representante"];
 $_SESSION["nombre_repres"] = $nombre_repres;
 $parentesco_repres= $_POST["parentesco_representante"];
 $_SESSION["parentesco_repres"] = $parentesco_repres;
 $documento_repres= $_POST["documento_representante"];
 $_SESSION["documento_repres"] = $documento_repres;
-
+}else{
+    $_SESSION["nombre_repres"] = "No Aplica";
+$_SESSION["parentesco_repres"] = "No Aplica";
+$_SESSION["documento_repres"] = "No Aplica";
+}
 if (isset($_POST['imagen'])) { 
 
     // mostrar la imagen

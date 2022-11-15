@@ -63,14 +63,14 @@ $conexion = $conexion->connect();
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="nombre_completo" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="nombre_completo" id="validationCustomNombre" aria-describedby="basic-addon3" required>
 </div>
 <label for="validationCustomNombre">Documento de Identidad <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-id-card-o"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="documento" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="documento" id="validationCustomNombre" aria-describedby="basic-addon3" required>
 </div>
 <label for="validationCustomNombre">Firma - Imagen </label>
 <div class="input-group mb-3">
@@ -95,7 +95,7 @@ $conexion = $conexion->connect();
   <div class="input-group mb-3" id="cargo">
   <?php foreach ($conexion->query($consul_cargo) as $row) { ?>
   <div class="form-check col-md-3">
-  <input class="form-check-input" type="radio" value="<?php echo $row['id']; ?>" name="radiocargo" id="radiocargo1" onchange="mostrar2(this.value);">
+  <input class="form-check-input" type="radio" value="<?php echo $row['id']; ?>" name="radiocargo" id="radiocargo1" onchange="mostrar2(this.value);" required>
   <label class="form-check-label" for="flexRadioFirma1">
   <?php echo $row['descripcion'];?>
   </label>
