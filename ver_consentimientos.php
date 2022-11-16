@@ -33,10 +33,17 @@ require 'modelo/Cita.php';
 include_once 'modelDao/CitaDao.php';
 require 'modelo/Consentimiento.php';
 include_once 'modelDao/ConsentimientoDao.php';
+include_once 'Conexion/Conexion.php';
+require 'modelo/Estado.php';
+include_once 'modelDao/EstadoDao.php';
+require 'modelo/Examen.php';
+include_once 'modelDao/ExamenDao.php';
 $conexion = new conexion();
 $conexion = $conexion->connect(); 
 $citam = new CitaDao(); 
 $consentimiento = new ConsentimientoDao(); 
+$estado = new EstadoDao();
+$examen = new ExamenDao();
 $id_cita = $_GET["id_cita"];
 $cod_examen = $_GET["cod_examen"];
 $historial = $_GET["historial"];
@@ -48,7 +55,7 @@ $historial = $_GET["historial"];
                   <?php 
                  $estado_cita = $citam->Consultar_Estado_cita($id_cita);
                  if($estado_cita=="3"){
-                    if(@file_get_contents('firma_paciente_temp/'.$id_cita.'.png') && $_SESSION["nombre_repres"]!="" || $historial=="true"){
+                    if(@file_get_contents('firma_paciente_temp/'.$id_cita.'.png') || $historial=="true"){
                     }else{?>
                     <div class="row col-sm-12 text-left mb-2 d-flex">
               <div class="col-sm-12 text-secondary"><h4>Solicite la Firma al Paciente/Representante Legal</h4></div>
@@ -125,8 +132,12 @@ $historial = $_GET["historial"];
               </div>
        </div>
        <?php if($historial=="false"){?>
-       <div class="row col-sm-12 text-left mb-3 d-flex">         
-              <div class="col-sm-12 text-right" style="display: block;">
+       <div class="row col-sm-12 justify-content-center mb-3 d-flex"> 
+       <div class="row col-sm-5 text-left" style="display: block;">
+<?php $nombre_procedimiento = $examen->Consultar_Examen_Por_ID($cod_examen); ?>
+<h3 class="text-muted"><?php echo $nombre_procedimiento;?></h3>
+    </div>        
+              <div class="col-sm-6 text-right" style="display: block;">
                   <button type="button" class="btn btn-success" data-toggle="modal" id="select" data-target="#exampleModal">
                   Anexar Consentimiento
 </button>
@@ -139,13 +150,6 @@ $historial = $_GET["historial"];
             </div>
             <div class="col-sm-12 card-body">
             <?php 
-include_once 'Conexion/Conexion.php';
-require 'modelo/Estado.php';
-include_once 'modelDao/EstadoDao.php';
-require 'modelo/Examen.php';
-include_once 'modelDao/ExamenDao.php';
-$estado = new EstadoDao();
-$examen = new ExamenDao();
 $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
 ?>
             <table id="minhatabela" class="display responsive table table-striped table-bordered table-hover" cellspacing="0" width="100%">
@@ -215,7 +219,7 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
 </div>
 <form name="f1" id="formElement"  method='post' action="Controlador/Anexar_Consentimiento_Cita.php?id_cita=<?php echo $id_cita?>&cod_examen=<?php echo $cod_examen?>" ENCTYPE='multipart/form-data'>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Seleccione el/los Consentimientos a Anexar</h5>

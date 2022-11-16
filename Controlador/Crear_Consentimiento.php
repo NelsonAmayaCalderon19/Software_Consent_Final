@@ -497,9 +497,15 @@ if($validarConsentCita=="0"){
   array_map('unlink', array_filter(
     (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
 $consentimiento->Actualizar_Estado_Cita($id_cita);
+$_SESSION["nombre_repres"] = "";
+$_SESSION["parentesco_repres"] = "";
+$_SESSION["documento_repres"] = "";
 
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
+  $_SESSION["nombre_repres"] = "";
+$_SESSION["parentesco_repres"] = "";
+$_SESSION["documento_repres"] = "";
 }
       header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
       unlink('../formatos/Plantilla/'. $ruta);

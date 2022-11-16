@@ -74,7 +74,7 @@ $datosCargo = $profesional->Obtener_Cargo_profesional($documento);
 <label for="validationCustomNombre">Documento de Identidad <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-id-card-o"></i></span>
   </div>
     <input type="text" class="form-control" value="<?php echo $datos[0]; ?>" name="documento" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
 </div>
@@ -82,7 +82,7 @@ $datosCargo = $profesional->Obtener_Cargo_profesional($documento);
 <label for="validationCustomSelect">Cargo del Profesional<span style="color:red;"> (*)</span></label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-user"></i></label>
+      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-user-circle-o"></i></label>
   </div>
          <select class="custom-select" id="validationCustomSelect" name="selectcargo" aria-describedby="inputGroupPrepend" required onchange="mostrar()">   
          <option value="<?php echo $datos[2]; ?>" ><?php echo $datosCargo[0]; ?></option>
@@ -95,7 +95,7 @@ $datosCargo = $profesional->Obtener_Cargo_profesional($documento);
 
 <div class="container-fluid col-sm-12" style="display: none;" id="user">
 <br>
-<label for="validationCustomNombre">Re-Asignar Contraseña</label>
+<label for="validationCustomNombre">Actualizar Contraseña</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-key"></i></span>
@@ -110,7 +110,7 @@ $datosCargo = $profesional->Obtener_Cargo_profesional($documento);
     <label for="validationCustomNombre">Actualizar Firma</label>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon3"><i class="fa fa-key"></i></span>
+          <span class="input-group-text" id="basic-addon3"><i class="fa fa-picture-o"></i></span>
       </div>
       <div class="custom-file">
     <label class="custom-file" id="customFile">

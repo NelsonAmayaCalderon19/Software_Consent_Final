@@ -67,7 +67,8 @@ $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$i
                 </div>
                 <div class="col-sm-12 card shadow mb-3">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> Ingresar Información</h6>
+            <?php $nombre_proced = $consentimiento->Consultar_Nombre_Consentimiento($id_consentimiento); ?>
+              <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> <?php echo $nombre_proced; ?></h6>
             </div>
             <div class="col-sm-12 card-body">
             <form method="POST" id="formularito" action="Controlador/Crear_Consentimiento.php?id_cita=<?php echo $id_cita?>&cod_consentimiento=<?php echo $id_consentimiento?>&cod_examen=<?php echo $cod_examen?>"> 
@@ -439,7 +440,7 @@ $cargo = $datoscargo[0];?>
   <?php if($_SESSION["documento_repres"]==""){ ?>
     <input type="text" class="form-control" value="" name="documento_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
     <?php }else{?>
-      <input type="text" class="form-control" value="<?php echo $_SESSION["nombre_repres"]; ?>" name="documento_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+      <input type="text" class="form-control" value="<?php echo $_SESSION["documento_repres"]; ?>" name="documento_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
       <?php }?>
   </div>
 </td>
@@ -473,7 +474,7 @@ Firma Paciente o Representante Legal
 </table>
 </div>
   <div class="col-12 text-center justify-content-center row">
-
+  <a class="btn btn-warning mr-3" href="#">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" id="btnAcepta" value="Aceptar" /> 
     
                           </div>
@@ -489,14 +490,15 @@ Firma Paciente o Representante Legal
   <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
           <div class="row">
               <div class="col-12 d-xl-flex align-items-center justify-content-center" style="width:100%;">
+              <?php $nombre_proced = $consentimiento->Consultar_Nombre_Consentimiento($id_consentimiento); ?>
                 <div class="alert alert-success alert-dismissible" id="success-alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Encuesta Pre Sedación</strong> Formato a Diligenciar
+    <strong><?php echo $nombre_proced;?></strong> Formato a Diligenciar
   </div>
                 </div>
                 <div class="col-sm-12 card shadow mb-3">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> Diligenciar Encuesta</h6>
+              <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> DILIGENCIAR <?php echo $nombre_proced;?></h6>
             </div>
             <div class="col-sm-12 card-body">
             <form id="formulario" method="POST" action="Controlador/Crear_Consentimiento.php?id_cita=<?php echo $id_cita?>&cod_consentimiento=<?php echo $id_consentimiento?>&cod_examen=<?php echo $cod_examen?>"> 
@@ -562,14 +564,14 @@ Firma Paciente o Representante Legal
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-male"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="peso" id="validationCustomNombre" placeholder="KG" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="peso" id="validationCustomNombre" placeholder="KG" aria-describedby="basic-addon3" required>
 </div>
 <label for="validationCustomNombre">Talla <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-male"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="talla" id="validationCustomNombre" aria-describedby="basic-addon3" placeholder="CM">
+    <input type="text" class="form-control" value="" name="talla" id="validationCustomNombre" aria-describedby="basic-addon3" placeholder="CM" required>
 </div>
 <table class="table border">
   <thead class="thead-light">
@@ -947,8 +949,8 @@ Firma Paciente o Representante Legal
     </div></td>
 <td>
 <div class="form-group row">
-    <label for="dosis1" class="col-sm-2 col-form-label">Dosis:</label>
-    <div class="col-sm-10">
+    <label for="dosis1" class="col-sm-3 col-form-label">Dosis:</label>
+    <div class="col-sm-9">
       <input type="text" class="form-control" id="dosis1" name="dosis1">
     </div>
 </div>
@@ -962,8 +964,8 @@ Firma Paciente o Representante Legal
     </div></td>
 <td>
 <div class="form-group row">
-    <label for="dosis2" class="col-sm-2 col-form-label">Dosis:</label>
-    <div class="col-sm-10">
+    <label for="dosis2" class="col-sm-3 col-form-label">Dosis:</label>
+    <div class="col-sm-9">
       <input type="text" class="form-control" id="dosis2" name="dosis2">
     </div>
 </div>
@@ -977,8 +979,8 @@ Firma Paciente o Representante Legal
     </div></td>
 <td>
 <div class="form-group row">
-    <label for="dosis3" class="col-sm-2 col-form-label">Dosis:</label>
-    <div class="col-sm-10">
+    <label for="dosis3" class="col-sm-3 col-form-label">Dosis:</label>
+    <div class="col-sm-9">
       <input type="text" class="form-control" id="dosis3" name="dosis3">
     </div>
 </div>
@@ -992,8 +994,8 @@ Firma Paciente o Representante Legal
     </div></td>
 <td>
 <div class="form-group row">
-    <label for="dosis4" class="col-sm-2 col-form-label">Dosis:</label>
-    <div class="col-sm-10">
+    <label for="dosis4" class="col-sm-3 col-form-label">Dosis:</label>
+    <div class="col-sm-9">
       <input type="text" class="form-control" id="dosis4" name="dosis4">
     </div>
 </div>
@@ -1007,8 +1009,8 @@ Firma Paciente o Representante Legal
     </div></td>
 <td>
 <div class="form-group row">
-    <label for="dosis5" class="col-sm-2 col-form-label">Dosis:</label>
-    <div class="col-sm-10">
+    <label for="dosis5" class="col-sm-3 col-form-label">Dosis:</label>
+    <div class="col-sm-9">
       <input type="text" class="form-control" id="dosis5" name="dosis5">
     </div>
 </div>
@@ -1017,9 +1019,9 @@ Firma Paciente o Representante Legal
   </tbody>
  </table>
  <div class="col-12 text-center justify-content-center row">
-
+ <a class="btn btn-warning mr-3" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false" ?>">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnConfirmar" id="btnConfirmar" value="Aceptar" /> 
-    
+
                           </div>
  </form>
             </div>

@@ -65,7 +65,7 @@ la alternativa propuesta por el profesional de salud con total conocimiento de e
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Login
+							Iniciar Sesión
 						</button>
 					</div>
 					<div class="flex-sb-m w-full p-t-10 p-b-5">
