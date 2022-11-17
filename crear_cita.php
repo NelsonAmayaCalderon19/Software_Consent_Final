@@ -56,7 +56,7 @@ $conexion = $conexion->connect();
 <label for="validationCustomNombre">Numero de Documento <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-id-card-o"></i></span>
   </div>
     <input type="text" class="form-control" value="" name="documento" id="validationCustomNombre" aria-describedby="basic-addon3" required>
 </div>

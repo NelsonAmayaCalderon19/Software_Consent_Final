@@ -67,7 +67,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
                     <tr>
                     <td class="text-center"><?php echo $row['descripcion']; ?></td>
                         <td class="text-center"><div class="form-check">
-  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo']; ?>" id="flexCheckDefault">
+  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo']; ?>" id="flexCheckDefault" required>
   <label class="form-check-label" for="flexCheckDefault">
   </label>
 </div></td>                      

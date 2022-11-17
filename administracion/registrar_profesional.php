@@ -109,7 +109,7 @@ $conexion = $conexion->connect();
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-key"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="password" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="password" class="form-control" value="" name="password" id="validationCustomNombre" aria-describedby="basic-addon3">
 </div>
   </div>
   <br><br>
