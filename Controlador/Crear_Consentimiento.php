@@ -273,7 +273,7 @@ $consentimiento->Actualizar_Estado_Cita($id_cita);
 $consentimiento->Resetear_Datos_Representante($id_cita);
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
-$consentimiento->Resetear_Datos_Representante($id_cita);
+//$consentimiento->Resetear_Datos_Representante($id_cita);
 }
 
 header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");

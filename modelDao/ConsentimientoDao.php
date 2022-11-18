@@ -22,7 +22,7 @@ endforeach;
     }
 
     public function Consultar_Datos_Representante($id_cita){
-        $sq="SELECT * FROM cita_consent as cons WHERE cons.id_cita= :id_cita";
+        $sq="SELECT * FROM cita_consent as cons WHERE cons.id_cita= :id_cita and cons.nombre_representante!=''";
 $result=$this->conexion->prepare($sq);
 $result->execute(array(
     ':id_cita' =>"".$id_cita.""
