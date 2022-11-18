@@ -211,7 +211,7 @@ $conexion = $conexion->connect();
                     </select>
 </div>
          <div class="col-12 text-center justify-content-center row">
-         <a class="btn btn-warning mr-3" href="principal.php">Volver</a> 
+         <a class="btn btn-warning mr-3" style="color: white;" href="principal.php">Volver</a> 
    
 <input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" value="Confirmar" /> 
     
