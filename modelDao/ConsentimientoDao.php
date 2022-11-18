@@ -21,6 +21,26 @@ endforeach;
     return $nombre;
     }
 
+    public function Consultar_Datos_Representante($id_cita){
+        $sq="SELECT * FROM cita_consent as cons WHERE cons.id_cita= :id_cita";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':id_cita' =>"".$id_cita.""
+));
+$results = $result -> fetchAll();
+$dir = array();
+$cont = 0;
+foreach($results as $fila):
+        $dir[$cont] = $fila["nombre_representante"];
+        $cont++;
+        $dir[$cont] = $fila["parentesco_representante"];
+        $cont++;
+        $dir[$cont] = $fila["documento_representante"];
+        $cont++;
+endforeach;
+return $dir;
+    }
+
     public function Eliminar_Examen_Consentimiento($cod_examen,$cod_consentimiento){
         $sq="DELETE FROM consent_examen WHERE cod_examen= :cod_examen and cod_consentimiento= :cod_consentimiento";
         $result=$this->conexion->prepare($sq);
@@ -326,6 +346,29 @@ $sq->bindValue(':cod_examen',$cod_examen);
 $sq->bindValue(':cod_consentimiento',$cod_consentimiento);     
 $sq->execute();
 return $sq;
+}
+
+public function Guardar_Datos_Representante($id_cita,$nombre_representante,$parentesco_representante,$documento_representante){
+    $sq ="UPDATE cita_consent SET nombre_representante=:nombre_representante, parentesco_representante=:parentesco_representante, documento_representante=:documento_representante WHERE id_cita= :id_cita";
+    $result=$this->conexion->prepare($sq);
+    $result->execute(array(
+        ':nombre_representante' =>"".$nombre_representante."",
+        ':parentesco_representante' =>"".$parentesco_representante."",
+        ':documento_representante' =>"".$documento_representante."",
+        ':id_cita' =>"".$id_cita.""
+        
+      ));
+      return $result->rowCount();
+}
+
+public function Resetear_Datos_Representante($id_cita){
+    $sq ="UPDATE cita_consent SET nombre_representante=NULL,parentesco_representante=NULL,documento_representante=NULL WHERE id_cita= :id_cita";
+    $result=$this->conexion->prepare($sq);
+    $result->execute(array(
+        ':id_cita' =>"".$id_cita.""
+        
+      ));
+      return $result->rowCount();
 }
 
 public function Guardar_Consentimiento_Detalle($cod_consentimiento,$nombre,$descripcion,$objetivo,$beneficio,$riesgo,$existe_alternativa,$alternativa,$decision,$revocatoria,$profesional_firma){

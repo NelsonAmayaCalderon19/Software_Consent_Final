@@ -357,97 +357,10 @@ $cargo = $datoscargo[0];?>
 </div>
   </td>
 </tr>
-<tr >
-  <td colspan="4">
-  <label for="validationCustomNombre" style="display:none;" id="encabezado_persona_firmante">Persona que Firma el Consentimiento</label>
-  <div class="input-group mb-3" style="display:none;" id="persona_firmante">
-  <div class="form-check col-md-2">
-    <?php $nom = $_SESSION["nombre_repres"]; if($nom == ""){ ?>
-  <input class="form-check-input" type="radio" value="Paciente" name="flexRadioFirma" id="flexRadioFirma1" onchange="mostrar2(this.value);">
-  <label class="form-check-label" for="flexRadioFirma1">
-    Paciente
-  </label>
-  </div>
-  <div class="form-check">
-  <?php  }else{ ?>
-    <input class="form-check-input" type="radio" value="Representante_Legal" name="flexRadioFirma" id="flexRadioFirma2" onchange="mostrar2(this.value);">
-  <label class="form-check-label" for="flexRadioFirma2">
-    Representante legal
-  </label>
-</div>
-  <?php } ?>
 
-
-  
-<!--<div class="form-check" style="display:none;">
-  <input class="form-check-input" type="radio" value="" name="flexRadioFirma" id="flexRadioFirma3" onchange="mostrar2(this.value);" checked>
-  <label class="form-check-label" for="flexRadioFirma3">
-  </label>
-</div>-->
-</div>
-  </td>
-</tr>
 </tbody>
 </table>
-<div class="container-fluid col-12" style="display:none;" id="firma_paciente">
 
-</div>
-<div class="container-fluid col-12" style="display:none;" id="firma_representante">
-<table class="table border representante_legal">
-<thead class="thead-light">
-<tr>
-      <th class="text-center" >DATOS DEL REPRESENTANTE LEGAL</th>
-    </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>
-    <label for="validationCustomNombre">Nombre <span style="color:red;">(*)</span></label>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
-  </div>
-  <?php if($_SESSION["nombre_repres"]==""){ ?>
-    <input type="text" class="form-control" value="" name="nombre_representante" id="validation_Representante" aria-describedby="basic-addon3" readonly="">
-<?php }else{?>
-  <input type="text" class="form-control" value="<?php echo $_SESSION["nombre_repres"]; ?>" name="nombre_representante" id="validation_Representante" aria-describedby="basic-addon3" readonly="">
-  <?php }?>
-  </div>
-</td>
-</tr>
-<tr>
-    <td>
-    <label for="validationCustomNombre">Parentesco <span style="color:red;">(*)</span></label>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
-  </div>
-  <?php if($_SESSION["parentesco_repres"]==""){ ?>
-    <input type="text" class="form-control" value="" name="parentesco_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
-    <?php }else{?>
-      <input type="text" class="form-control" value="<?php echo $_SESSION["parentesco_repres"]; ?>" name="parentesco_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
-      <?php }?>
-  </div>
-</td>
-</tr>
-<tr>
-    <td>
-    <label for="validationCustomNombre">Numero de Documento de Identidad <span style="color:red;">(*)</span></label>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon3"><i class="fa fa-address-card"></i></span>
-  </div>
-  <?php if($_SESSION["documento_repres"]==""){ ?>
-    <input type="text" class="form-control" value="" name="documento_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
-    <?php }else{?>
-      <input type="text" class="form-control" value="<?php echo $_SESSION["documento_repres"]; ?>" name="documento_representante" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
-      <?php }?>
-  </div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <div class="container-fluid col-12" style="display:none;" id="revocatoria">
 <table class="table border revocatoria">
 <thead class="thead-light">
@@ -474,7 +387,7 @@ Firma Paciente o Representante Legal
 </table>
 </div>
   <div class="col-12 text-center justify-content-center row">
-  <a class="btn btn-warning mr-3" href="#">Cancelar</a>
+  <a class="btn btn-warning mr-3" style="color: white;" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false" ?>">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" id="btnAcepta" value="Aceptar" /> 
     
                           </div>
@@ -564,14 +477,14 @@ Firma Paciente o Representante Legal
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-male"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="peso" id="validationCustomNombre" placeholder="KG" aria-describedby="basic-addon3" required>
+    <input type="text" class="form-control" value="" name="peso" id="validationCustomNombre" placeholder="KG" aria-describedby="basic-addon3">
 </div>
 <label for="validationCustomNombre">Talla <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-male"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="talla" id="validationCustomNombre" aria-describedby="basic-addon3" placeholder="CM" required>
+    <input type="text" class="form-control" value="" name="talla" id="validationCustomNombre" aria-describedby="basic-addon3" placeholder="CM">
 </div>
 <table class="table border">
   <thead class="thead-light">
@@ -1019,7 +932,7 @@ Firma Paciente o Representante Legal
   </tbody>
  </table>
  <div class="col-12 text-center justify-content-center row">
- <a class="btn btn-warning mr-3" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false" ?>">Cancelar</a>
+ <a class="btn btn-warning mr-3" style="color: white;" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false" ?>">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnConfirmar" id="btnConfirmar" value="Aceptar" /> 
 
                           </div>

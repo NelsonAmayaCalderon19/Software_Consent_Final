@@ -109,7 +109,7 @@ $consulta = "SELECT SUBSTRING(ruta_archivo,1,25) ruta_archivo,codigo,descripcion
 <div class="col-12 text-left row">
 <div class="col-6 text-left mb-3">
 
-  <a class="btn btn-warning" href="examenes.php" role="button">Volver</a>
+  <a class="btn btn-warning" href="examenes.php" role="button" style="color: white;">Volver</a>
 
                           </div>
                           </div> 

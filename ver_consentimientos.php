@@ -263,8 +263,6 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
   </div>
 </div>
                     </form>
-
-
                     <form name="f2" id="formElement2"  method='post' ENCTYPE='multipart/form-data'>
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -294,7 +292,7 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
                     <tr>
                         <td class="text-center"><?php echo $row['nombre_completo']; ?></td>
                         <td class="text-center"><div class="form-check">
-  <input class="form-radio-input" name="selectprofesional" type="radio" value="<?php echo $row['documento']; ?>" id="flexCheckDefault">
+  <input class="form-radio-input" name="selectprofesional" type="radio" value="<?php echo $row['documento']; ?>" id="flexCheckDefault" required>
   <label class="form-radio-label" for="flexCheckDefault">
   </label>
 </div></td>                      

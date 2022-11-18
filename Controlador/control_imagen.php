@@ -8,14 +8,14 @@ require '../modelo/Consentimiento.php';
 include_once '../modelDao/ConsentimientoDao.php';
 $conexion = new conexion();
 $conexion = $conexion->connect();  
-
-$_SESSION["nombre_repres"] = "";
+$consentimiento = new ConsentimientoDao();
+/*$_SESSION["nombre_repres"] = "";
 $_SESSION["parentesco_repres"] = "";
-$_SESSION["documento_repres"] = "";
+$_SESSION["documento_repres"] = "";*/
 $id_cita = $_GET["id_cita"];
 $cod_examen = $_GET["cod_examen"];
-$cod_consentimiento = $_GET["cod_consentimiento"];
-if($_POST["nombre_representante"]!=""){
+//$cod_consentimiento = $_GET["cod_consentimiento"];
+/*if($_POST["nombre_representante"]!=""){
 $nombre_repres= $_POST["nombre_representante"];
 $_SESSION["nombre_repres"] = $nombre_repres;
 $parentesco_repres= $_POST["parentesco_representante"];
@@ -26,6 +26,12 @@ $_SESSION["documento_repres"] = $documento_repres;
     $_SESSION["nombre_repres"] = "No Aplica";
 $_SESSION["parentesco_repres"] = "No Aplica";
 $_SESSION["documento_repres"] = "No Aplica";
+}*/
+
+if($_POST["nombre_representante"]!=""){
+$consentimiento->Guardar_Datos_Representante($id_cita,$_POST["nombre_representante"],$_POST["parentesco_representante"],$_POST["documento_representante"]);
+}else{
+$consentimiento->Guardar_Datos_Representante($id_cita,"No Aplica","No Aplica","No Aplica");
 }
 if (isset($_POST['imagen'])) { 
 

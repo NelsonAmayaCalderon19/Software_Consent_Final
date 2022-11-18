@@ -26,9 +26,9 @@ use PhpOffice\PhpWord\TemplateProcessor;
       $ruta_firma = $id_cita.".png";
       //$firma = $_GET["firma"];
       $id_estado;
-      
+      $datos_repre = $consentimiento->Consultar_Datos_Representante($id_cita);
       if(filter_input(INPUT_POST, 'btnAcepta') || filter_input(INPUT_POST, 'btnAcepta2')){
-        if($_POST["nombre_representante"]=="" && filter_input(INPUT_POST, 'btnAcepta')){
+        if($datos_repre[0]=="" && filter_input(INPUT_POST, 'btnAcepta')){
           header("Refresh: 1; URL=../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
           echo '<script>
           Swal.fire({
@@ -62,14 +62,14 @@ $templateWord = new TemplateProcessor('../formatos/' . $ruta);
         $inquietudes = $_POST["inquietudes"];
         $respuesta = $_POST["respuesta"];
         $acepRech = $_POST["flexRadioDefault"];
-       if($_POST["nombre_representante"]=="No Aplica"){
+       if($datos_repre[0]=="No Aplica"){
         $nombre_representante= "";
         $parentesco_representante= "";
         $documento_representante= "";
        }else{
-        $nombre_representante= $_POST["nombre_representante"];
-        $parentesco_representante= $_POST["parentesco_representante"];
-        $documento_representante= $_POST["documento_representante"];
+        $nombre_representante= $datos_repre[0];
+        $parentesco_representante= $datos_repre[1];
+        $documento_representante= $datos_repre[2];
        }
         
         $primer_nombre = $nombre_paciente[0];    
@@ -95,7 +95,7 @@ if($_POST["flexRadioDefault"] == "Sí"){
     $templateWord->setValue('ace',"X");
     $templateWord->setValue('rec',"");
     $id_estado="7";
-    if($_POST["nombre_representante"] == "No Aplica"){
+    if($datos_repre[0] == "No Aplica"){
     $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
     $templateWord->setValue('cedula_paciente',$documento);
     $templateWord->setValue('firma_representante',"");
@@ -108,7 +108,7 @@ if($_POST["flexRadioDefault"] == "Sí"){
     $templateWord->setValue('rec',"X");
     $templateWord->setValue('ace',"");
     $id_estado="8";
-    if($_POST["nombre_representante"] == "No Aplica"){
+    if($datos_repre[0] == "No Aplica"){
       $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
       $templateWord->setValue('cedula_paciente',$documento);
       $templateWord->setValue('firma_representante',"");
@@ -137,15 +137,17 @@ if($validarConsentCita=="0"){
   array_map('unlink', array_filter(
     (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
 $consentimiento->Actualizar_Estado_Cita($id_cita);
-$_SESSION["nombre_repres"] = "";
+/*$_SESSION["nombre_repres"] = "";
 $_SESSION["parentesco_repres"] = "";
-$_SESSION["documento_repres"] = "";
+$_SESSION["documento_repres"] = "";*/
+$consentimiento->Resetear_Datos_Representante($id_cita);
 
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
-  $_SESSION["nombre_repres"] = "";
+ /* $_SESSION["nombre_repres"] = "";
 $_SESSION["parentesco_repres"] = "";
-$_SESSION["documento_repres"] = "";
+$_SESSION["documento_repres"] = "";*/
+$consentimiento->Resetear_Datos_Representante($id_cita);
 }
       //echo $ruta." ".$nombre_paciente." ".$apellido_paciente." ".$tipo_documento." ".$documento." ".$aseguradora." ".$regimen;
       /*echo $nombre_paciente;
@@ -176,14 +178,14 @@ $inquietudes = $_POST["inquietudes"];
 $respuesta = $_POST["respuesta"];
 $acepRech = $_POST["flexRadioDefault"];
 
-if($_POST["nombre_representante"]=="No Aplica"){
+if($datos_repre[0]=="No Aplica"){
   $nombre_representante= "";
   $parentesco_representante= "";
   $documento_representante= "";
  }else{
-  $nombre_representante= $_POST["nombre_representante"];
-  $parentesco_representante= $_POST["parentesco_representante"];
-  $documento_representante= $_POST["documento_representante"];
+  $nombre_representante= $datos_repre[0];
+  $parentesco_representante= $datos_repre[1];
+  $documento_representante= $datos_repre[2];
  }
 $primer_nombre = $nombre_paciente[0];    
 $segundo_nombre = $nombre_paciente[1];   
@@ -208,7 +210,7 @@ if($_POST["flexRadioDefault"] == "Sí"){
 $templateWord->setValue('ace',"X");
 $templateWord->setValue('rec',"");
 $id_estado="7";
-if($_POST["nombre_representante"] == "No Aplica"){
+if($datos_repre[0] == "No Aplica"){
 $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
 $templateWord->setValue('cedula_paciente',$documento);
 $templateWord->setValue('firma_representante',"");
@@ -221,7 +223,7 @@ $templateWord->setValue('cedula_paciente',"");
 $templateWord->setValue('rec',"X");
 $templateWord->setValue('ace',"");
 $id_estado="8";
-if($_POST["nombre_representante"] == "No Aplica"){
+if($datos_repre[0] == "No Aplica"){
 $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
 $templateWord->setValue('cedula_paciente',$documento);
 $templateWord->setValue('firma_representante',"");
@@ -274,14 +276,16 @@ if($validarConsentCita=="0"){
 array_map('unlink', array_filter(
 (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
 $consentimiento->Actualizar_Estado_Cita($id_cita);
-$_SESSION["nombre_repres"] = "";
+/*$_SESSION["nombre_repres"] = "";
 $_SESSION["parentesco_repres"] = "";
-$_SESSION["documento_repres"] = "";
+$_SESSION["documento_repres"] = "";*/
+$consentimiento->Resetear_Datos_Representante($id_cita);
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
-  $_SESSION["nombre_repres"] = "";
+ /* $_SESSION["nombre_repres"] = "";
 $_SESSION["parentesco_repres"] = "";
-$_SESSION["documento_repres"] = "";
+$_SESSION["documento_repres"] = "";*/
+$consentimiento->Resetear_Datos_Representante($id_cita);
 }
 
 header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
@@ -497,15 +501,16 @@ if($validarConsentCita=="0"){
   array_map('unlink', array_filter(
     (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
 $consentimiento->Actualizar_Estado_Cita($id_cita);
-$_SESSION["nombre_repres"] = "";
+/*$_SESSION["nombre_repres"] = "";
 $_SESSION["parentesco_repres"] = "";
-$_SESSION["documento_repres"] = "";
-
+$_SESSION["documento_repres"] = "";*/
+$consentimiento->Resetear_Datos_Representante($id_cita);
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
-  $_SESSION["nombre_repres"] = "";
+  /*$_SESSION["nombre_repres"] = "";
 $_SESSION["parentesco_repres"] = "";
-$_SESSION["documento_repres"] = "";
+$_SESSION["documento_repres"] = "";*/
+$consentimiento->Resetear_Datos_Representante($id_cita);
 }
       header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
       unlink('../formatos/Plantilla/'. $ruta);

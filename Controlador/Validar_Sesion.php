@@ -24,7 +24,7 @@ $res = $usuario->Datos_Usuario($documento);
 if ($resul!=0) {
 	session_start();
 	$_SESSION["usuario"]=$res;
-	$_SESSION["nombre_repres"] = "";
+	//$_SESSION["nombre_repres"] = "";
 	header("location:../principal.php");
 }else{
 	 header("Location: ../index.php?error=true");

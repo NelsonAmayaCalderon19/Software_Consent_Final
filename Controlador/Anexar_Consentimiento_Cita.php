@@ -35,8 +35,16 @@ if(filter_input(INPUT_POST, 'btnConfirma')){
     </script>';
     
     }else{
-        header("location:../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false");
-    }
+        header("Refresh: 1; URL=../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false");
+        echo '<script>
+        Swal.fire({
+         icon: "error",
+         title: "Proceso No Realizado",
+         text: "Recuerde Seleccionar al menos 1 Consentimiento, para poder continuar",
+         showConfirmButton:false,
+         });
+        </script>';
+      }
    
 }
 
