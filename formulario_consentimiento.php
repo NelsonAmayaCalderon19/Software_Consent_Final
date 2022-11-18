@@ -477,14 +477,14 @@ Firma Paciente o Representante Legal
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-male"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="peso" id="validationCustomNombre" placeholder="KG" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="peso" id="validationCustomPeso" placeholder="KG" aria-describedby="basic-addon3">
 </div>
 <label for="validationCustomNombre">Talla <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-male"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="talla" id="validationCustomNombre" aria-describedby="basic-addon3" placeholder="CM">
+    <input type="text" class="form-control" value="" name="talla" id="validationCustomTalla" aria-describedby="basic-addon3" placeholder="CM">
 </div>
 <table class="table border">
   <thead class="thead-light">
@@ -948,7 +948,7 @@ Firma Paciente o Representante Legal
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-   <script src="javaScript/formulario_consentimiento.js"></script>
+   <script src="javaScript/formulario_consentimient.js"></script>
     <?php include "includes/footer.php";?> 
 </body>
 </html>

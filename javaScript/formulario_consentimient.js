@@ -111,11 +111,26 @@ $("#formulario input[name='flex_alcohol']:radio").is(':checked') && $("#formular
 $("#formulario input[name='flex_cirugias']:radio").is(':checked') && $("#formulario input[name='flex_sedaciones']:radio").is(':checked') &&
 $("#formulario input[name='flex_fatiga']:radio").is(':checked') && $("#formulario input[name='flex_hospitalizacion']:radio").is(':checked') &&
 $("#formulario input[name='flex_procedimiento']:radio").is(':checked')) {  
-          $("#formulario").submit();  
+          
   /*if($("#formulario input[name='flex_alergia']:radio").is(':checked')){
     if($("#formulario input[name='flex_cardiaca']:radio").is(':checked')){
       $("#formulario").submit();
     }*/
+    if($("#validationCustomPeso").val().length > 0){
+      if($("#validationCustomTalla").val().length > 0){
+        
+      $("#formulario").submit();  
+      }else{
+        alert("Recuerde Ingresar la Talla del Paciente"); 
+          $("#validationCustomTalla").focus();
+        return false;  
+      }
+        } else{
+          
+          alert("Recuerde Ingresar el Peso del Paciente"); 
+          $("#validationCustomPeso").focus();
+        return false;        
+        }
   }
    else{  
               alert("Verifique que todas las preguntas hayan sido respondidas, Gracias"); 
@@ -127,12 +142,9 @@ $("#formulario input[name='flex_procedimiento']:radio").is(':checked')) {
 $(document).ready(function()
   {
     $("#btnAcepta").click(function () {
-        if( $("#formularito input[name='flexRadioDefault']:radio").is(':checked')){
-
-        
-        $("#formularito").submit();  
-        }
-         else{  
+        if( $("#formularito input[name='flexRadioDefault']:radio").is(':checked')){      
+        $("#formularito").submit();          
+        }else{  
                     alert("Debe Confirmar si Acepta o No, la Realización del Procedimiento"); 
           return false; 
                     } 
