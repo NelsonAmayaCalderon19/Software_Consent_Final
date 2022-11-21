@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 
-   <!-- Required meta tags -->
    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon"  href="../images/pestania.png">
@@ -22,8 +21,6 @@
 #customFile .custom-file-control:lang(en)::before {
   content: "Click Aquí";
 }
-
-/*when a value is selected, this class removes the content */
 .custom-file-control.selected:lang(en)::after {
   content: "" !important;
 }
@@ -72,23 +69,6 @@ $conexion = $conexion->connect();
   </div>
     <input type="text" class="form-control" value="" name="documento" id="validationCustomNombre" aria-describedby="basic-addon3" required>
 </div>
-<label for="validationCustomNombre">Firma - Imagen </label>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fa fa-picture-o"></i></span>
-  </div>
-  <!--<div class="custom-file">
-    <input type="file" accept="image/png,image/jpeg" class="custom-file-input" id="inputGroupFile01"
-      aria-describedby="inputGroupFileAddon01" name="firma">
-    <label class="custom-file-label" for="inputGroupFile01">Seleccionar Imagen</label>
-  </div>-->
-  <div class="custom-file">
-    <label class="custom-file" id="customFile">
-        <input type="file" accept="image/png,image/jpeg" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp" name="firma">
-        <span class="custom-file-control form-control-file"></span>
-    </label>
-</div>
-</div>
 <?php $consul_cargo = "SELECT * FROM cargo";?>
 
 <label for="validationCustomNombre" id="encabezado_persona_firmante">Cargo <span style="color:red;">(*)</span></label>
@@ -109,9 +89,26 @@ $conexion = $conexion->connect();
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-key"></i></span>
   </div>
-    <input type="password" class="form-control" value="" name="password" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="password" class="form-control" value="" name="password" id="validationCustomPass" aria-describedby="basic-addon3">
 </div>
   </div>
+
+  <div class="container-fluid col-sm-12" style="display:none;" id="firma">
+<br>
+<label for="validationCustomNombre">Seleccionar Firma del Profesional <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+<div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fa fa-picture-o"></i></span>
+  </div>
+  <div class="custom-file">
+    <label class="custom-file" id="customFile">
+        <input type="file" accept="image/png,image/jpeg" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp" name="firma">
+        <span class="custom-file-control form-control-file"></span>
+    </label>
+</div>
+  </div>
+  </div>
+
   <br><br>
   <div class="col-12 text-center justify-content-center row">
     <a class="btn btn-warning mr-3" href="personal.php">Volver</a>
@@ -128,7 +125,7 @@ $conexion = $conexion->connect();
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>   
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script src="js/registrar_profesionl.js"></script>
+    <script src="js/registrar_profesional.js"></script>
 <?php include "includes/footer.php";?>
 </body>
 </html>
