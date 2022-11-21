@@ -50,13 +50,13 @@ $historial = $_GET["historial"];
 ?>
 <div class="container-fluid col-11 mx-auto" style="margin-top: 65px;">
 <div class="row">            
-<div class="row col-sm-12 text-left mb-3 d-flex">
-              <div class="col-sm-12 text-center mb-3">
+<div class="row col-sm-12 text-left d-flex">
+              <div class="col-sm-12 text-center">
                   <?php 
                  $estado_cita = $citam->Consultar_Estado_cita($id_cita);
                  if($estado_cita=="3"){
-                    if(@file_get_contents('firma_paciente_temp/'.$id_cita.'.png') || $historial=="true"){
-                    }else{?>
+                    if(@file_get_contents('firma_paciente_temp/'.$id_cita.'.png') || $historial=="true"){?>
+                   <?php }else{?>
                     <div class="row col-sm-12 text-left mb-2 d-flex">
               <div class="col-sm-12 text-secondary"><h4>Solicite la Firma al Paciente/Representante Legal</h4></div>
 </div>
@@ -133,17 +133,38 @@ $historial = $_GET["historial"];
        </div>
        <?php if($historial=="false"){?>
        <div class="row col-sm-12 justify-content-center mb-3 d-flex"> 
-       <div class="row col-sm-5 text-left" style="display: block;">
+       <!--<div class="row col-sm-5 text-left" style="display: block;">
 <?php $nombre_procedimiento = $examen->Consultar_Examen_Por_ID($cod_examen); ?>
 <h3 class="text-muted"><?php echo $nombre_procedimiento;?></h3>
-    </div>        
-              <div class="col-sm-6 text-right" style="display: block;">
+    </div>   -->
+    <div class="row col-sm-8 mb-3">
+    <div class="row col-sm-12 text-left">
+<?php $nombre_procedimiento = $examen->Consultar_Examen_Por_ID($cod_examen); ?>
+<h3 class="text-muted">Procedimiento: <?php echo $nombre_procedimiento;?></h3>
+    </div>    
+    <div class="row col-sm-12 text-left">
+<?php $nombre_paciente = $citam->Consultar_Cita_por_Id($id_cita); ?>
+<h6 class="text-muted">Paciente: <?php echo $nombre_paciente[1]; echo $nombre_paciente[2];?> - Documento: <?php echo $nombre_paciente[3];?> </h6>
+    </div>  
+       </div>     
+              <div class="col-sm-4 text-right" style="display: block;">
                   <button type="button" class="btn btn-success" data-toggle="modal" id="select" data-target="#exampleModal">
                   Anexar Consentimiento
 </button>
               </div>
        </div>
-       <?php }?>
+       <?php }else{?>
+        <div class="row col-sm-12 justify-content-center mb-3 d-flex"> 
+       <div class="row col-sm-12 text-left">
+<?php $nombre_procedimiento = $examen->Consultar_Examen_Por_ID($cod_examen); ?>
+<h3 class="text-muted">Procedimiento: <?php echo $nombre_procedimiento;?></h3>
+    </div>    
+    <div class="row col-sm-12 text-left">
+<?php $nombre_paciente = $citam->Consultar_Cita_por_Id($id_cita); ?>
+<h3 class="text-muted">Paciente: <?php echo $nombre_paciente[1]; echo $nombre_paciente[2];?> - Documento: <?php echo $nombre_paciente[3];?> </h3>
+    </div>     
+       </div>
+        <?php }?>
 <div class="col-sm-12 card shadow mb-3">
 <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-address-book-o"></i> Consentimientos informados</h6>
