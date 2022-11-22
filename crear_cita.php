@@ -35,6 +35,9 @@ $conexion = $conexion->connect();
     <?php include "includes/header.php";?>
     <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
           <div class="row">
+          <div class="col-sm-12 text-center mt-2">
+           <h3 class="text-muted">AGENDAR CITA</h3>
+                </div>
           <div class="col-sm-12 card shadow mb-3">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> Ingresar Información</h6>
