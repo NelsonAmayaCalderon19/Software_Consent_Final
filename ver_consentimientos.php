@@ -92,7 +92,7 @@ $historial = $_GET["historial"];
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="nombre_representante" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="nombre_representante" id="validationNombr" aria-describedby="basic-addon3">
 </div>
 </td>
 </tr>
@@ -103,7 +103,7 @@ $historial = $_GET["historial"];
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="parentesco_representante" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="parentesco_representante" id="validationParentesc" aria-describedby="basic-addon3">
 </div>
 </td>
 </tr>
@@ -114,7 +114,7 @@ $historial = $_GET["historial"];
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-address-card"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="documento_representante" id="validationCustomNombre" aria-describedby="basic-addon3">
+    <input type="text" class="form-control" value="" name="documento_representante" id="validationDocument" aria-describedby="basic-addon3">
 </div>
 </td>
 </tr>
@@ -352,7 +352,7 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
     document.forms['formElement2'].action = "Controlador/Crear_Consentimiento.php?id_cita=<?php echo $id_cita?>&cod_consentimiento="+este+"&cod_examen=<?php echo $cod_examen?>";
   }
   </script>
-    <script src="javaScript/ver_consentimientos_2.js"></script>
+    <script src="javaScript/ver_consentimientos.js"></script>
 </body>
 </html>
 

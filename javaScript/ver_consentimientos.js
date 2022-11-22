@@ -107,7 +107,7 @@ var idCanvas='canvas';
    /* Enviar el trazado */
    function GuardarTrazado(){
      imagen.value=document.getElementById(idCanvas).toDataURL('image/png');
-     document.forms[idForm].submit();
+     //document.forms[idForm].submit();
    }
 
 $(document).ready(function() {
@@ -121,7 +121,13 @@ $(document).ready(function() {
        
  if (dato == "Representante Legal") {
    document.getElementById("firma_representante").style.display = "block";
+   $('#validationNombr').prop("required", true);
+      $('#validationParentesc').prop("required", true);
+      $('#validationDocument').prop("required", true);
  }else if(dato == "Paciente"){
    document.getElementById("firma_representante").style.display = "none";
+   $('#validationNombr').prop("required", false);
+      $('#validationParentesc').prop("required", false);
+      $('#validationDocument').prop("required", false);
  }
 }
