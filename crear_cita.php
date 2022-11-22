@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<?php 
+ini_set('date.timezone','America/Bogota');
 
+$hora=date("H:i");
+?>
    <!-- Required meta tags -->
    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,8 +17,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-  
-
     <title>Crear Cita</title>
     <?php
     session_start();
@@ -132,10 +134,10 @@ $conexion = $conexion->connect();
 </div>
 <label for="validationCustomNombre">Hora <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
-  <div class="input-group-prepend">
+<div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-clock-o"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="hora" id="validationCustomNombre" aria-describedby="basic-addon3" required>
+    <input type="time" class="form-control" value="<?php echo $hora;?>" name="hora"  aria-describedby="basic-addon3" required>
 </div>
 <?php $consul_cargo = "SELECT * FROM examen where id_estado=1";?>
 <label for="validationCustomSelect">Examen <span style="color:red;"> (*)</span></label>

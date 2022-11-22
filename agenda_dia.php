@@ -82,7 +82,7 @@ $consulta = $cita->listar();
                         <td class="text-center"><?php echo $row['apellido_paciente']; ?></td>
                         <td class="text-center"><?php echo $row['documento']; ?></td>
                         <td class="text-center"><?php $cod = $row['cod_examen']; echo $examen->Consultar_Examen_Por_ID($cod); ?></td>
-                        <td class="text-center"><?php echo $row['hora']; ?></td>
+                          <td class="text-center"><?php echo date( "g:i A", strtotime( $row['hora'] ) ); ?></td>
                         <?php if($row['id_estado']==3):?>
                         <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -127,7 +127,7 @@ $consulta = $cita->listar();
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <script src='javaScript/agenda_dia.js'></script>
+  <script src='javaScript/agenda_day.js'></script>
 </body>
 </html>
 

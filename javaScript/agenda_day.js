@@ -6,7 +6,9 @@ $(document).ready(function() {
   var table = $('#minhatabela').DataTable( {
     destroy: true,
     deferRender:    true, 
-    autoWidth: false,     
+    autoWidth: false, 
+    order: false,
+    //"order": [[ 5, "asc" ]],     
     "search": {
       "regex": false,
       "caseInsensitive": true,
