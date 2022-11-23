@@ -144,7 +144,7 @@ $historial = $_GET["historial"];
     </div>    
     <div class="row col-sm-12 text-left">
 <?php $nombre_paciente = $citam->Consultar_Cita_por_Id($id_cita); ?>
-<h6 class="text-muted">Paciente: <?php echo $nombre_paciente[1]; echo $nombre_paciente[2];?> - Documento: <?php echo $nombre_paciente[3];?> </h6>
+<h6 class="text-muted">Paciente: <?php echo $nombre_paciente[1]." "; echo $nombre_paciente[2];?> - Documento: <?php echo $nombre_paciente[3];?> </h6>
     </div>  
        </div>     
               <div class="col-sm-4 text-right" style="display: block;">
@@ -161,7 +161,7 @@ $historial = $_GET["historial"];
     </div>    
     <div class="row col-sm-12 text-left">
 <?php $nombre_paciente = $citam->Consultar_Cita_por_Id($id_cita); ?>
-<h3 class="text-muted">Paciente: <?php echo $nombre_paciente[1]; echo $nombre_paciente[2];?> - Documento: <?php echo $nombre_paciente[3];?> </h3>
+<h3 class="text-muted">Paciente: <?php echo $nombre_paciente[1]." "; echo $nombre_paciente[2];?> - Documento: <?php echo $nombre_paciente[3];?> </h3>
     </div>     
        </div>
         <?php }?>
