@@ -24,18 +24,24 @@ use PhpOffice\PhpWord\TemplateProcessor;
       $id_consentimiento = $_GET["cod_consentimiento"];
       $cod_examen = $_GET["cod_examen"];
       $ruta_firma = $id_cita.".png";
+      $_SESSION["aceptRech"] = "";
       //$firma = $_GET["firma"];
       $id_estado;
       $datos_repre = $consentimiento->Consultar_Datos_Representante($id_cita);
       if(filter_input(INPUT_POST, 'btnAcepta') || filter_input(INPUT_POST, 'btnAcepta2')){
         if($datos_repre[0]=="" && filter_input(INPUT_POST, 'btnAcepta')){
-          header("Refresh: 1; URL=../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
+          if($consentimiento->Consultar_Firmante_Consentimiento($id_consentimiento) == "MEDICO"){
+            $cita->Actualizar_Medico_Cita($id_cita,$_POST["selectprofesional"],$_POST['selecttipodocumento'],$_POST["selectsexo"]);
+            $_SESSION["aceptRech"] = $_POST["flexRadioDefault"];
+            $_SESSION["id_consentimiento"] = $_GET["cod_consentimiento"];
+          }
+          header("Refresh: 2; URL=../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false". "&solicitar=true");
           echo '<script>
           Swal.fire({
            icon: "error",
-           title: "Error",
-           text: "Debe Solicitar la Firma al Paciente para poder Continuar el Proceso",
-           showConfirmButton: false
+           title: "Señor Usuario",
+           text: "Se procedera a ingresar la firma del Paciente o de su Representante Legal",
+           showConfirmButton: true
            });
           </script>';
          }else{
@@ -138,20 +144,22 @@ if($validarConsentCita=="0"){
     (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
 $consentimiento->Actualizar_Estado_Cita($id_cita);
 $consentimiento->Resetear_Datos_Representante($id_cita);
-
+$_SESSION["aceptRech"] = "";
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
-$consentimiento->Resetear_Datos_Representante($id_cita);
+//$consentimiento->Resetear_Datos_Representante($id_cita);
+$_SESSION["aceptRech"] = "";
 }
       //echo $ruta." ".$nombre_paciente." ".$apellido_paciente." ".$tipo_documento." ".$documento." ".$aseguradora." ".$regimen;
       /*echo $nombre_paciente;
       echo $apellido_paciente;*/
       header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
       unlink('../formatos/Plantilla/'. $ruta);
+      $_SESSION["aceptRech"] = "";
       }else{
         if(@file_get_contents('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx')){
         $templateWord = new TemplateProcessor('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx');
-        
+        $_SESSION["aceptRech"] = "";
         }else{
 $templateWord = new TemplateProcessor('../formatos/' . $ruta);
 
@@ -271,11 +279,13 @@ array_map('unlink', array_filter(
 (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
 $consentimiento->Actualizar_Estado_Cita($id_cita);
 $consentimiento->Resetear_Datos_Representante($id_cita);
+$_SESSION["aceptRech"] = "";
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
+  $_SESSION["aceptRech"] = "";
 //$consentimiento->Resetear_Datos_Representante($id_cita);
 }
-
+$_SESSION["aceptRech"] = "";
 header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
 
       }
@@ -492,7 +502,7 @@ $consentimiento->Actualizar_Estado_Cita($id_cita);
 $consentimiento->Resetear_Datos_Representante($id_cita);
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
-$consentimiento->Resetear_Datos_Representante($id_cita);
+//$consentimiento->Resetear_Datos_Representante($id_cita);
 }
       header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
       unlink('../formatos/Plantilla/'. $ruta);

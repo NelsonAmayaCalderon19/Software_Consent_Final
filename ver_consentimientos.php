@@ -47,6 +47,7 @@ $examen = new ExamenDao();
 $id_cita = $_GET["id_cita"];
 $cod_examen = $_GET["cod_examen"];
 $historial = $_GET["historial"];
+$solicitar = $_GET["solicitar"];
 ?>
 <div class="container-fluid col-11 mx-auto" style="margin-top: 65px;">
 <div class="row">            
@@ -54,7 +55,7 @@ $historial = $_GET["historial"];
               <div class="col-sm-12 text-center">
                   <?php 
                  $estado_cita = $citam->Consultar_Estado_cita($id_cita);
-                 if($estado_cita=="3"){
+                 if($estado_cita=="3" && $solicitar=="true"){
                     if(@file_get_contents('firma_paciente_temp/'.$id_cita.'.png') || $historial=="true"){?>
                    <?php }else{?>
                     <div class="row col-sm-12 text-left mb-2 d-flex">

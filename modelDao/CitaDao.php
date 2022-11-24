@@ -264,6 +264,19 @@ public function Cita_No_Asistida($id_cita){
       return $result->rowCount();
 }
 
+public function Actualizar_Medico_Cita($id_cit,$documento,$tipo_documento,$sexo){
+
+    $sq ="UPDATE cita SET ced_medico=:ced_medico, tipo_documento=:tipo_documento, sexo=:sexo WHERE id_cita= :id_cita";
+    $result=$this->conexion->prepare($sq);
+    $result->execute(array(
+        ':ced_medico' =>"".$documento."",
+        ':tipo_documento' =>"".$tipo_documento."",
+        ':sexo' =>"".$sexo."",
+        ':id_cita' =>"".$id_cit."",
+      ));
+      return $result->rowCount();
+}
+
 public function Actualizar_Cita_($id_cita,$tipo_documento,$sexo){
     $sq ="UPDATE cita SET tipo_documento=:tipo_documento, sexo=:sexo WHERE id_cita= :id_cita";
     $result=$this->conexion->prepare($sq);

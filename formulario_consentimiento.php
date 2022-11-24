@@ -343,17 +343,35 @@ $cargo = $datoscargo[0];?>
   <td colspan="4">
   <div class="input-group mb-3">
 <div class="form-check col-md-2">
+  <?php if($_SESSION["aceptRech"]=="Sí"){?>
+  <input class="form-check-input" type="radio" value="Sí" name="flexRadioDefault" id="flexRadioDefault1" checked>
+  <label class="form-check-label" for="flexRadioDefault">
+    Sí
+  </label>
+<?php }else if($_SESSION["aceptRech"]=="No"){?>
+</div>
+<div class="form-check ">
+  <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault">
+    No
+  </label>
+  
+</div>
+<?php }else{?>
   <input class="form-check-input" type="radio" value="Sí" name="flexRadioDefault" id="flexRadioDefault1">
   <label class="form-check-label" for="flexRadioDefault">
     Sí
   </label>
+
 </div>
-<div class="form-check ">
+  <div class="form-check ">
   <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2">
   <label class="form-check-label" for="flexRadioDefault">
     No
   </label>
+  
 </div>
+  <?php }?>
 </div>
   </td>
 </tr>
@@ -387,7 +405,7 @@ Firma Paciente o Representante Legal
 </table>
 </div>
   <div class="col-12 text-center justify-content-center row">
-  <a class="btn btn-warning mr-3" style="color: white;" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false" ?>">Cancelar</a>
+  <a class="btn btn-warning mr-3" style="color: white;" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false". "&solicitar=false" ?>">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" id="btnAcepta" value="Aceptar" /> 
     
                           </div>
@@ -932,7 +950,7 @@ Firma Paciente o Representante Legal
   </tbody>
  </table>
  <div class="col-12 text-center justify-content-center row">
- <a class="btn btn-warning mr-3" style="color: white;" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false" ?>">Cancelar</a>
+ <a class="btn btn-warning mr-3" style="color: white;" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false". "&solicitar=false" ?>">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnConfirmar" id="btnConfirmar" value="Aceptar" /> 
 
                           </div>
