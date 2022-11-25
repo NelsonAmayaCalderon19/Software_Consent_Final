@@ -47,9 +47,9 @@ use PhpOffice\PhpWord\TemplateProcessor;
           header("Refresh: 2; URL=../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false". "&solicitar=true");
           echo '<script>
           Swal.fire({
-           icon: "error",
+           icon: "info",
            title: "Señor Usuario",
-           text: "Se procedera a ingresar la firma del Paciente o de su Representante Legal",
+           text: "Por favor, proceda a firma el consentimiento, en caso de incapacidad, favor firmar el Representante Legal",
            showConfirmButton: true
            });
           </script>';
