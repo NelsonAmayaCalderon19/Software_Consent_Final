@@ -25,6 +25,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
       $cod_examen = $_GET["cod_examen"];
       $ruta_firma = $id_cita.".png";
       $_SESSION["aceptRech"] = "";
+      $_SESSION["selectPro"] = "";
       //$firma = $_GET["firma"];
       $id_estado;
       $datos_repre = $consentimiento->Consultar_Datos_Representante($id_cita);
@@ -32,6 +33,14 @@ use PhpOffice\PhpWord\TemplateProcessor;
         if($datos_repre[0]=="" && filter_input(INPUT_POST, 'btnAcepta')){
           if($consentimiento->Consultar_Firmante_Consentimiento($id_consentimiento) == "MEDICO"){
             $cita->Actualizar_Medico_Cita($id_cita,$_POST["selectprofesional"],$_POST['selecttipodocumento'],$_POST["selectsexo"]);
+            $_SESSION["aceptRech"] = $_POST["flexRadioDefault"];
+            $_SESSION["id_consentimiento"] = $_GET["cod_consentimiento"];
+          }else{
+            if($_POST["selectprofesional"] != ""){
+              $_SESSION["selectPro"] = $_POST["selectprofesional"];
+            }
+            
+            $cita->Actualizar_Info_Cita($id_cita,$_POST['selecttipodocumento'],$_POST["selectsexo"]);
             $_SESSION["aceptRech"] = $_POST["flexRadioDefault"];
             $_SESSION["id_consentimiento"] = $_GET["cod_consentimiento"];
           }
@@ -153,13 +162,14 @@ $_SESSION["aceptRech"] = "";
       //echo $ruta." ".$nombre_paciente." ".$apellido_paciente." ".$tipo_documento." ".$documento." ".$aseguradora." ".$regimen;
       /*echo $nombre_paciente;
       echo $apellido_paciente;*/
-      header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
+      header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false&solicitar=false");
       unlink('../formatos/Plantilla/'. $ruta);
       $_SESSION["aceptRech"] = "";
       }else{
         if(@file_get_contents('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx')){
         $templateWord = new TemplateProcessor('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx');
         $_SESSION["aceptRech"] = "";
+        $_SESSION["selectPro"]="";
         }else{
 $templateWord = new TemplateProcessor('../formatos/' . $ruta);
 
@@ -280,13 +290,15 @@ array_map('unlink', array_filter(
 $consentimiento->Actualizar_Estado_Cita($id_cita);
 $consentimiento->Resetear_Datos_Representante($id_cita);
 $_SESSION["aceptRech"] = "";
+$_SESSION["selectPro"]="";
 }if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
   $consentimiento->Actualizar_Estado_Cita($id_cita);
   $_SESSION["aceptRech"] = "";
+  $_SESSION["selectPro"]="";
 //$consentimiento->Resetear_Datos_Representante($id_cita);
 }
 $_SESSION["aceptRech"] = "";
-header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
+header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false&solicitar=false");
 
       }
          }
@@ -504,7 +516,7 @@ $consentimiento->Resetear_Datos_Representante($id_cita);
   $consentimiento->Actualizar_Estado_Cita($id_cita);
 //$consentimiento->Resetear_Datos_Representante($id_cita);
 }
-      header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false");
+      header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false&solicitar=false");
       unlink('../formatos/Plantilla/'. $ruta);
     }
   

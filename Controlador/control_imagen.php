@@ -12,6 +12,12 @@ $consentimiento = new ConsentimientoDao();
 $id_cita = $_GET["id_cita"];
 $cod_examen = $_GET["cod_examen"];
 $cod_consentimiento = $_SESSION["id_consentimiento"];
+$redirec="";
+if($_SESSION["aceptRech"]=="Sí"){
+    $redirec="btnAcepta";
+}else if($_SESSION["aceptRech"]=="No"){
+    $redirec="btnAcepta";
+}
 
 if($_POST["nombre_representante"]!=""){
 $consentimiento->Guardar_Datos_Representante($id_cita,$_POST["nombre_representante"],$_POST["parentesco_representante"],$_POST["documento_representante"]);
@@ -35,7 +41,7 @@ if (isset($_POST['imagen'])) {
    
             $nombre = $id_cita.'.png';
 //header("location:../Controlador/Desplegar_Consentimiento.php?id_cita=119&cod_consentimiento=99921&cod_examen=1");
-            header("location:../Controlador/Desplegar_Consentimiento.php?id_cita=" . $id_cita ."&cod_consentimiento=". $_SESSION["id_consentimiento"] ."&cod_examen=" . $cod_examen);
+            header("location:../Controlador/Desplegar_Consentimiento.php?id_cita=" . $id_cita ."&cod_consentimiento=" . $_SESSION["id_consentimiento"] ."&cod_examen=" . $cod_examen . "#" . $redirec);
             return true;
         }
     }
@@ -44,6 +50,6 @@ if (isset($_POST['imagen'])) {
     uploadImgBase64($_POST['imagen'], $id_cita);
     }
 
-    header("location:../Controlador/Desplegar_Consentimiento.php?id_cita=" . $id_cita ."&cod_consentimiento=". $_SESSION["id_consentimiento"] ."&cod_examen=" . $cod_examen);
+    header("location:../Controlador/Desplegar_Consentimiento.php?id_cita=" . $id_cita ."&cod_consentimiento=". $_SESSION["id_consentimiento"] ."&cod_examen=" . $cod_examen . "#" . $redirec);
     //header("location:../Controlador/Desplegar_Consentimiento.php?id_cita=119&cod_consentimiento=99921&cod_examen=1");
 ?>

@@ -277,6 +277,18 @@ public function Actualizar_Medico_Cita($id_cit,$documento,$tipo_documento,$sexo)
       return $result->rowCount();
 }
 
+public function Actualizar_Info_Cita($id_cit,$tipo_documento,$sexo){
+
+    $sq ="UPDATE cita SET tipo_documento=:tipo_documento, sexo=:sexo WHERE id_cita= :id_cita";
+    $result=$this->conexion->prepare($sq);
+    $result->execute(array(
+        ':tipo_documento' =>"".$tipo_documento."",
+        ':sexo' =>"".$sexo."",
+        ':id_cita' =>"".$id_cit."",
+      ));
+      return $result->rowCount();
+}
+
 public function Actualizar_Cita_($id_cita,$tipo_documento,$sexo){
     $sq ="UPDATE cita SET tipo_documento=:tipo_documento, sexo=:sexo WHERE id_cita= :id_cita";
     $result=$this->conexion->prepare($sq);

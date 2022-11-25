@@ -57,7 +57,7 @@ if($_GET["cod_consentimiento"] != "FT-PA-GI-HC-064"){
 $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$id_consentimiento'";?>
     
     <?php foreach ($conexion->query($consulta) as $row) { ?>
-    <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
+    <div class="container-fluid col-11 mx-auto" style="margin-top: 65px;">
           <div class="row">
               <div class="col-12 d-xl-flex align-items-center justify-content-center" style="width:100%;">
                 <div class="alert alert-success alert-dismissible" id="success-alert">
@@ -201,7 +201,10 @@ $cargo = $datoscargo[0];?>
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-user"></i></label>
   </div>
          <select class="custom-select" id="validationCustomSelect" name="selectprofesional" aria-describedby="inputGroupPrepend" >
-         <option value="">Seleccione</option>
+         <?php if($_SESSION["selectPro"] == ""){?>
+          <option value="">Seleccione</option>
+        <?php }else{ ?>
+         <option value="<?php echo $_SESSION["selectPro"]; ?>">Enfermero Seleccionado</option><?php }?>
          <?php foreach ($conexion->query($consul_cargo) as $ro) { ?>
                         <option value="<?php echo $ro['documento']; ?>"><?php echo $ro['nombre_completo'];?></option>
                         <?php } ?>  
@@ -342,13 +345,27 @@ $cargo = $datoscargo[0];?>
   <tr>
   <td colspan="4">
   <div class="input-group mb-3">
-<div class="form-check col-md-2">
+
   <?php if($_SESSION["aceptRech"]=="Sí"){?>
+    <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="Sí" name="flexRadioDefault" id="flexRadioDefault1" checked>
   <label class="form-check-label" for="flexRadioDefault">
     Sí
   </label>
+  </div>
+  <div class="form-check ">
+  <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2">
+  <label class="form-check-label" for="flexRadioDefault">
+    No
+  </label>
+  
+</div>
 <?php }else if($_SESSION["aceptRech"]=="No"){?>
+  <div class="form-check col-md-2">
+  <input class="form-check-input" type="radio" value="Sí" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault">
+    Sí
+  </label>
 </div>
 <div class="form-check ">
   <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2" checked>
@@ -358,11 +375,11 @@ $cargo = $datoscargo[0];?>
   
 </div>
 <?php }else{?>
+  <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="Sí" name="flexRadioDefault" id="flexRadioDefault1">
   <label class="form-check-label" for="flexRadioDefault">
     Sí
   </label>
-
 </div>
   <div class="form-check ">
   <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2">

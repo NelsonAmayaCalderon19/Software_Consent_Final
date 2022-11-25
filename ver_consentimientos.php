@@ -49,7 +49,7 @@ $cod_examen = $_GET["cod_examen"];
 $historial = $_GET["historial"];
 $solicitar = $_GET["solicitar"];
 ?>
-<div class="container-fluid col-11 mx-auto" style="margin-top: 65px;">
+<div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
 <div class="row">            
 <div class="row col-sm-12 text-left d-flex">
               <div class="col-sm-12 text-center">

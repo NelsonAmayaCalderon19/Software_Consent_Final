@@ -25,6 +25,7 @@ if ($resul!=0) {
 	session_start();
 	$_SESSION["usuario"]=$res;
 	$_SESSION["aceptRech"]="";
+	$_SESSION["selectPro"]="";
 	header("location:../principal.php");
 }else{
 	 header("Location: ../index.php?error=true");
