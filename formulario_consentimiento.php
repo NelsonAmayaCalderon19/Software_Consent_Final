@@ -57,7 +57,7 @@ if($_GET["cod_consentimiento"] != "FT-PA-GI-HC-064"){
 $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$id_consentimiento'";?>
     
     <?php foreach ($conexion->query($consulta) as $row) { ?>
-    <div class="container-fluid col-11 mx-auto" style="margin-top: 65px;">
+    <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
           <div class="row">
               <div class="col-12 d-xl-flex align-items-center justify-content-center" style="width:100%;">
                 <div class="alert alert-success alert-dismissible" id="success-alert">
@@ -204,7 +204,7 @@ $cargo = $datoscargo[0];?>
          <?php if($_SESSION["selectPro"] == ""){?>
           <option value="">Seleccione</option>
         <?php }else{ ?>
-         <option value="<?php echo $_SESSION["selectPro"]; ?>">Enfermero Seleccionado</option><?php }?>
+         <option value="<?php echo $_SESSION["selectPro"]; ?>"><?php $nomprof = $prof->Consultar_Profesional_por_Cedula($_SESSION["selectPro"]); echo $nomprof[1];?></option><?php }?>
          <?php foreach ($conexion->query($consul_cargo) as $ro) { ?>
                         <option value="<?php echo $ro['documento']; ?>"><?php echo $ro['nombre_completo'];?></option>
                         <?php } ?>  
