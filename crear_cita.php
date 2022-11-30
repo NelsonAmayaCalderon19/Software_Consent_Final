@@ -43,34 +43,35 @@ $conexion = $conexion->connect();
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> Ingresar Información</h6>
             </div>
             <div class="col-sm-12 card-body">
-            <form method="post" action="Controlador/Confirmar_Cita.php">
+            <form method="post" id="formularito" action="Controlador/Confirmar_Cita.php">
             <label for="validationCustomNombre">Nombres del Paciente <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="nombres_paciente" id="validationCustomNombre" aria-describedby="basic-addon3" required>
+    <input type="text" class="form-control" value="" name="nombres_paciente" id="validationCustomNombre" aria-describedby="basic-addon3">
 </div>
 <label for="validationCustomNombre">Apellidos del Paciente <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="apellidos_paciente" id="validationCustomNombre" aria-describedby="basic-addon3" required>
+    <input type="text" class="form-control" value="" name="apellidos_paciente" id="validationCustomApellido" aria-describedby="basic-addon3" >
 </div>
 <label for="validationCustomNombre">Numero de Documento <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-id-card-o"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="documento" id="validationCustomNombre" aria-describedby="basic-addon3" required>
+    <input type="text" class="form-control" value="" name="documento" id="validationCustomDocumento" aria-describedby="basic-addon3" >
 </div>
 <label for="validationCustomSelect">Tipo de Documento <span style="color:red;">(*)</span></label>
      <div class="input-group mb-3">
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selecttipodocumento" aria-describedby="inputGroupPrepend" required>
+         <select class="custom-select" id="validationCustomtipoDoc" name="selecttipodocumento" aria-describedby="inputGroupPrepend" required>
+                        <option value="">Seleccione</option>
                         <option value="Cedula de Ciudadania">Cedula de Ciudadania</option>
                         <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>  
                         <option value="Permiso Especial de Permanencia">Permiso Especial de Permanencia</option>   
@@ -84,21 +85,21 @@ $conexion = $conexion->connect();
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="edad" id="validationCustomNombre" aria-describedby="basic-addon3" required>
+    <input type="text" class="form-control" value="" name="edad" id="validationCustomEdad" aria-describedby="basic-addon3">
 </div>
 <label for="validationCustomNombre">Afiliacion <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-shield"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="afiliacion" id="validationCustomNombre" aria-describedby="basic-addon3" required>
+    <input type="text" class="form-control" value="" name="afiliacion" id="validationCustomAfiliacion" aria-describedby="basic-addon3" >
 </div>
 <label for="validationCustomNombre">Aseguradora <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-shield"></i></span>
   </div>
-    <input type="text" class="form-control" value="" name="aseguradora" id="validationCustomNombre" aria-describedby="basic-addon3" required>
+    <input type="text" class="form-control" value="" name="aseguradora" id="validationCustomAseguradora" aria-describedby="basic-addon3" >
 </div>
 <label for="validationCustomSelect">Regimen <span style="color:red;">(*)</span></label>
 
@@ -106,8 +107,8 @@ $conexion = $conexion->connect();
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-users"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selectregimen" aria-describedby="inputGroupPrepend" required>
-         
+         <select class="custom-select" id="validationCustomRegimen" name="selectregimen" aria-describedby="inputGroupPrepend" required>
+                        <option value="">Seleccione</option>
                         <option value="Contributivo">Contributivo</option>
                         <option value="Subsidiado">Subsidiado</option>
                         <option value="Particular">Particular</option>
@@ -121,8 +122,8 @@ $conexion = $conexion->connect();
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selectsexo" aria-describedby="inputGroupPrepend" required>
-                    
+         <select class="custom-select" id="validationCustomSexo" name="selectsexo" aria-describedby="inputGroupPrepend" required>
+                        <option value="">Seleccione</option>
                         <option value="Femenino">Femenino</option>
                         <option value="Masculino">Masculino</option>  
                         <option value="Otro / No Responde">Otro / No Responde</option>         
@@ -133,14 +134,14 @@ $conexion = $conexion->connect();
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-calendar"></i></span>
   </div>
-    <input type="date" class="form-control" value="<?php echo date('Y-m-d');?>" name="fecha" id="validationCustomNombre" aria-describedby="basic-addon3" required>
+    <input type="date" class="form-control" value="<?php echo date('Y-m-d');?>" name="fecha" id="validationCustomFecha" aria-describedby="basic-addon3">
 </div>
 <label for="validationCustomNombre">Hora <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
 <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-clock-o"></i></span>
   </div>
-    <input type="time" class="form-control" value="<?php echo $hora;?>" name="hora"  aria-describedby="basic-addon3" required>
+    <input type="time" class="form-control" value="<?php echo $hora;?>" name="hora" id="validationHora"  aria-describedby="basic-addon3">
 </div>
 <?php $consul_cargo = "SELECT * FROM examen where id_estado=1";?>
 <label for="validationCustomSelect">Examen <span style="color:red;"> (*)</span></label>
@@ -148,7 +149,7 @@ $conexion = $conexion->connect();
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-medkit"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selectexamen" aria-describedby="inputGroupPrepend" required>
+         <select class="custom-select" id="validationCustomExamen" name="selectexamen" aria-describedby="inputGroupPrepend" required>
          <?php foreach ($conexion->query($consul_cargo) as $ro) { ?>
                         <option value="<?php echo $ro['codigo']; ?>"><?php echo $ro['descripcion'];?></option>
                         <?php } ?>  
@@ -209,7 +210,7 @@ $conexion = $conexion->connect();
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-hospital-o"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selectesquema" aria-describedby="inputGroupPrepend" required>
+         <select class="custom-select" id="validationCustomEsquema" name="selectesquema" aria-describedby="inputGroupPrepend" required>
                         <option value="">Seleccione</option>
                         <option value="No">No</option>
                         <option value="Si">Si</option>
@@ -218,7 +219,7 @@ $conexion = $conexion->connect();
          <div class="col-12 text-center justify-content-center row">
          <a class="btn btn-warning mr-3" style="color: white;" href="principal.php">Volver</a> 
    
-<input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" value="Confirmar" /> 
+<input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" id="btnConfirmar" value="Confirmar" /> 
     
                           </div>
                          
@@ -233,6 +234,7 @@ $conexion = $conexion->connect();
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>   
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="javaScript/crear_cita.js"></script>
 <?php include "includes/footer.php";?>
 </body>
 </html>

@@ -14,7 +14,6 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
-
 foreach($results as $fila):
         $nombre = $fila["descripcion"];
 endforeach;
@@ -66,7 +65,6 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
-
 foreach($results as $fila):
         $nombre = $fila["ruta_archivo"];
 endforeach;
@@ -80,7 +78,6 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
-
 foreach($results as $fila):
         $estado = $fila["id_estado"];
 endforeach;
@@ -94,7 +91,6 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
-
 foreach($results as $fila):
         $nombre = $fila["formulario"];
 endforeach;
@@ -109,7 +105,6 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
-
 foreach($results as $fila):
         $nombre = $fila["profesional_firma"];
 endforeach;
@@ -293,7 +288,6 @@ $result->execute(array(
     ':cod_consentimiento' =>"".$cod_consentimiento.""
   ));
 $results = $result -> fetchAll();
-
 foreach($results as $fila):
         $cantidad = $fila["cod_examen"];
 endforeach;
@@ -304,8 +298,7 @@ public function Actualizar_Estado_Cita($id_cita){
     $sq ="UPDATE cita SET id_estado=4 WHERE id_cita= :id_cita";
         $result=$this->conexion->prepare($sq);
         $result->execute(array(   
-            ':id_cita' =>"".$id_cita.""
-            
+            ':id_cita' =>"".$id_cita.""           
           ));
           return $result->rowCount();
 }
@@ -314,8 +307,7 @@ public function Retornar_Estado_Inicial_Cita($id_cita){
     $sq ="UPDATE cita SET id_estado=3 WHERE id_cita= :id_cita";
         $result=$this->conexion->prepare($sq);
         $result->execute(array(   
-            ':id_cita' =>"".$id_cita.""
-            
+            ':id_cita' =>"".$id_cita.""         
           ));
           return $result->rowCount();
 }
@@ -323,10 +315,8 @@ public function Retornar_Estado_Inicial_Cita($id_cita){
 public function Guardar_Consentimiento($codigo,$descripcion,$ruta_archivo){
     $datos = new Consentimiento($codigo,$descripcion,$ruta_archivo,1);
     $consulta = "INSERT INTO consentimiento(codigo,descripcion,ruta_archivo,id_estado) 
-    VALUES(:codigo,:descripcion,:ruta_archivo,:id_estado)";
-    
+    VALUES(:codigo,:descripcion,:ruta_archivo,:id_estado)";    
 $sql = $this->conexion->prepare($consulta);
-
 $sql->bindValue(':codigo',$datos->getCodigo());
 $sql->bindValue(':descripcion',$datos->getDescripcion());
 $sql->bindValue(':ruta_archivo',$datos->getRuta());
@@ -336,12 +326,8 @@ return $sql;
 }
 public function Guardar_Consentimiento_Examen($cod_examen,$cod_consentimiento){
     $consulta = "INSERT INTO consent_examen(cod_examen,cod_consentimiento) 
-    VALUES(:cod_examen,:cod_consentimiento)";
-    
+    VALUES(:cod_examen,:cod_consentimiento)";   
 $sq = $this->conexion->prepare($consulta);
-
-//$sub_fech = Cita::Validar_Fecha($fecha);
-
 $sq->bindValue(':cod_examen',$cod_examen);
 $sq->bindValue(':cod_consentimiento',$cod_consentimiento);     
 $sq->execute();
@@ -355,8 +341,7 @@ public function Guardar_Datos_Representante($id_cita,$nombre_representante,$pare
         ':nombre_representante' =>"".$nombre_representante."",
         ':parentesco_representante' =>"".$parentesco_representante."",
         ':documento_representante' =>"".$documento_representante."",
-        ':id_cita' =>"".$id_cita.""
-        
+        ':id_cita' =>"".$id_cita.""       
       ));
       return $result->rowCount();
 }
@@ -365,18 +350,15 @@ public function Resetear_Datos_Representante($id_cita){
     $sq ="UPDATE cita_consent SET nombre_representante=NULL,parentesco_representante=NULL,documento_representante=NULL WHERE id_cita= :id_cita";
     $result=$this->conexion->prepare($sq);
     $result->execute(array(
-        ':id_cita' =>"".$id_cita.""
-        
+        ':id_cita' =>"".$id_cita.""        
       ));
       return $result->rowCount();
 }
 
 public function Guardar_Consentimiento_Detalle($cod_consentimiento,$nombre,$descripcion,$objetivo,$beneficio,$riesgo,$existe_alternativa,$alternativa,$decision,$revocatoria,$profesional_firma){
     $consulta = "INSERT INTO consentimiento_detalle(cod_consentimiento,nombre,descripcion,objetivo,beneficio,riesgo,existe_alternativa,alternativa,decision,revocatoria,profesional_firma) 
-    VALUES(:cod_consentimiento,:nombre,:descripcion,:objetivo,:beneficio,:riesgo,:existe_alternativa,:alternativa,:decision,:revocatoria,:profesional_firma)";
-    
+    VALUES(:cod_consentimiento,:nombre,:descripcion,:objetivo,:beneficio,:riesgo,:existe_alternativa,:alternativa,:decision,:revocatoria,:profesional_firma)";    
 $sq = $this->conexion->prepare($consulta);
-
 $sq->bindValue(':cod_consentimiento',$cod_consentimiento);
 $sq->bindValue(':nombre',$nombre);   
 $sq->bindValue(':descripcion',$descripcion);

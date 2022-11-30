@@ -62,22 +62,24 @@ $solicitar = $_GET["solicitar"];
               <div class="col-sm-12 text-secondary"><h4>Solicite la Firma al Paciente/Representante Legal</h4></div>
 </div>
    <div id="canva">
+   
+   <form id='formCanvas' method='post' action="Controlador/control_imagen.php?id_cita=<?php echo $id_cita?>&cod_examen=<?php echo $cod_examen?>&firma=1" ENCTYPE='multipart/form-data'>
    <canvas id='canvas' width="600" height="200" style='border: 1px solid #CCC;'>
        <p>Tu navegador no soporta canvas</p>
    </canvas>
    <firma id="firma"></firma>
    <signature></signature>
-   <form id='formCanvas' method='post' action="Controlador/control_imagen.php?id_cita=<?php echo $id_cita?>&cod_examen=<?php echo $cod_examen?>&firma=1" ENCTYPE='multipart/form-data'>
-     <button class="btn btn-warning" type='button' onclick='LimpiarTrazado()'>Limpiar</button>     
+   <br> 
+   <button class="btn btn-warning mb-2" type='button' onclick='LimpiarTrazado()'>Limpiar</button>     
        <input type='hidden' name='imagen' id='imagen' />
        <br>
-       <h2>Seleccione el Usuario que Firma</h2>
+       <!--<h2>Seleccione el Usuario que Firma</h2>
        <input type="radio" class="btn-check" name="options" id="option1" value="Paciente" autocomplete="off" onchange="mostrar(this.value);">
-<label class="btn btn-primary" for="option1">Paciente</label>
+<label class="btn btn-primary" for="option1">Paciente</label>-->
 
 <input type="radio" class="btn-check" name="options" id="option2" value="Representante Legal" autocomplete="off" onchange="mostrar(this.value);">
 <label class="btn btn-primary" for="option2">Representante Legal</label>
-
+                 
 <div class="container-fluid col-12" style="display:none;" id="firma_representante">
 <table class="table border representante_legal">
 <thead class="thead-light">

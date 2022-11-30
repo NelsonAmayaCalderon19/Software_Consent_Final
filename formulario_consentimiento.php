@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-   <!-- Required meta tags -->
    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon"  href="images/pestania.png">
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-  <style>
-    .data{
-    /*width: 100px;
-    word-wrap: break-word;*/
-    }
-    </style>
 	<title>Formulario Consentimiento</title>
     <?php
   session_start();
@@ -33,8 +24,7 @@
       require 'modelo/Profesional.php';
       include_once 'modelDao/ProfesionalDao.php';
       require 'modelo/Examen.php';
-      include_once 'modelDao/ExamenDao.php';
-      
+      include_once 'modelDao/ExamenDao.php';     
       $cita = new CitaDao();
       $prof = new ProfesionalDao();
       $examen = new ExamenDao();
@@ -42,20 +32,14 @@
       $id_consentimiento = $_GET["cod_consentimiento"];
       $cod_examen = $_GET["cod_examen"];
       $datos = $cita->Consultar_Cita_por_Id($id_cita);
-      
-      
-
 require 'modelo/Consentimiento.php';
 include_once 'modelDao/ConsentimientoDao.php';
 $consentimiento = new ConsentimientoDao();
-
-
 $conexion = new conexion();
 $conexion = $conexion->connect(); ?>
 <?php include "includes/header.php";
 if($_GET["cod_consentimiento"] != "FT-PA-GI-HC-064"){
 $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$id_consentimiento'";?>
-    
     <?php foreach ($conexion->query($consulta) as $row) { ?>
     <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
           <div class="row">
@@ -79,7 +63,6 @@ $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$i
   </div>
     <input type="text" class="form-control" value="<?php echo $datos[1]; ?>" name="nombre_paciente" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
 </div>
-
 <label for="validationCustomNombre">Apellidos del Paciente <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -100,8 +83,8 @@ $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$i
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selecttipodocumento" aria-describedby="inputGroupPrepend" required>
-                    
+         <select class="custom-select" id="validationTipoDocumento" name="selecttipodocumento" aria-describedby="inputGroupPrepend" required>                  
+                        <option value="">Seleccione</option>
                         <option value="Cedula de Ciudadania">Cedula de Ciudadania</option>
                         <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>  
                         <option value="Permiso Especial de Permanencia">Permiso Especial de Permanencia</option>   
@@ -152,8 +135,8 @@ $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$i
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selectsexo" aria-describedby="inputGroupPrepend" required>
-                    
+         <select class="custom-select" id="validationSexo" name="selectsexo" aria-describedby="inputGroupPrepend" required>
+                        <option value="">Seleccione</option>
                         <option value="Femenino">Femenino</option>
                         <option value="Masculino">Masculino</option>  
                         <option value="Otro / No Responde">Otro / No Responde</option>         
@@ -190,8 +173,7 @@ $cargo = $datoscargo[0];?>
          <?php }?>
          <?php foreach ($conexion->query($consul_cargo) as $ro) { ?>
                         <option value="<?php echo $ro['documento']; ?>"><?php echo $ro['nombre_completo'];?></option>
-                        <?php } ?>  
-              
+                        <?php } ?>               
   </select>
 </div>
 <?php }else{?>
@@ -207,13 +189,10 @@ $cargo = $datoscargo[0];?>
          <option value="<?php echo $_SESSION["selectPro"]; ?>"><?php $nomprof = $prof->Consultar_Profesional_por_Cedula($_SESSION["selectPro"]); echo $nomprof[1];?></option><?php }?>
          <?php foreach ($conexion->query($consul_cargo) as $ro) { ?>
                         <option value="<?php echo $ro['documento']; ?>"><?php echo $ro['nombre_completo'];?></option>
-                        <?php } ?>  
-              
+                        <?php } ?>              
   </select>
 </div>
-
   <?php } ?>
-
 <table class="table">
   <thead class="thead-light">
     <tr>
@@ -273,8 +252,6 @@ $cargo = $datoscargo[0];?>
   </thead>
   <tbody>
     <tr>
-      
-  
   <?php if($row['existe_alternativa'] == "Si"){?>
   <td class="text-left border data" >SI, EXISTEN OTRAS ALTERNATIVAS</td>
   <td class="text-left border data" ><strong><?php echo "X"; ?></strong></td>
@@ -322,7 +299,6 @@ $cargo = $datoscargo[0];?>
 </div>
       <td>
  </tr>
- 
   </tbody>
   <thead class="thead-light">
     <tr>
@@ -345,7 +321,6 @@ $cargo = $datoscargo[0];?>
   <tr>
   <td colspan="4">
   <div class="input-group mb-3">
-
   <?php if($_SESSION["aceptRech"]=="Sí"){?>
     <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="Sí" name="flexRadioDefault" id="flexRadioDefault1" checked>
@@ -357,8 +332,7 @@ $cargo = $datoscargo[0];?>
   <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2">
   <label class="form-check-label" for="flexRadioDefault">
     No
-  </label>
-  
+  </label>  
 </div>
 <?php }else if($_SESSION["aceptRech"]=="No"){?>
   <div class="form-check col-md-2">
@@ -371,8 +345,7 @@ $cargo = $datoscargo[0];?>
   <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2" checked>
   <label class="form-check-label" for="flexRadioDefault">
     No
-  </label>
-  
+  </label> 
 </div>
 <?php }else{?>
   <div class="form-check col-md-2">
@@ -385,17 +358,14 @@ $cargo = $datoscargo[0];?>
   <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2">
   <label class="form-check-label" for="flexRadioDefault">
     No
-  </label>
-  
+  </label>  
 </div>
   <?php }?>
 </div>
   </td>
 </tr>
-
 </tbody>
 </table>
-
 <div class="container-fluid col-12" style="display:none;" id="revocatoria">
 <table class="table border revocatoria">
 <thead class="thead-light">
@@ -423,11 +393,8 @@ Firma Paciente o Representante Legal
 </div>
   <div class="col-12 text-center justify-content-center row">
   <a class="btn btn-warning mr-3" style="color: white;" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false". "&solicitar=false" ?>">Cancelar</a>
-<input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" id="btnAcepta" value="Aceptar" /> 
-    
-                          </div>
-                         
-                          
+<input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" id="btnAcepta" value="Aceptar" />    
+                          </div>                                                   
 </div>
   </form>
             </div>
@@ -492,8 +459,7 @@ Firma Paciente o Representante Legal
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selectsexo" aria-describedby="inputGroupPrepend" required>
-                    
+         <select class="custom-select" id="validationCustomSelect" name="selectsexo" aria-describedby="inputGroupPrepend" required>                    
                         <option value="Femenino">Femenino</option>
                         <option value="Masculino">Masculino</option>  
                         <option value="Otro / No Responde">Otro / No Responde</option>         
@@ -531,7 +497,6 @@ Firma Paciente o Representante Legal
     <tr>
 <td>¿Tiene alergia conocida a algún medicamento, comida?</td>
 <td>
-
   <div class="input-group mb-3" id="tiene_alergia" >
   <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="SI" name="flex_alergia" id="flex_alergia1" onchange="mostrar3();">
@@ -554,7 +519,6 @@ Firma Paciente o Representante Legal
     <tr>
 <td>¿Sufre de Enfermedad cardiaca?</td>
 <td>
-
   <div class="input-group mb-3" id="tiene_cardiaca">
   <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="SI" name="flex_cardiaca" id="flex_cardiaca1" onchange="mostrar3();">
@@ -577,7 +541,6 @@ Firma Paciente o Representante Legal
     <tr>
 <td>¿Sufre de enfermedad Pulmonar?</td>
 <td>
-
   <div class="input-group mb-3" id="tiene_pulmonar">
   <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="SI" name="flex_pulmonar" id="flex_pulmonar1" onchange="mostrar3();">
@@ -600,7 +563,6 @@ Firma Paciente o Representante Legal
     <tr>
 <td>¿Ha presentado ronquidos al dormir?</td>
 <td>
-
   <div class="input-group mb-3" id="tiene_ronquidos">
   <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="SI" name="flex_ronquidos" id="flex_ronquidos1" onchange="mostrar3();">
@@ -635,7 +597,6 @@ Firma Paciente o Representante Legal
 </div>
 </td>
 <td>¿Usa Oxigeno en la casa?
-
   <div class="input-group mb-3" id="tiene_oxigeno">
   <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="SI" name="flex_oxigeno" id="flex_oxigeno1" onchange="mostrar3();">
@@ -655,7 +616,6 @@ Firma Paciente o Representante Legal
     <tr>
 <td>¿Sufre de enfermedad neurológica/psiquiátrica?</td>
 <td>
-
   <div class="input-group mb-3" id="tiene_psiquiatria">
   <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="SI" name="flex_psiquiatria" id="flex_psiquiatria1" onchange="mostrar3();">
@@ -678,7 +638,6 @@ Firma Paciente o Representante Legal
     <tr>
 <td>¿Sufre de enfermedad de riñón y/o hígado?</td>
 <td>
-
   <div class="input-group mb-3" id="tiene_higado">
   <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="SI" name="flex_higado" id="flex_higado1" onchange="mostrar3();">
@@ -701,7 +660,6 @@ Firma Paciente o Representante Legal
     <tr>
 <td>¿Consume medicamentos que interfieren con la coagulación?</td>
 <td>
-
   <div class="input-group mb-3" id="tiene_coagulacion">
   <div class="form-check col-md-2">
   <input class="form-check-input" type="radio" value="SI" name="flex_coagulacion" id="flex_coagulacion1" onchange="mostrar3();">
@@ -969,7 +927,6 @@ Firma Paciente o Representante Legal
  <div class="col-12 text-center justify-content-center row">
  <a class="btn btn-warning mr-3" style="color: white;" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false". "&solicitar=false" ?>">Cancelar</a>
 <input class="btn btn-success btn-acepta" type="submit" name="btnConfirmar" id="btnConfirmar" value="Aceptar" /> 
-
                           </div>
  </form>
             </div>
@@ -982,8 +939,7 @@ Firma Paciente o Representante Legal
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>   
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-   <script src="javaScript/formulario_consentimient.js"></script>
+   <script src="javaScript/formulario_consentimiento.js"></script>
     <?php include "includes/footer.php";?> 
 </body>
 </html>

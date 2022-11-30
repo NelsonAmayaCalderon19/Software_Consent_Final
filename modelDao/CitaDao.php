@@ -8,7 +8,6 @@ public function __construct(){
         $this->conexion = new conexion();
         $this->conexion = $this->conexion->connect();
     }
-
     public function Consultar_Cod_Examen($nombre){
         $datos = new Examen("",$nombre,"");
         $sq="SELECT * FROM examen as exam WHERE exam.descripcion= :descripcion";
@@ -17,7 +16,6 @@ $result->execute(array(
     ':descripcion' =>"".$datos->getDescripcion().""
   ));
 $results = $result -> fetchAll();
-
 foreach($results as $fila):
         $datos->setCodigo($fila["codigo"]);
 endforeach;
@@ -32,7 +30,6 @@ $result->execute(array(
     ':documento' =>"".$documento.""
   ));
 $results = $result -> fetchAll();
-
 foreach($results as $fila):
         $cod = $fila["documento"];
 endforeach;
@@ -53,8 +50,7 @@ public function Validar_Fecha($fecha){
         $result_mes =$posicion+1;
     } else {
         $result_mes = 0;
-    }
-    
+    }  
     $sub_fech = $anio . '-' . $result_mes . '-' . $dia;
     return $sub_fech;
 }
@@ -62,10 +58,8 @@ public function Guardar_Cita($nombre_p,$apellido_p,$documento,$tipo_documento,$e
     $datos = new Cita($nombre_p,$apellido_p,$documento,$tipo_documento,$edad,$afiliacion,$aseguradora,$regimen,$sexo,$fecha,$hora,$ced_medico,$consultorio,$tipo_examen,$cod_examen,$sede,$id_estado,$esquema_clinico);
     $consulta = "INSERT INTO cita(nombre_paciente,apellido_paciente,documento,tipo_documento,edad,plan_afiliacion,aseguradora,regimen,sexo,fecha,hora,ced_medico,consultorio,tipo_examen,cod_examen,sede,id_estado,esquema_clinico) 
 VALUES(:nombre_p,:apellido_p,:documento,:tipo_documento,:edad,:afiliacion,:aseguradora,:regimen,:sexo,:fecha,:hora,:ced_medico,:consultorio,:tipo_examen,:cod_examen,:sede,:id_estado,:esquema_clinico)";
-    
 $sql = $this->conexion->prepare($consulta);
 $sub_fech = CitaDao::Validar_Fecha($datos->getFecha());
-
 $sql->bindValue(':nombre_p',$datos->getNombre_paciente());
 $sql->bindValue(':apellido_p',$datos->getApellido_paciente());
 $sql->bindValue(':documento',$datos->getDocumento());
@@ -91,10 +85,8 @@ return $this->conexion->lastInsertId();
 public function Guardar_Cita_Extraordinaria($nombre_p,$apellido_p,$documento,$tipo_documento,$edad,$afiliacion,$aseguradora,$regimen,$sexo,$fecha,$hora,$ced_medico,$consultorio,$tipo_examen,$cod_examen,$sede,$id_estado,$esquema_clinico){
     $datos = new Cita($nombre_p,$apellido_p,$documento,$tipo_documento,$edad,$afiliacion,$aseguradora,$regimen,$sexo,$fecha,$hora,$ced_medico,$consultorio,$tipo_examen,$cod_examen,$sede,$id_estado,$esquema_clinico);
     $consulta = "INSERT INTO cita(nombre_paciente,apellido_paciente,documento,tipo_documento,edad,plan_afiliacion,aseguradora,regimen,sexo,fecha,hora,ced_medico,consultorio,tipo_examen,cod_examen,sede,id_estado,esquema_clinico) 
-VALUES(:nombre_p,:apellido_p,:documento,:tipo_documento,:edad,:afiliacion,:aseguradora,:regimen,:sexo,:fecha,:hora,:ced_medico,:consultorio,:tipo_examen,:cod_examen,:sede,:id_estado,:esquema_clinico)";
-    
+VALUES(:nombre_p,:apellido_p,:documento,:tipo_documento,:edad,:afiliacion,:aseguradora,:regimen,:sexo,:fecha,:hora,:ced_medico,:consultorio,:tipo_examen,:cod_examen,:sede,:id_estado,:esquema_clinico)";    
 $sql = $this->conexion->prepare($consulta);
-
 $sql->bindValue(':nombre_p',$datos->getNombre_paciente());
 $sql->bindValue(':apellido_p',$datos->getApellido_paciente());
 $sql->bindValue(':documento',$datos->getDocumento());
@@ -133,7 +125,6 @@ public function Listar_Agenda(){
         print $row['id_cita'] . "\t";
         print $row['nombre_paciente'] . "\t";
         print $row['edad'] . "\n";
-
     }
 }
 
@@ -190,7 +181,7 @@ return $dir;
 }
 
 public function Consultar_Cita($id_cita, $id_consentimiento){
-    $sq="SELECT cita.documento,cons.nombre FROM cita as cita, cita_consent as cit, consentimiento_detalle as cons WHERE cita.id_cita=cit.id_cita and cons.cod_consentimiento=cit.cod_consentimiento and cit.id_cita= :id_cita and cit.cod_consentimiento= :id_consentimiento";
+    $sq="SELECT cita.documento,cita.tipo_documento,cons.nombre FROM cita as cita, cita_consent as cit, consentimiento_detalle as cons WHERE cita.id_cita=cit.id_cita and cons.cod_consentimiento=cit.cod_consentimiento and cit.id_cita= :id_cita and cit.cod_consentimiento= :id_consentimiento";
 $result=$this->conexion->prepare($sq);
 $result->execute(array(
 ':id_cita' =>"".$id_cita."",
@@ -201,6 +192,8 @@ $dir = array();
 $cont = 0;
 foreach($results as $fila):
         $dir[$cont] = $fila["documento"];
+        $cont++;
+        $dir[$cont] = $fila["tipo_documento"];
         $cont++;
         $dir[$cont] = $fila["nombre"];
         $cont++;
@@ -214,8 +207,7 @@ public function Consultar_Estado_cita($id_cita){
     $result->execute(array(
         ':id_cita' =>"".$id_cita.""
       ));
-    $results = $result -> fetchAll();
-    
+    $results = $result -> fetchAll();   
     foreach($results as $fila):
             $estado = $fila["id_estado"];
     endforeach;
@@ -223,7 +215,7 @@ public function Consultar_Estado_cita($id_cita){
 }
 
 public function Consultar_Cita2($id_cita, $id_consentimiento){
-    $sq="SELECT cita.documento,cons.descripcion FROM cita as cita, cita_consent as cit, consentimiento as cons WHERE cita.id_cita=cit.id_cita and cons.codigo=cit.cod_consentimiento and cit.id_cita= :id_cita and cit.cod_consentimiento= :id_consentimiento";
+    $sq="SELECT cita.documento,cita.tipo_documento,cons.descripcion FROM cita as cita, cita_consent as cit, consentimiento as cons WHERE cita.id_cita=cit.id_cita and cons.codigo=cit.cod_consentimiento and cit.id_cita= :id_cita and cit.cod_consentimiento= :id_consentimiento";
 $result=$this->conexion->prepare($sq);
 $result->execute(array(
 ':id_cita' =>"".$id_cita."",
@@ -235,6 +227,8 @@ $cont = 0;
 foreach($results as $fila):
         $dir[$cont] = $fila["documento"];
         $cont++;
+        $dir[$cont] = $fila["tipo_documento"];
+        $cont++;
         $dir[$cont] = $fila["descripcion"];
         $cont++;
 endforeach;
@@ -243,10 +237,8 @@ return $dir;
 
 public function Agregar_Consentimiento_Cita($id_cita,$cod_consentimiento,$id_estado){
     $consulta = "INSERT INTO cita_consent(id_cita,cod_consentimiento,id_estado) 
-    VALUES(:id_cita,:cod_consentimiento,:id_estado)";
-        
-    $sql = $this->conexion->prepare($consulta);
-        
+    VALUES(:id_cita,:cod_consentimiento,:id_estado)";       
+    $sql = $this->conexion->prepare($consulta);     
     $sql->bindValue(':id_cita',$id_cita);
     $sql->bindValue(':cod_consentimiento',$cod_consentimiento);
     $sql->bindValue(':id_estado',$id_estado);  
@@ -350,7 +342,6 @@ $result->execute(array(
     ':id_cita' =>"".$id_cita.""
   ));
 $results = $result -> fetchAll();
-
 foreach($results as $fila):
         $cantidad = $fila["total"];
 endforeach;

@@ -142,12 +142,26 @@ $("#formulario input[name='flex_procedimiento']:radio").is(':checked')) {
 $(document).ready(function()
   {
     $("#btnAcepta").click(function () {
-        if( $("#formularito input[name='flexRadioDefault']:radio").is(':checked')){      
+      if ($('#validationTipoDocumento').val().trim() === '') {
+        alert('Debe seleccionar el Tipo de Documento del Paciente');
+        $("#validationTipoDocumento").focus();
+        return false;
+      }else if($('#validationSexo').val().trim() === ''){
+        alert('Debe seleccionar el Sexo del Paciente');
+        $("#validationSexo").focus();
+        return false;
+    }else if(!$("#formularito input[name='flexRadioDefault']:radio").is(':checked')){
+      alert("Debe Confirmar si Acepta o No, la Realización del Procedimiento"); 
+      return false;
+    } else {
+      $("#formularito").submit();  
+    }
+        /*if( $("#formularito input[name='flexRadioDefault']:radio").is(':checked')){      
         $("#formularito").submit();          
         }else{  
                     alert("Debe Confirmar si Acepta o No, la Realización del Procedimiento"); 
           return false; 
-                    } 
+                    } */
     });
 });
 
