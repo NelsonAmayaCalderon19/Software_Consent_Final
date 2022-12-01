@@ -459,7 +459,8 @@ Firma Paciente o Representante Legal
   <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-address-card"></i></label>
   </div>
-         <select class="custom-select" id="validationCustomSelect" name="selectsexo" aria-describedby="inputGroupPrepend" required>                    
+         <select class="custom-select" id="validationCustSexo" name="selectsexo" aria-describedby="inputGroupPrepend" required>                    
+                        <option value="">Seleccione</option>               
                         <option value="Femenino">Femenino</option>
                         <option value="Masculino">Masculino</option>  
                         <option value="Otro / No Responde">Otro / No Responde</option>         

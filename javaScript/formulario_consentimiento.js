@@ -102,6 +102,7 @@ document.getElementById("cual_hospitalizacion").style.visibility = "visible";
 $(document).ready(function()
   {
   $("#btnConfirmar").click(function () {	 
+   
       if( $("#formulario input[name='flex_alergia']:radio").is(':checked') && $("#formulario input[name='flex_cardiaca']:radio").is(':checked') && 
 $("#formulario input[name='flex_pulmonar']:radio").is(':checked') && $("#formulario input[name='flex_ronquidos']:radio").is(':checked') &&
 $("#formulario input[name='flex_cpap']:radio").is(':checked') && $("#formulario input[name='flex_oxigeno']:radio").is(':checked') &&
@@ -110,33 +111,34 @@ $("#formulario input[name='flex_coagulacion']:radio").is(':checked') && $("#form
 $("#formulario input[name='flex_alcohol']:radio").is(':checked') && $("#formulario input[name='flex_embarazo']:radio").is(':checked') &&
 $("#formulario input[name='flex_cirugias']:radio").is(':checked') && $("#formulario input[name='flex_sedaciones']:radio").is(':checked') &&
 $("#formulario input[name='flex_fatiga']:radio").is(':checked') && $("#formulario input[name='flex_hospitalizacion']:radio").is(':checked') &&
-$("#formulario input[name='flex_procedimiento']:radio").is(':checked')) {  
-          
-  /*if($("#formulario input[name='flex_alergia']:radio").is(':checked')){
-    if($("#formulario input[name='flex_cardiaca']:radio").is(':checked')){
-      $("#formulario").submit();
-    }*/
+$("#formulario input[name='flex_procedimiento']:radio").is(':checked')){  
+  
     if($("#validationCustomPeso").val().length > 0){
-      if($("#validationCustomTalla").val().length > 0){
-        
+      if($("#validationCustomTalla").val().length > 0){       
+        if ($('#validationCustSexo').val().trim() === '') {
+          alert("Recuerde Seleccionar el Sexo del Paciente"); 
+          $("#validationCustomTalla").focus();
+        return false;  
+        }else{
       $("#formulario").submit();  
+        }
       }else{
         alert("Recuerde Ingresar la Talla del Paciente"); 
           $("#validationCustomTalla").focus();
         return false;  
       }
-        } else{
-          
+        } else{  
           alert("Recuerde Ingresar el Peso del Paciente"); 
           $("#validationCustomPeso").focus();
         return false;        
-        }
+        }    
   }
    else{  
               alert("Verifique que todas las preguntas hayan sido respondidas, Gracias"); 
     return false; 
               }  
-  });
+  
+});
 });
 
 $(document).ready(function()
@@ -156,12 +158,6 @@ $(document).ready(function()
     } else {
       $("#formularito").submit();  
     }
-        /*if( $("#formularito input[name='flexRadioDefault']:radio").is(':checked')){      
-        $("#formularito").submit();          
-        }else{  
-                    alert("Debe Confirmar si Acepta o No, la Realización del Procedimiento"); 
-          return false; 
-                    } */
     });
 });
 
