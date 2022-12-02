@@ -17,7 +17,7 @@ $id_cita = $_GET["id_cita"];
 $id_consentimiento = $_GET["cod_consentimiento"];
 $cod_examen = $_GET["cod_examen"];
 $datos = $consentimiento->Consultar_Consentimiento_Paciente($id_cita,$id_consentimiento);
-if($_GET["cod_consentimiento"] != "9. FT-PA-GI-HC-064"){
+if($_GET["cod_consentimiento"] != "FT-PA-GI-HC-064"){
 $nombre = $cita->Consultar_Cita($id_cita,$id_consentimiento);}
 else{
   $nombre = $cita->Consultar_Cita2($id_cita,$id_consentimiento);

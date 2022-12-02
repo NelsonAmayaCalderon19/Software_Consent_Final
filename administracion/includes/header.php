@@ -28,7 +28,7 @@
   <!--<i class="fa fa-user" aria-hidden="true" id="icon"></i>--> <?php echo $_SESSION["usuario"];?>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  <a class="dropdown-item text-primary" href="panel_admin.php" ><i class="fa fa-home" aria-hidden="true" id="file_archive"></i> Home</a>
+  <a class="dropdown-item text-primary" href="panel_admin.php" ><i class="fa fa-home" aria-hidden="true" id="file_archive"></i> Inicio</a>
   <a class="dropdown-item text-primary" href="personal.php" ><i class="fa fa-users" aria-hidden="true" id="file_archive"></i> Personal</a>
   <a class="dropdown-item text-primary" href="examenes.php" ><i class="fa fa-medkit" aria-hidden="true" id="file_archive"></i> Examenes</a>
    <a class="dropdown-item text-danger" href="Controlador/Cerrar_Sesion.php"><i class="fa fa-sign-out" aria-hidden="true" id="sign-out"></i> Cerrar Sesión</a>
