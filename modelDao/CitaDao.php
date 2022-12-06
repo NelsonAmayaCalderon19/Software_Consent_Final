@@ -42,8 +42,8 @@ public function Validar_Fecha($fecha){
     $dia = $partes[0];
     $mes = $partes[1];  
     $anio = $partes[2];  
-    $meses = array('Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-           'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic');
+    $meses = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+           'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
     if(in_array($mes, $meses))
     {
         $posicion = array_search($mes, $meses);

@@ -60,9 +60,51 @@ use PhpOffice\PhpWord\TemplateProcessor;
       //if($id_consentimiento != "FT-PA-GI-HC-069"){
 
 $templateWord = new TemplateProcessor('../formatos/' . $ruta);
- 
-        $nombre_paciente = explode(" ",$_POST["nombre_paciente"]);
-        $apellido_paciente = explode(" ",$_POST["apellido_paciente"]);
+$names = explode(" ",$_POST["nombre_paciente"]);
+$num_nombres = count($names);
+$primer_nombre = $segundo_nombre = "";
+switch ($num_nombres) {
+    case 1: 
+        $primer_nombre = $names[0];
+        break;
+    case 2:
+        $primer_nombre    = $names[0];
+        $segundo_nombre = $names[1];
+        break;
+    case 3:
+        $segundo_nombre = $names[1] . ' ' . $names[2];
+        $primer_nombre   = $names[0];
+    case 4:
+          $segundo_nombre = $names[1] . ' ' . $names[2] . ' ' . $names[3];
+          $primer_nombre   = $names[0];
+    default:
+        break;
+}
+
+$apellidos = explode(" ",$_POST["apellido_paciente"]);
+$num_apellidos = count($apellidos);
+$primer_apellido = $segundo_apellido = "";
+switch ($num_apellidos) {
+    case 1: 
+        $primer_apellido = $apellidos[0];
+        break;
+    case 2:
+        $primer_apellido   = $apellidos[0];
+        $segundo_apellido = $apellidos[1];
+        break;
+    case 3:
+        $segundo_apellido = $apellidos[1] . ' ' . $apellidos[2];
+        $primer_apellido   = $apellidos[0];
+    case 4:
+          $segundo_apellido = $apellidos[1] . ' ' . $apellidos[2] . ' ' . $apellidos[3];
+          $primer_apellido   = $apellidos[0];
+    default:
+        break;
+}
+//$nombres    = mb_convert_case($nombres, MB_CASE_TITLE, 'UTF-8');
+//$apellidos  = mb_convert_case($apellidos, MB_CASE_TITLE, 'UTF-8');
+
+        
         $tipo_documento = $_POST['selecttipodocumento'];
         $documento = $_POST["documento"];
         $aseguradora = $_POST["aseguradora"];
@@ -86,11 +128,6 @@ $templateWord = new TemplateProcessor('../formatos/' . $ruta);
         $parentesco_representante= $datos_repre[1];
         $documento_representante= $datos_repre[2];
        }
-        
-        $primer_nombre = $nombre_paciente[0];    
-        $segundo_nombre = $nombre_paciente[1];   
-        $primer_apellido = $apellido_paciente[0];    
-        $segundo_apellido = $apellido_paciente[1]; 
 $templateWord->setValue('primer_nombre',$primer_nombre);
 $templateWord->setValue('segundo_nombre',$segundo_nombre);
 $templateWord->setValue('primer_apellido',$primer_apellido);
@@ -174,8 +211,47 @@ $_SESSION["aceptRech"] = "";
 $templateWord = new TemplateProcessor('../formatos/' . $ruta);
 
       
-$nombre_paciente = explode(" ",$_POST["nombre_paciente"]);
-$apellido_paciente = explode(" ",$_POST["apellido_paciente"]);
+$names = explode(" ",$_POST["nombre_paciente"]);
+$num_nombres = count($names);
+$primer_nombre = $segundo_nombre = "";
+switch ($num_nombres) {
+    case 1: 
+        $primer_nombre = $names[0];
+        break;
+    case 2:
+        $primer_nombre    = $names[0];
+        $segundo_nombre = $names[1];
+        break;
+    case 3:
+        $segundo_nombre = $names[1] . ' ' . $names[2];
+        $primer_nombre   = $names[0];
+    case 4:
+          $segundo_nombre = $names[1] . ' ' . $names[2] . ' ' . $names[3];
+          $primer_nombre   = $names[0];
+    default:
+        break;
+}
+
+$apellidos = explode(" ",$_POST["apellido_paciente"]);
+$num_apellidos = count($apellidos);
+$primer_apellido = $segundo_apellido = "";
+switch ($num_apellidos) {
+    case 1: 
+        $primer_apellido = $apellidos[0];
+        break;
+    case 2:
+        $primer_apellido   = $apellidos[0];
+        $segundo_apellido = $apellidos[1];
+        break;
+    case 3:
+        $segundo_apellido = $apellidos[1] . ' ' . $apellidos[2];
+        $primer_apellido   = $apellidos[0];
+    case 4:
+          $segundo_apellido = $apellidos[1] . ' ' . $apellidos[2] . ' ' . $apellidos[3];
+          $primer_apellido   = $apellidos[0];
+    default:
+        break;
+}
 $tipo_documento = $_POST['selecttipodocumento'];
 $documento = $_POST["documento"];
 $aseguradora = $_POST["aseguradora"];
@@ -199,10 +275,10 @@ if($datos_repre[0]=="No Aplica"){
   $parentesco_representante= $datos_repre[1];
   $documento_representante= $datos_repre[2];
  }
-$primer_nombre = $nombre_paciente[0];    
+/*$primer_nombre = $nombre_paciente[0];    
 $segundo_nombre = $nombre_paciente[1];   
 $primer_apellido = $apellido_paciente[0];    
-$segundo_apellido = $apellido_paciente[1]; 
+$segundo_apellido = $apellido_paciente[1]; */
 $templateWord->setValue('primer_nombre',$primer_nombre);
 $templateWord->setValue('segundo_nombre',$segundo_nombre);
 $templateWord->setValue('primer_apellido',$primer_apellido);

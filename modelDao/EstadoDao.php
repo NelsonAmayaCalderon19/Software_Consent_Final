@@ -21,6 +21,21 @@ foreach($results as $fila):
 endforeach;
     return $datos->getDescripcion();
     }
+
+    public function Consultar_Estado_Por_Descripcion($descripcion){
+        $datos = new Estado("",$descripcion);
+        $sq="SELECT * FROM estado as est WHERE est.descripcion= :descripcion";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':descripcion' =>"".$datos->getDescripcion().""
+  ));
+$results = $result -> fetchAll();
+
+foreach($results as $fila):
+    $datos->setId($fila["id"]);
+endforeach;
+    return $datos->getId();
+    }
 }
 
 ?>

@@ -8,7 +8,7 @@
     <link rel="shortcut icon"  href="images/pestania.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Nelson Eduardo Amaya Calderón">
-
+    
     <title>Consent_Gastro</title>
     <?php
   if (!isset($_SESSION["usuario"])){
@@ -59,6 +59,7 @@ $examen = new ExamenDao();
 $conexion = new conexion();
 $conexion = $conexion->connect(); 
 $consulta = $cita->listar();
+
 ?>
             <table id="minhatabela" class="display responsive table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                 <br>
