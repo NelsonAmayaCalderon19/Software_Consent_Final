@@ -115,6 +115,7 @@ $conexion = $conexion->connect();
                         <option value="SOAT">SOAT</option>
                         <option value="Seguro de Riesgos Catastróficos y Accidentes de Tránsito (ECAT)">Seguro de Riesgos Catastróficos y Accidentes de Tránsito (ECAT)</option>
                         <option value="VINC">VINC</option>
+                        <option value="Regimen de Excepcion">Regimen de Excepcion</option>
                     </select>
 </div>
 <label for="validationCustomSelect">Sexo <span style="color:red;">(*)</span></label>
