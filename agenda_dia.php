@@ -85,16 +85,27 @@ $consulta = $cita->listar();
                         <td class="text-center"><?php $cod = $row['cod_examen']; echo $examen->Consultar_Examen_Por_ID($cod); ?></td>
                           <td class="text-center"><?php echo date( "g:i A", strtotime( $row['hora'] ) ); ?></td>
                         <?php if($row['id_estado']==3):?>
+                          
                         <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                           </div></td>
                           <td class="text-center"><a class="btn btn-success" title="Asistió" href="<?php echo "ver_consentimientos.php?id_cita=" . $row['id_cita'] ."&cod_examen=" . $row['cod_examen']. "&historial=false". "&solicitar=false" ?>"><span class="fa fa-check" style="color: white;"></span></a>
                         <a class="btn btn-danger" title="No Asistió" href="javascript:;" onclick="aviso('Controlador/Cita_No_Asistida.php?id_cita= <?php echo $row['id_cita'] ?>'); return false;"><span class="fa fa-close" style="color: white;"></span></a></td>
                         <?php elseif($row['id_estado']==4):?>
-                          <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
-                          <?php if($cita->Validar_Estado_Cita_Sin_Pendientes($row['id_cita'])=="0"){?>
+                          <?php if($cita->Validar_Consentimientos_Con_Preguntas($row['id_cita'],"","")!=0){  ?>
+                            <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><?php  echo "Preguntas"?><br>
+                            <?php }else{?>
+                              <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br>
+                              <?php }?>
+                          
+                          <div class="progress progress-sm">
+                          <?php if($cita->Validar_Estado_Cita_Sin_Pendientes($row['id_cita'])=="0" && $cita->Validar_Consentimientos_Con_Preguntas($row['id_cita'],"","")==0){?>
                           <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div><?php }else{?> 
+                          </div>
+                          <?php }else if($cita->Validar_Estado_Cita_Sin_Pendientes($row['id_cita'])=="0" && $cita->Validar_Consentimientos_Con_Preguntas($row['id_cita'],"","")!=0){?>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                          <?php }else{?> 
                             <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="50"></div>
                           </div>
                             <?php }?></td>

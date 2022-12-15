@@ -235,6 +235,25 @@ endforeach;
 return $dir;
 }
 
+public function Consultar_Inquietudes_Respuesta($id_cita, $id_consentimiento){
+    $sq="SELECT cit.inquietud, cit.respuesta FROM cita_consent as cit WHERE  cit.id_cita= :id_cita and cit.cod_consentimiento= :id_consentimiento";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+':id_cita' =>"".$id_cita."",
+':id_consentimiento' =>"".$id_consentimiento.""
+));
+$results = $result -> fetchAll();
+$dir = array();
+$cont = 0;
+foreach($results as $fila):
+        $dir[$cont] = $fila["inquietud"];
+        $cont++;
+        $dir[$cont] = $fila["respuesta"];
+        $cont++;
+endforeach;
+return $dir;
+}
+
 public function Agregar_Consentimiento_Cita($id_cita,$cod_consentimiento,$id_estado){
     $consulta = "INSERT INTO cita_consent(id_cita,cod_consentimiento,id_estado) 
     VALUES(:id_cita,:cod_consentimiento,:id_estado)";       
@@ -339,6 +358,21 @@ public function Validar_Estado_Cita_Sin_Pendientes($id_cita){
     $sq="SELECT COUNT(citcon.cod_consentimiento) as total FROM cita_consent as citcon WHERE citcon.id_estado=10 and citcon.id_cita=:id_cita";
 $result=$this->conexion->prepare($sq);
 $result->execute(array(
+    ':id_cita' =>"".$id_cita.""
+  ));
+$results = $result -> fetchAll();
+foreach($results as $fila):
+        $cantidad = $fila["total"];
+endforeach;
+    return $cantidad;
+}
+
+public function Validar_Consentimientos_Con_Preguntas($id_cita,$inquietud,$respuesta){
+    $sq="SELECT COUNT(citcon.cod_consentimiento) as total FROM cita_consent as citcon WHERE (citcon.inquietud!=:inquietud or citcon.respuesta!=:respuesta) and citcon.id_cita=:id_cita";
+$result=$this->conexion->prepare($sq);
+$result->execute(array(
+    ':inquietud' =>"".$inquietud."",
+    ':respuesta' =>"".$respuesta."",
     ':id_cita' =>"".$id_cita.""
   ));
 $results = $result -> fetchAll();

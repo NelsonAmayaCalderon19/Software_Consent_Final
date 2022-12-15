@@ -48,6 +48,7 @@ $id_cita = $_GET["id_cita"];
 $cod_examen = $_GET["cod_examen"];
 $historial = $_GET["historial"];
 $solicitar = $_GET["solicitar"];
+$cod_consentimiento="";
 ?>
 <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
 <div class="row">            
@@ -200,7 +201,11 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
                           <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                           </div></td>
-                          <td class="text-center"><a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?id_cita=" . $row['id_cita'] ."&cod_consentimiento=" . $row['cod_consentimiento'] . "&cod_examen=" . $cod_examen ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a></td>
+                          <td class="text-center"><a class="btn btn-primary" title="Descargar" href="<?php echo "Controlador/Descargar_Consentimiento.php?id_cita=" . $row['id_cita'] ."&cod_consentimiento=" . $row['cod_consentimiento'] . "&cod_examen=" . $cod_examen ?>" target="_blank"><span class="fa fa-download" style="color: white;"></span></a>
+                          <?php if(@file_get_contents('archivo_temp/'.$row['id_cita'].'-'.$row['cod_consentimiento'].'.docx')){ ?>
+                            <?php $cod_consentimiento = $cod; ?>                      
+                            <a class="btn btn-info" href="<?php echo "anexar_inquietud.php?id_cita=" . $row['id_cita'] ."&cod_examen=" . $cod_examen. "&cod_consentimiento=" .$cod?>" title="Responder Inquietudes del Paciente" id="<?php echo $row['cod_consentimiento'] ?>"><span class="fa fa-question-circle-o" style="color: white;"></span></a> </td>                          
+                            <?php }?>
                           <?php elseif($row['id_estado']==8):?>
                             <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -216,7 +221,13 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
                             <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
                             <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                           </div></td>
-                          <td class="text-center"><a class="btn btn-success" title="Asignar" onclick="editar(this.id)" id="<?php echo $row['cod_consentimiento'] ?>"><span class="fa fa-user-plus" style="color: white;"></span></a></td>
+                          <td class="text-center">
+                          <a class="btn btn-success" title="Asignar" onclick="editar(this.id)" id="<?php echo $row['cod_consentimiento'] ?>"><span class="fa fa-user-plus" style="color: white;"></span></a>
+                          
+                          <?php if($consentimiento->Consultar_Pregunta_Consentimiento($id_cita,$row['cod_consentimiento'])!=""){ ?>
+                          <?php $cod_consentimiento = $row['cod_consentimiento']; ?>
+                          <a class="btn btn-info" href="<?php echo "anexar_inquietud.php?id_cita=" . $row['id_cita'] ."&cod_examen=" . $cod_examen. "&cod_consentimiento=" .$cod?>" title="Responder Inquietudes del Paciente" id="<?php echo $row['cod_consentimiento'] ?>"><span class="fa fa-question-circle-o" style="color: white;"></span></a>                        
+                             </td><?php }?>
                           
                           <?php elseif($row['id_estado']==6 && $historial == "true"):?>
                             <td class="text-center"><?php $id = $row['id_estado']; echo $estado->Consultar_Estado_Por_ID($id);?><br><div class="progress progress-sm">
@@ -334,6 +345,49 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
   </div>
 </div>
                     </form>
+
+
+                    <form name="f3" id="formElement3"  method='post' ENCTYPE='multipart/form-data'>
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Preguntas e Inquietudes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <p id="variable"></p>
+        <?php
+      $datos = $citam->Consultar_Inquietudes_Respuesta($id_cita,$_GET["variable"]);
+?>
+            <label for="validationCustomNombre"><strong>Inquietudes del Paciente</strong></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-question"></i></span>
+  </div>
+    <textarea class="form-control" style="height: 6em;"  name="inquietudes" id="validationCustomNombre" aria-describedby="basic-addon3" required=""><?php echo $datos[0];?></textarea>
+</div>
+<label for="validationCustomNombre"><strong>Respuesta del Medico Tratante</strong></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-comment-o"></i></span>
+  </div>
+    <textarea class="form-control" style="height: 6em;"  name="respuesta" id="validationCustomNombre" aria-describedby="basic-addon3" required=""><?php echo $datos[1];?></textarea>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <input class="btn btn-success btn-acepta2" type="submit" name="btnAcepta2" id="btnAcepta2" value="Finalizar" /> 
+ 
+      </div>
+    </div>
+  </div>
+</div>
+                    </form>
+
+
   <script src="vendor2/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor2/jquery-easing/jquery.easing.min.js"></script>
    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -352,7 +406,14 @@ $consulta = "SELECT * FROM cita_consent where id_cita = $id_cita";
     <script type="text/javascript" language="javascript">
     function editar(este) {
     var ModalEdit = new bootstrap.Modal(exampleModal2, {}).show();
-    document.forms['formElement2'].action = "Controlador/Crear_Consentimiento.php?id_cita=<?php echo $id_cita?>&cod_consentimiento="+este+"&cod_examen=<?php echo $cod_examen?>";
+    document.forms['formElement2'].action = "Controlador/Crear_Consentimiento2.php?id_cita=<?php echo $id_cita?>&cod_consentimiento="+este+"&cod_examen=<?php echo $cod_examen?>";
+  }
+
+  function inquietud(este) {
+    var ModalEdit = new bootstrap.Modal(exampleModal3, {}).show();
+    
+    document.forms['formElement3'].action = "Controlador/Crear_Consentimiento2.php?id_cita=<?php echo $id_cita?>&cod_consentimiento="+este+"&cod_examen=<?php echo $cod_examen?>";
+    //document.getElementById("valor_id").value = este;
   }
   </script>
     <script src="javaScript/ver_consentimientos.js"></script>

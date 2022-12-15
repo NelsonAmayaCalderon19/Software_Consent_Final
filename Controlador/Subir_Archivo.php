@@ -117,6 +117,10 @@ if(filter_input(INPUT_POST, 'btnCargar')){
       </script>';
     }
     unlink($directorio.'/'.$archivo_nombre);
+    array_map('unlink', array_filter(
+      (array) array_merge(glob("../firma_paciente_temp/*"))));
+      array_map('unlink', array_filter(
+        (array) array_merge(glob("../archivo_temp/*"))));
     fclose($archivo);
 }
 ?>

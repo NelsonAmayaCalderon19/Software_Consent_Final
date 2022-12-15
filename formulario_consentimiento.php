@@ -55,7 +55,7 @@ $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$i
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> <?php echo $nombre_proced; ?></h6>
             </div>
             <div class="col-sm-12 card-body">
-            <form method="POST" id="formularito" action="Controlador/Crear_Consentimiento.php?id_cita=<?php echo $id_cita?>&cod_consentimiento=<?php echo $id_consentimiento?>&cod_examen=<?php echo $cod_examen?>"> 
+            <form method="POST" id="formularito" action="Controlador/Crear_Consentimiento2.php?id_cita=<?php echo $id_cita?>&cod_consentimiento=<?php echo $id_consentimiento?>&cod_examen=<?php echo $cod_examen?>"> 
             <label for="validationCustomNombre">Nombre del Paciente <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -283,19 +283,20 @@ $cargo = $datoscargo[0];?>
   <tbody>
     <tr>
     <td class="border" colspan="4">
+      <?php $datos = $cita->Consultar_Inquietudes_Respuesta($id_cita, $id_consentimiento); ?>
      <label for="validationCustomNombre">Descripción de las Inquietudes</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <textarea class="form-control"  name="inquietudes" id="validationCustomNombre" aria-describedby="basic-addon3"></textarea>
+    <textarea class="form-control" style="height: 6em;" name="inquietudes" id="validationCustomNombre" aria-describedby="basic-addon3"><?php echo $datos[0];?></textarea>
 </div>
 <label for="validationCustomNombre">Respuesta del Medico Tratante</label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
   </div>
-    <textarea class="form-control"  name="respuesta" id="validationCustomNombre" aria-describedby="basic-addon3"></textarea>
+    <textarea class="form-control" style="height: 6em;" name="respuesta" id="validationCustomNombre" aria-describedby="basic-addon3"><?php echo $datos[1];?></textarea>
 </div>
       <td>
  </tr>
@@ -416,7 +417,7 @@ Firma Paciente o Representante Legal
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> DILIGENCIAR <?php echo $nombre_proced;?></h6>
             </div>
             <div class="col-sm-12 card-body">
-            <form id="formulario" method="POST" action="Controlador/Crear_Consentimiento.php?id_cita=<?php echo $id_cita?>&cod_consentimiento=<?php echo $id_consentimiento?>&cod_examen=<?php echo $cod_examen?>"> 
+            <form id="formulario" method="POST" action="Controlador/Crear_Consentimiento2.php?id_cita=<?php echo $id_cita?>&cod_consentimiento=<?php echo $id_consentimiento?>&cod_examen=<?php echo $cod_examen?>"> 
             <label for="validationCustomNombre">Nombre del Paciente <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
