@@ -38,7 +38,7 @@ $consentimiento = new ConsentimientoDao();
 $conexion = new conexion();
 $conexion = $conexion->connect(); ?>
 <?php include "includes/header.php";
-if($_GET["cod_consentimiento"] != "FT-PA-GI-HC-115" && $_GET["cod_consentimiento"] != "FT-PA-GI-HC-064"){
+if($_GET["cod_consentimiento"] != "FT-PA-GI-HC-235" && $_GET["cod_consentimiento"] != "FT-PA-GI-HC-064"){
 $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$id_consentimiento'";?>
     <?php foreach ($conexion->query($consulta) as $row) { ?>
     <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
@@ -935,7 +935,7 @@ Firma Paciente o Representante Legal
 </div>      
 </div>
 </div>
-            <?php }if($_GET["cod_consentimiento"] == "FT-PA-GI-HC-115"){
+            <?php }if($_GET["cod_consentimiento"] == "FT-PA-GI-HC-235"){
               $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$id_consentimiento'";?>
     <?php foreach ($conexion->query($consulta) as $row) { ?>
     <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
@@ -974,7 +974,7 @@ Firma Paciente o Representante Legal
   </div>
     <input type="text" class="form-control" value="<?php echo $datos[3]; ?>" name="documento" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
 </div>
-<?php if($_SESSION["expedicion"]!=""){?>
+<!--<?php if($_SESSION["expedicion"]!=""){?>
 <label for="validationCustomNombre">Lugar de Expedición <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -990,7 +990,7 @@ Firma Paciente o Representante Legal
   </div>
     <input type="text" class="form-control" value="" name="lugar_exp" id="validationCustomNombre" aria-describedby="basic-addon3" >
 </div>
-  <?php }?>
+  <?php }?>-->
 <label for="validationCustomNombre">Edad <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -998,7 +998,7 @@ Firma Paciente o Representante Legal
   </div>
     <input type="text" class="form-control" value="<?php echo $datos[4]; ?>" name="edad" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
 </div>
-<?php if($_SESSION["direccion"]!=""){?>
+<!--<?php if($_SESSION["direccion"]!=""){?>
 <label for="validationCustomNombre">Dirección de Residencia <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -1014,8 +1014,8 @@ Firma Paciente o Representante Legal
   </div>
     <input type="text" class="form-control" value="" name="direc" id="validationCustomNombre" aria-describedby="basic-addon3">
 </div>
-  <?php }?>
-  <?php if($_SESSION["telefono"]!=""){?>
+  <?php }?>-->
+  <!--<?php if($_SESSION["telefono"]!=""){?>
 <label for="validationCustomNombre">Teléfono <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -1031,7 +1031,14 @@ Firma Paciente o Representante Legal
   </div>
     <input type="text" class="form-control" value="" name="telefono" id="validationCustomNombre" aria-describedby="basic-addon3">
 </div>
-  <?php }?>
+  <?php }?>-->
+  <label for="validationCustomNombre">EPS del Paciente <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="<?php echo $datos[6]; ?>" name="eps" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
 <?php $datoscargo = $prof->Consultar_Cargo_por_Descripcion($row['profesional_firma']); 
 $cargo = $datoscargo[0];?>
 <?php $consul_cargo = "SELECT * FROM profesional as prof where prof.id_estado=1 and prof.id_cargo= $cargo";?>

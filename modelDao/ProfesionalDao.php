@@ -124,7 +124,6 @@ class ProfesionalDao extends Profesional{
     endforeach;
     return $dir;
     }
-
     public function Consultar_Cargo_por_Descripcion($id){
         $sq="SELECT * FROM cargo as cit WHERE cit.descripcion= :id";
     $result=$this->conexion->prepare($sq);
