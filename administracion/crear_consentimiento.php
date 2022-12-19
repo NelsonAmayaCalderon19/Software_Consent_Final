@@ -40,7 +40,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
               <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> Ingresar Información</h6>
             </div>
             <div class="col-sm-12 card-body">
-            <form method="post" action="Controlador/Crear_Consentimiento.php">
+            <form method="post" action="Controlador/Crear_Consentimiento.php"  onsubmit="comprobarChecks(event);">
             <label for="validationCustomNombre">Codigo del Consentimiento <span style="color:red;">(*)</span></label>
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -67,7 +67,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
                     <tr>
                     <td class="text-center"><?php echo $row['descripcion']; ?></td>
                         <td class="text-center"><div class="form-check">
-  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo']; ?>" id="flexCheckDefault" required>
+  <input class="form-check-input" name="check_list[]" type="checkbox" value="<?php echo $row['codigo']; ?>" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
   </label>
 </div></td>                      
@@ -181,7 +181,7 @@ $consul_examen = "SELECT * FROM examen where id_estado=1";
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <script src="js/crear_consentimiento.js"></script>
+  <script src="js/crear_consentimient.js"></script>
 <?php include "includes/footer.php";?>
 </body>
 </html>

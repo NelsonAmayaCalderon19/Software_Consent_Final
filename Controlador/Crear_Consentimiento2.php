@@ -35,6 +35,27 @@ use PhpOffice\PhpWord\TemplateProcessor;
       $datos_repre = $consentimiento->Consultar_Datos_Representante($id_cita);
       if(filter_input(INPUT_POST, 'btnAcepta') || filter_input(INPUT_POST, 'btnAcepta2')){
         if($datos_repre[0]=="" && filter_input(INPUT_POST, 'btnAcepta')){
+          if($id_consentimiento == "FT-PA-GI-HC-115"){
+            if($consentimiento->Consultar_Firmante_Consentimiento($id_consentimiento) == "MEDICO"){
+              $cita->Actualizar_Medico_Cita($id_cita,$_POST["selectprofesional"],$_POST['selecttipodocumento'],$_POST["selectsexo"]);
+              
+              $_SESSION["direccion"] = $_POST["direc"];
+              $_SESSION["telefono"] = $_POST["telefono"];
+              $_SESSION["expedicion"] = $_POST["lugar_exp"];
+              $_SESSION["aceptRech"] = $_POST["flexRadioDefault"];
+              $_SESSION["id_consentimiento"] = $_GET["cod_consentimiento"];
+            }else{
+              if($_POST["selectprofesional"] != ""){
+                $_SESSION["selectPro"] = $_POST["selectprofesional"];
+              }
+             
+              $_SESSION["direccion"] = $_POST["direc"];
+              $_SESSION["telefono"] = $_POST["telefono"];
+              $_SESSION["expedicion"] = $_POST["lugar_exp"];
+              $_SESSION["aceptRech"] = $_POST["flexRadioDefault"];
+              $_SESSION["id_consentimiento"] = $_GET["cod_consentimiento"];
+            }
+          }else{
           if($consentimiento->Consultar_Firmante_Consentimiento($id_consentimiento) == "MEDICO"){
             $cita->Actualizar_Medico_Cita($id_cita,$_POST["selectprofesional"],$_POST['selecttipodocumento'],$_POST["selectsexo"]);
             if($_POST["inquietudes"]!=""){
@@ -54,6 +75,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
             $_SESSION["aceptRech"] = $_POST["flexRadioDefault"];
             $_SESSION["id_consentimiento"] = $_GET["cod_consentimiento"];
           }
+        }
           header("Refresh: 2; URL=../ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false". "&solicitar=true");
           echo '<script>
           Swal.fire({
@@ -67,7 +89,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
       $ruta = $consentimiento->Consultar_Archivo_Consentimiento($id_consentimiento);
       $firmante_rol = $consentimiento->Consultar_Firmante_Consentimiento($id_consentimiento);
       if($firmante_rol=="MEDICO"){
-      //if($id_consentimiento != "FT-PA-GI-HC-069"){
+      if($id_consentimiento != "FT-PA-GI-HC-115"){
         if(@file_get_contents('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx')){
           $templateWord = new TemplateProcessor('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx');
           $_SESSION["aceptRech"] = "";
@@ -166,11 +188,11 @@ if($_POST["flexRadioDefault"] == "Sí"){
     $templateWord->setValue('rec',"");
     $id_estado="7";
     if($datos_repre[0] == "No Aplica"){
-    $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
+    $templateWord->setImageValue('firma_paciente_acepta', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 200, 'height' => 60, 'ratio' => false));
     $templateWord->setValue('cedula_paciente',$documento);
     $templateWord->setValue('firma_representante',"");
   }else{
-      $templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
+      $templateWord->setImageValue('firma_representante', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 180, 'height' => 50, 'ratio' => false));
       $templateWord->setValue('firma_paciente_acepta',"");
       $templateWord->setValue('cedula_paciente',"");
     }
@@ -179,11 +201,11 @@ if($_POST["flexRadioDefault"] == "Sí"){
     $templateWord->setValue('ace',"");
     $id_estado="8";
     if($datos_repre[0] == "No Aplica"){
-      $templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
+      $templateWord->setImageValue('firma_paciente_acepta', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 200, 'height' => 60, 'ratio' => false));
       $templateWord->setValue('cedula_paciente',$documento);
       $templateWord->setValue('firma_representante',"");
     }else{
-        $templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
+        $templateWord->setImageValue('firma_representante', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 180, 'height' => 50, 'ratio' => false));
         $templateWord->setValue('firma_paciente_acepta',"");
         $templateWord->setValue('cedula_paciente',"");
       }
@@ -194,7 +216,7 @@ $templateWord->setValue('documento_representante',$documento_representante);
 $templateWord->setValue('cedula_profesional',$selectprofesional);
 $templateWord->setValue('firma_paciente_rechaza', "");
 $templateWord->setValue('firma_representante_rechaza',"");
-$templateWord->setImageValue('firma_profesional', array('src' => '../FirmasProfesionales/' . $firmaProfesional[0],'swh'=>'250'));
+$templateWord->setImageValue('firma_profesional', array('path' => '../FirmasProfesionales/' . $firmaProfesional[0], 'width' => 200, 'height' => 60, 'ratio' => false));
           }
           if($_POST["inquietudes"]!="" && $_POST["respuesta"]!=""){
 $inquietudes = $_POST["inquietudes"];
@@ -290,6 +312,81 @@ $_SESSION["aceptRech"] = "";
       header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false&solicitar=false");
       unlink('../formatos/Plantilla/'. $ruta);
       $_SESSION["aceptRech"] = "";
+}else if($id_consentimiento == "FT-PA-GI-HC-115"){
+  $templateWord = new TemplateProcessor('../formatos/' . $ruta);
+
+ // $tipo_documento = $_POST['selecttipodocumento'];
+  $nombre = $_POST["nombre_paciente"];
+  $apellido = $_POST["apellido_paciente"];
+  $documento = $_POST["documento"];
+  $lugar_exp = $_POST["lugar_exp"];
+  $edad = $_POST["edad"];
+  $telefono = $_POST["telefono"];
+  $fecha = $_POST["fecha"];
+  $direccion = $_POST["direc"];
+  $selectprofesional = $_POST["selectprofesional"];
+  $firmaProfesional = $profesional->Consultar_Firma_Profesional($selectprofesional);
+  $acepRech = $_POST["flexRadioDefault"];
+
+  if($_POST["flexRadioDefault"] == "Sí"){
+     $templateWord->setValue('ace',"X");
+     $templateWord->setValue('rec',"");
+    $id_estado="7";
+    $templateWord->setImageValue('fima_paciente', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 200, 'height' => 60, 'ratio' => false));  
+    
+}else if($_POST["flexRadioDefault"] =="No"){
+    $templateWord->setValue('rec',"X");
+    $templateWord->setValue('ace',"");
+    $id_estado="8";
+      $templateWord->setImageValue('fima_paciente', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 200, 'height' => 60, 'ratio' => false));
+}
+$nombre_completo = $nombre." ".$apellido;
+$templateWord->setValue('nombre_completo',$nombre_completo);
+$templateWord->setValue('cedula',$documento);
+$templateWord->setValue('ciudad_cedula',$lugar_exp);
+$templateWord->setValue('edad',$edad);
+$templateWord->setValue('direc',$direccion);
+$templateWord->setValue('fecha',$fecha);
+$templateWord->setValue('telefono',$telefono);
+$templateWord->setValue('ciudad',"San Jose De Cucuta");
+$templateWord->setImageValue('fima_profesional', array('path' => '../FirmasProfesionales/' . $firmaProfesional[0], 'width' => 200, 'height' => 60, 'ratio' => false));
+
+$templateWord->saveAs('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx');
+$archivo_binario = (file_get_contents('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx'));
+
+$consentimiento->Actualizar_Cita_Consentimiento($id_cita,$id_consentimiento,$id_estado,$archivo_binario);
+  
+$validarConsentCita=$consentimiento->Validar_Consentimientos_Cita_Firmados($id_cita);
+$validar_Sin_Firma_Venopuncion=$consentimiento->Validar_Consentimientos_Cita_Firmados_Sin_Firma_Pendiente($id_cita);
+$validar_Pendientes=$consentimiento->Validar_Consentimientos_Cita_Pendientes($id_cita);
+if($validarConsentCita=="0"){
+  array_map('unlink', array_filter(
+    (array) array_merge(glob("../firma_paciente_temp/".$ruta_firma))));
+$consentimiento->Actualizar_Estado_Cita($id_cita);
+//$consentimiento->Resetear_Datos_Representante($id_cita);
+$_SESSION["aceptRech"] = "";
+$_SESSION["direccion"] = "";
+$_SESSION["telefono"] = "";
+$_SESSION["expedicion"] = "";
+
+}if($validar_Sin_Firma_Venopuncion!="0" && $validar_Pendientes=="0"){
+  $consentimiento->Actualizar_Estado_Cita($id_cita);
+//$consentimiento->Resetear_Datos_Representante($id_cita);
+$_SESSION["aceptRech"] = "";
+$_SESSION["direccion"] = "";
+$_SESSION["telefono"] = "";
+$_SESSION["expedicion"] = "";
+}
+      //echo $ruta." ".$nombre_paciente." ".$apellido_paciente." ".$tipo_documento." ".$documento." ".$aseguradora." ".$regimen;
+      /*echo $nombre_paciente;
+      echo $apellido_paciente;*/
+      header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen ."&historial=false&solicitar=false");
+      unlink('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx');
+$_SESSION["aceptRech"] = "";
+$_SESSION["direccion"] = "";
+$_SESSION["telefono"] = "";
+$_SESSION["expedicion"] = "";
+}
       }else{
         if(@file_get_contents('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx')){
         $templateWord = new TemplateProcessor('../archivo_temp/'.$id_cita.'-'.$id_consentimiento.'.docx');
@@ -387,11 +484,11 @@ $templateWord->setValue('ace',"X");
 $templateWord->setValue('rec',"");
 $id_estado="7";
 if($datos_repre[0] == "No Aplica"){
-$templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
+$templateWord->setImageValue('firma_paciente_acepta', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 200, 'height' => 60, 'ratio' => false));
 $templateWord->setValue('cedula_paciente',$documento);
 $templateWord->setValue('firma_representante',"");
 }else{
-$templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
+$templateWord->setImageValue('firma_representante', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 180, 'height' => 50, 'ratio' => false));
 $templateWord->setValue('firma_paciente_acepta',"");
 $templateWord->setValue('cedula_paciente',"");
 }
@@ -400,11 +497,11 @@ $templateWord->setValue('rec',"X");
 $templateWord->setValue('ace',"");
 $id_estado="8";
 if($datos_repre[0] == "No Aplica"){
-$templateWord->setImageValue('firma_paciente_acepta', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
+$templateWord->setImageValue('firma_paciente_acepta', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 200, 'height' => 60, 'ratio' => false));
 $templateWord->setValue('cedula_paciente',$documento);
 $templateWord->setValue('firma_representante',"");
 }else{
-$templateWord->setImageValue('firma_representante', array('src' => '../firma_paciente_temp/'.$ruta_firma,'swh'=>'250'));
+$templateWord->setImageValue('firma_representante', array('path' => '../firma_paciente_temp/'.$ruta_firma, 'width' => 180, 'height' => 50, 'ratio' => false));
 $templateWord->setValue('firma_paciente_acepta',"");
 $templateWord->setValue('cedula_paciente',"");
 }
@@ -422,7 +519,7 @@ if($_POST["selectprofesional"] != ""){
   $selectprofesional = $_POST["selectprofesional"];
 $firmaProfesional = $profesional->Consultar_Firma_Profesional($selectprofesional);
 $templateWord->setValue('cedula_profesional',$selectprofesional);
-$templateWord->setImageValue('firma_profesional', array('src' => '../FirmasProfesionales/' . $firmaProfesional[0],'swh'=>'250'));
+$templateWord->setImageValue('firma_profesional', array('src' => '../FirmasProfesionales/' . $firmaProfesional[0], 'width' => 200, 'height' => 60, 'ratio' => false));
 }
 //$templateWord->setValue('cedula_profesional',$selectprofesional);
 $templateWord->setValue('firma_paciente_rechaza', "");
@@ -599,6 +696,7 @@ header("location:../ver_consentimientos.php"  . "?id_cita=" . $id_cita ."&cod_ex
 
       }
          }
+         
     }if(filter_input(INPUT_POST, 'btnConfirmar')){
       $ruta = $consentimiento->Consultar_Archivo_Consentimiento($id_consentimiento);
 

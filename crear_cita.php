@@ -116,6 +116,7 @@ $conexion = $conexion->connect();
                         <option value="Seguro de Riesgos Catastróficos y Accidentes de Tránsito (ECAT)">Seguro de Riesgos Catastróficos y Accidentes de Tránsito (ECAT)</option>
                         <option value="VINC">VINC</option>
                         <option value="Regimen de Excepcion">Regimen de Excepcion</option>
+                        <option value="Otro">Otro</option>
                     </select>
 </div>
 <label for="validationCustomSelect">Sexo <span style="color:red;">(*)</span></label>
@@ -188,10 +189,20 @@ $conexion = $conexion->connect();
       <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-stethoscope"></i></label>
   </div>
          <select class="custom-select" id="validationCustomSelect" name="selectconsultorio" aria-describedby="inputGroupPrepend" required>
-                    
-                        <option value="SALA 1">SALA 1</option>
-                        <option value="SALA 2">SALA 2</option>  
-                        <option value="SALA 3">SALA 3</option>         
+
+         <option value="CONSULTORIO 101">CONSULTORIO 101</option> 
+         <option value="CONSULTORIO 102">CONSULTORIO 102</option>
+         <option value="CONSULTORIO 103">CONSULTORIO 103</option>
+         <option value="CONSULTORIO 104">CONSULTORIO 104</option>
+         <option value="CONSULTORIO 105">CONSULTORIO 105</option>              
+         <option value="SALA 1">SALA 1</option>
+         <option value="SALA 2">SALA 2</option>  
+         <option value="SALA 3">SALA 3</option>
+         <option value="SALA 4">SALA 4</option> 
+         <option value="ECOGRAFÍA">ECOGRAFIA</option>
+         <option value="FISIOLOGÍA">FISIOLOGIA</option>
+         <option value="BARIÁTRICA 106">BARIATRICA 106</option>
+         <option value="TOMA DE MUESTRA">TOMA DE MUESTRA</option>       
   </select>
 </div>
 <label for="validationCustomSelect">Sede <span style="color:red;">(*)</span></label>

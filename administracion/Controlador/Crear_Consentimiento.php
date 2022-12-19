@@ -17,13 +17,25 @@ use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 if(filter_input(INPUT_POST, 'btnAcepta')){
-
-$miSelectFirmante = $_POST['selectfirmante'];
+  $miSelectFirmante = $_POST['selectfirmante'];
 $miSelectalternativas = $_POST['selectalternativas'];
 $templateWord = new TemplateProcessor('../../formatos/Plantilla/plantilla2.docx');
 $consentimiento= new ConsentimientoDao();
 $codigo = $_POST["codigo_consentimiento"];
 $descripcion = $_POST["nombre_procedimiento"];
+if($consentimiento->Consultar_Codigo_Disponible($codigo)!=0){
+  header("Refresh: 2; URL=../crear_consentimiento.php");
+
+  echo '<script>
+  Swal.fire({
+   icon: "error",
+   title: "Proceso Fallido",
+   text: "Debe Asignar un Codigo de Consentimiento Diferente",
+   showConfirmButton:false,
+   });
+  </script>';
+}else{
+
 $ruta_archivo = $codigo . " FORMATO DE CONSENTIMIENTO INFORMADO DE " . $descripcion . ".docx";
 $consentimiento -> Guardar_Consentimiento($codigo,$descripcion,$ruta_archivo);
 
@@ -106,6 +118,6 @@ if($consentimiento){
 
 
 //header("location:../panel_admin.php");
-
+    }
 }
 ?>

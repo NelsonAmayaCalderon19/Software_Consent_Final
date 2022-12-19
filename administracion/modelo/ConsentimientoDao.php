@@ -14,30 +14,11 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
+
 foreach($results as $fila):
         $nombre = $fila["descripcion"];
 endforeach;
     return $nombre;
-    }
-
-    public function Consultar_Datos_Representante($id_cita){
-        $sq="SELECT * FROM cita_consent as cons WHERE cons.id_cita= :id_cita and cons.nombre_representante!=''";
-$result=$this->conexion->prepare($sq);
-$result->execute(array(
-    ':id_cita' =>"".$id_cita.""
-));
-$results = $result -> fetchAll();
-$dir = array();
-$cont = 0;
-foreach($results as $fila):
-        $dir[$cont] = $fila["nombre_representante"];
-        $cont++;
-        $dir[$cont] = $fila["parentesco_representante"];
-        $cont++;
-        $dir[$cont] = $fila["documento_representante"];
-        $cont++;
-endforeach;
-return $dir;
     }
 
     public function Eliminar_Examen_Consentimiento($cod_examen,$cod_consentimiento){
@@ -65,6 +46,7 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
+
 foreach($results as $fila):
         $nombre = $fila["ruta_archivo"];
 endforeach;
@@ -78,20 +60,7 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
-foreach($results as $fila):
-        $estado = $fila["id_estado"];
-endforeach;
-    return $estado;
-    }
 
-    public function Consultar_Estado_Consentimiento2($id_cita,$cod_consentimiento){
-        $sq="SELECT * FROM cita_consent as cons WHERE cons.id_cita=:id_cita AND cons.cod_consentimiento=:cod_consentimiento";
-$result=$this->conexion->prepare($sq);
-$result->execute(array(
-    ':id_cita' =>"".$id_cita."",
-    ':cod_consentimiento' =>"".$cod_consentimiento.""
-  ));
-$results = $result -> fetchAll();
 foreach($results as $fila):
         $estado = $fila["id_estado"];
 endforeach;
@@ -105,6 +74,7 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
+
 foreach($results as $fila):
         $nombre = $fila["formulario"];
 endforeach;
@@ -119,38 +89,11 @@ $result->execute(array(
     ':codigo' =>"".$codigo.""
   ));
 $results = $result -> fetchAll();
+
 foreach($results as $fila):
         $nombre = $fila["profesional_firma"];
 endforeach;
     return $nombre;
-    }
-
-    public function Consultar_Pregunta_Consentimiento($id_cita,$id_consentimiento){
-        $sq="SELECT * FROM cita_consent WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
-$result=$this->conexion->prepare($sq);
-$result->execute(array(
-    ':id_cita' =>"".$id_cita."",
-    ':cod_consentimiento' =>"".$id_consentimiento.""
-  ));
-$results = $result -> fetchAll();
-foreach($results as $fila):
-        $nombre = $fila["inquietud"];
-endforeach;
-    return $nombre;
-    }
-
-    public function Consultar_Firmado_Consentimiento($id_cita,$id_consentimiento){
-        $sql="SELECT * FROM cita_consent WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
-$result2=$this->conexion->prepare($sql);
-$result2->execute(array(
-    ':id_cita' =>"".$id_cita."",
-    ':cod_consentimiento' =>"".$id_consentimiento.""
-  ));
-$results = $result2 -> fetchAll();
-foreach($results as $fila):
-        $nomb = $fila["firmado_pro"];
-endforeach;
-    return $nomb;
     }
 
     public function Actualizar_Cita_Consentimiento($id_cita,$id_consentimiento,$id_estado,$archivo_adjunto){
@@ -165,46 +108,11 @@ endforeach;
           return $result->rowCount();
     }
 
-    public function Actualizar_Consentimiento_firmado_Profesional($id_cita,$id_consentimiento,$firma){
-        $sq ="UPDATE cita_consent SET firmado_pro=:firma WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
-        $result=$this->conexion->prepare($sq);
-        $result->execute(array(
-            ':firma' =>"".$firma."",
-            ':id_cita' =>"".$id_cita."",
-            ':cod_consentimiento' =>"".$id_consentimiento.""
-          ));
-          return $result->rowCount();
-    }
-
-    public function Actualizar_Cita_Consentimiento_Archivo($id_cita,$id_consentimiento,$archivo_adjunto){
-        $sq ="UPDATE cita_consent SET archivo_adjunto=:archivo_adjunto WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
-        $result=$this->conexion->prepare($sq);
-        $result->execute(array(
-  
-            ':archivo_adjunto' =>"".$archivo_adjunto."",
-            ':id_cita' =>"".$id_cita."",
-            ':cod_consentimiento' =>"".$id_consentimiento.""
-          ));
-          return $result->rowCount();
-    }
-
     public function Actualizar_Estado_Consentimiento_Venopuncion($id_cita,$id_consentimiento,$id_estado){
         $sq ="UPDATE cita_consent SET id_estado=:id_estado WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
         $result=$this->conexion->prepare($sq);
         $result->execute(array(
             ':id_estado' =>"".$id_estado."",
-            ':id_cita' =>"".$id_cita."",
-            ':cod_consentimiento' =>"".$id_consentimiento.""
-          ));
-          return $result->rowCount();
-    }
-
-    public function Anadir_Inquietude($id_cita,$id_consentimiento,$inquietud,$respuesta){
-        $sq ="UPDATE cita_consent SET inquietud=:inquietud, respuesta=:respuesta WHERE id_cita= :id_cita and cod_consentimiento= :cod_consentimiento";
-        $result=$this->conexion->prepare($sq);
-        $result->execute(array(
-            ':inquietud' =>"".$inquietud."",
-            ':respuesta' =>"".$respuesta."",
             ':id_cita' =>"".$id_cita."",
             ':cod_consentimiento' =>"".$id_consentimiento.""
           ));
@@ -365,6 +273,7 @@ $result->execute(array(
     ':cod_consentimiento' =>"".$cod_consentimiento.""
   ));
 $results = $result -> fetchAll();
+
 foreach($results as $fila):
         $cantidad = $fila["cod_examen"];
 endforeach;
@@ -375,7 +284,8 @@ public function Actualizar_Estado_Cita($id_cita){
     $sq ="UPDATE cita SET id_estado=4 WHERE id_cita= :id_cita";
         $result=$this->conexion->prepare($sq);
         $result->execute(array(   
-            ':id_cita' =>"".$id_cita.""           
+            ':id_cita' =>"".$id_cita.""
+            
           ));
           return $result->rowCount();
 }
@@ -384,7 +294,8 @@ public function Retornar_Estado_Inicial_Cita($id_cita){
     $sq ="UPDATE cita SET id_estado=3 WHERE id_cita= :id_cita";
         $result=$this->conexion->prepare($sq);
         $result->execute(array(   
-            ':id_cita' =>"".$id_cita.""         
+            ':id_cita' =>"".$id_cita.""
+            
           ));
           return $result->rowCount();
 }
@@ -392,8 +303,10 @@ public function Retornar_Estado_Inicial_Cita($id_cita){
 public function Guardar_Consentimiento($codigo,$descripcion,$ruta_archivo){
     $datos = new Consentimiento($codigo,$descripcion,$ruta_archivo,1);
     $consulta = "INSERT INTO consentimiento(codigo,descripcion,ruta_archivo,id_estado) 
-    VALUES(:codigo,:descripcion,:ruta_archivo,:id_estado)";    
+    VALUES(:codigo,:descripcion,:ruta_archivo,:id_estado)";
+    
 $sql = $this->conexion->prepare($consulta);
+
 $sql->bindValue(':codigo',$datos->getCodigo());
 $sql->bindValue(':descripcion',$datos->getDescripcion());
 $sql->bindValue(':ruta_archivo',$datos->getRuta());
@@ -403,49 +316,24 @@ return $sql;
 }
 public function Guardar_Consentimiento_Examen($cod_examen,$cod_consentimiento){
     $consulta = "INSERT INTO consent_examen(cod_examen,cod_consentimiento) 
-    VALUES(:cod_examen,:cod_consentimiento)";   
+    VALUES(:cod_examen,:cod_consentimiento)";
+    
 $sq = $this->conexion->prepare($consulta);
+
+//$sub_fech = Cita::Validar_Fecha($fecha);
+
 $sq->bindValue(':cod_examen',$cod_examen);
 $sq->bindValue(':cod_consentimiento',$cod_consentimiento);     
 $sq->execute();
 return $sq;
 }
 
-public function Guardar_Datos_Representante($id_cita,$nombre_representante,$parentesco_representante,$documento_representante){
-    $sq ="UPDATE cita_consent SET nombre_representante=:nombre_representante, parentesco_representante=:parentesco_representante, documento_representante=:documento_representante WHERE id_cita= :id_cita";
-    $result=$this->conexion->prepare($sq);
-    $result->execute(array(
-        ':nombre_representante' =>"".$nombre_representante."",
-        ':parentesco_representante' =>"".$parentesco_representante."",
-        ':documento_representante' =>"".$documento_representante."",
-        ':id_cita' =>"".$id_cita.""       
-      ));
-      return $result->rowCount();
-}
-
-public function Resetear_Datos_Representante($id_cita){
-    $sq ="UPDATE cita_consent SET nombre_representante=NULL,parentesco_representante=NULL,documento_representante=NULL WHERE id_cita= :id_cita";
-    $result=$this->conexion->prepare($sq);
-    $result->execute(array(
-        ':id_cita' =>"".$id_cita.""        
-      ));
-      return $result->rowCount();
-}
-
-public function Resetear_Inquietudes($id_cita,$id_consentimiento){
-    $sq ="UPDATE cita_consent SET inquietud=NULL,respuesta=NULL WHERE id_cita= :id_cita AND cod_consentimiento= :id_consentimiento";
-    $result=$this->conexion->prepare($sq);
-    $result->execute(array(
-        ':id_cita' =>"".$id_cita."",
-        ':id_consentimiento' =>"".$id_consentimiento.""
-      ));
-      return $result->rowCount();
-}
-
 public function Guardar_Consentimiento_Detalle($cod_consentimiento,$nombre,$descripcion,$objetivo,$beneficio,$riesgo,$existe_alternativa,$alternativa,$decision,$revocatoria,$profesional_firma){
     $consulta = "INSERT INTO consentimiento_detalle(cod_consentimiento,nombre,descripcion,objetivo,beneficio,riesgo,existe_alternativa,alternativa,decision,revocatoria,profesional_firma) 
-    VALUES(:cod_consentimiento,:nombre,:descripcion,:objetivo,:beneficio,:riesgo,:existe_alternativa,:alternativa,:decision,:revocatoria,:profesional_firma)";    
+    VALUES(:cod_consentimiento,:nombre,:descripcion,:objetivo,:beneficio,:riesgo,:existe_alternativa,:alternativa,:decision,:revocatoria,:profesional_firma)";
+    
 $sq = $this->conexion->prepare($consulta);
+
 $sq->bindValue(':cod_consentimiento',$cod_consentimiento);
 $sq->bindValue(':nombre',$nombre);   
 $sq->bindValue(':descripcion',$descripcion);
@@ -488,19 +376,6 @@ endforeach;
 return $cod;
 }
 
-public function Consultar_Codigo_Disponible($codigo){
-    $sq="SELECT count(codigo) as cantidad FROM consentimiento WHERE codigo= :codigo";
-    $result=$this->conexion->prepare($sq);
-    $result->execute(array(
-        ':codigo' =>"".$codigo.""
-    ));
-    $results = $result -> fetchAll();
-foreach($results as $fila):
-    $cod = $fila["cantidad"];
-endforeach;
-return $cod;
-}
-
 public function Consultar_Consentimiento_Formato($id_consentimiento){
     $sq="SELECT * FROM consentimiento WHERE codigo= :cod_consentimiento";
 $result=$this->conexion->prepare($sq);
@@ -525,18 +400,6 @@ public function InActivar_Consentimiento($codigo,$id_estado){
     $result->execute(array(
         ':id_estado' =>"".$id_estado."",
         ':codigo' =>"".$codigo.""
-      ));
-      return $result->rowCount();
-}
-
-public function Editar_Inquietud_Consentimiento($id_cita,$id_consentimiento,$inquietud,$respuesta){
-    $sq ="UPDATE cita_consent SET inquietud=:inquietud, respuesta=:respuesta WHERE id_cita= :id_cita AND cod_consentimiento= :id_consentimiento ";
-    $result=$this->conexion->prepare($sq);
-    $result->execute(array(
-        ':inquietud' =>"".$inquietud."",
-        ':respuesta' =>"".$respuesta."",
-        ':id_cita' =>"".$id_cita."",
-        ':id_consentimiento' =>"".$id_consentimiento.""
       ));
       return $result->rowCount();
 }

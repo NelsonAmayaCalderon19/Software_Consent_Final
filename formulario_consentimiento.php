@@ -38,7 +38,7 @@ $consentimiento = new ConsentimientoDao();
 $conexion = new conexion();
 $conexion = $conexion->connect(); ?>
 <?php include "includes/header.php";
-if($_GET["cod_consentimiento"] != "FT-PA-GI-HC-064"){
+if($_GET["cod_consentimiento"] != "FT-PA-GI-HC-115" && $_GET["cod_consentimiento"] != "FT-PA-GI-HC-064"){
 $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$id_consentimiento'";?>
     <?php foreach ($conexion->query($consulta) as $row) { ?>
     <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
@@ -402,7 +402,7 @@ Firma Paciente o Representante Legal
 </div>      
 </div>
 </div>
- <?php } }else{?> 
+ <?php } }if($_GET["cod_consentimiento"] == "FT-PA-GI-HC-064"){?> 
   <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
           <div class="row">
               <div class="col-12 d-xl-flex align-items-center justify-content-center" style="width:100%;">
@@ -935,7 +935,211 @@ Firma Paciente o Representante Legal
 </div>      
 </div>
 </div>
-            <?php }?>
+            <?php }if($_GET["cod_consentimiento"] == "FT-PA-GI-HC-115"){
+              $consulta = "SELECT * FROM consentimiento_detalle where cod_consentimiento = '$id_consentimiento'";?>
+    <?php foreach ($conexion->query($consulta) as $row) { ?>
+    <div class="container-fluid col-11 mx-auto" style="margin-top: 60px;">
+          <div class="row">
+              <div class="col-12 d-xl-flex align-items-center justify-content-center" style="width:100%;">
+                <div class="alert alert-success alert-dismissible" id="success-alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Consentimiento Informado</strong> Formato a Diligenciar
+  </div>
+                </div>
+                <div class="col-sm-12 card shadow mb-3">
+            <div class="card-header py-3">
+            <?php $nombre_proced = $consentimiento->Consultar_Nombre_Consentimiento($id_consentimiento); ?>
+              <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-pencil-square-o"></i> <?php echo $nombre_proced; ?></h6>
+            </div>
+            <div class="col-sm-12 card-body">
+            <form method="POST" id="formularito" action="Controlador/Crear_Consentimiento2.php?id_cita=<?php echo $id_cita?>&cod_consentimiento=<?php echo $id_consentimiento?>&cod_examen=<?php echo $cod_examen?>"> 
+            <label for="validationCustomNombre">Nombre del Paciente <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="<?php echo $datos[1]; ?>" name="nombre_paciente" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
+<label for="validationCustomNombre">Apellidos del Paciente <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="<?php echo $datos[2]; ?>" name="apellido_paciente" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
+<label for="validationCustomNombre">Documento <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="<?php echo $datos[3]; ?>" name="documento" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
+<?php if($_SESSION["expedicion"]!=""){?>
+<label for="validationCustomNombre">Lugar de Expedición <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="<?php echo $_SESSION["expedicion"];?>" name="lugar_exp" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
+<?php }else{?>
+  <label for="validationCustomNombre">Lugar de Expedición <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="" name="lugar_exp" id="validationCustomNombre" aria-describedby="basic-addon3" >
+</div>
+  <?php }?>
+<label for="validationCustomNombre">Edad <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="<?php echo $datos[4]; ?>" name="edad" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
+<?php if($_SESSION["direccion"]!=""){?>
+<label for="validationCustomNombre">Dirección de Residencia <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="<?php echo $_SESSION["direccion"];?>" name="direc" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
+<?php }else{?>
+  <label for="validationCustomNombre">Dirección de Residencia <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="" name="direc" id="validationCustomNombre" aria-describedby="basic-addon3">
+</div>
+  <?php }?>
+  <?php if($_SESSION["telefono"]!=""){?>
+<label for="validationCustomNombre">Teléfono <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="<?php echo $_SESSION["telefono"];?>" name="telefono" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
+<?php }else{?>
+  <label for="validationCustomNombre">Teléfono <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-user"></i></span>
+  </div>
+    <input type="text" class="form-control" value="" name="telefono" id="validationCustomNombre" aria-describedby="basic-addon3">
+</div>
+  <?php }?>
+<?php $datoscargo = $prof->Consultar_Cargo_por_Descripcion($row['profesional_firma']); 
+$cargo = $datoscargo[0];?>
+<?php $consul_cargo = "SELECT * FROM profesional as prof where prof.id_estado=1 and prof.id_cargo= $cargo";?>
+<?php if($row['profesional_firma'] == "MEDICO"){ ?>
+<label for="validationCustomSelect"><?php echo $row['profesional_firma']; ?><span style="color:red;"> (*)</span></label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-user"></i></label>
+  </div>
+         <select class="custom-select" id="validationCustomSelect" name="selectprofesional" aria-describedby="inputGroupPrepend" required>
+         <?php if($cargo == "1"){
+          $datosprof = $prof->Consultar_Profesional_por_Cedula($datos[10]);?>
+         <option value="<?php echo $datosprof[0]; ?>"><?php echo $datosprof[1]; ?></option>
+         <?php }?>
+         <?php foreach ($conexion->query($consul_cargo) as $ro) { ?>
+                        <option value="<?php echo $ro['documento']; ?>"><?php echo $ro['nombre_completo'];?></option>
+                        <?php } ?>               
+  </select>
+</div>
+<?php }else{?>
+  <label for="validationCustomSelect"><?php echo $row['profesional_firma']; ?><span style="color:red;"></span></label>
+     <div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-user"></i></label>
+  </div>
+         <select class="custom-select" id="validationCustomSelect" name="selectprofesional" aria-describedby="inputGroupPrepend" >
+         <?php if($_SESSION["selectPro"] == ""){?>
+          <option value="">Seleccione</option>
+        <?php }else{ ?>
+         <option value="<?php echo $_SESSION["selectPro"]; ?>"><?php $nomprof = $prof->Consultar_Profesional_por_Cedula($_SESSION["selectPro"]); echo $nomprof[1];?></option><?php }?>
+         <?php foreach ($conexion->query($consul_cargo) as $ro) { ?>
+                        <option value="<?php echo $ro['documento']; ?>"><?php echo $ro['nombre_completo'];?></option>
+                        <?php } ?>              
+  </select>
+</div>
+  <?php } ?>
+  <label for="validationCustomNombre">Fecha <span style="color:red;">(*)</span></label>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3"><i class="fa fa-calendar"></i></span>
+  </div>
+    <input type="date" class="form-control" value="<?php echo $datos[8]; ?>" name="fecha" id="validationCustomNombre" aria-describedby="basic-addon3" readonly="">
+</div>
+<table class="table border">
+<thead class="thead-light">
+<tr>
+      <th class="text-center" colspan="4">Acepta o No Acepta el Procedimiento</th>
+    </tr>
+</thead>
+<tbody>
+  <tr>
+  <td colspan="4">
+  <div class="input-group mb-3">
+  <?php if($_SESSION["aceptRech"]=="Sí"){?>
+    <div class="form-check col-md-2">
+  <input class="form-check-input" type="radio" value="Sí" name="flexRadioDefault" id="flexRadioDefault1" checked>
+  <label class="form-check-label" for="flexRadioDefault">
+    Sí
+  </label>
+  </div>
+  <div class="form-check ">
+  <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2">
+  <label class="form-check-label" for="flexRadioDefault">
+    No
+  </label>  
+</div>
+<?php }else if($_SESSION["aceptRech"]=="No"){?>
+  <div class="form-check col-md-2">
+  <input class="form-check-input" type="radio" value="Sí" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault">
+    Sí
+  </label>
+</div>
+<div class="form-check ">
+  <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault">
+    No
+  </label> 
+</div>
+<?php }else{?>
+  <div class="form-check col-md-2">
+  <input class="form-check-input" type="radio" value="Sí" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault">
+    Sí
+  </label>
+</div>
+  <div class="form-check ">
+  <input class="form-check-input" type="radio" value="No" name="flexRadioDefault" id="flexRadioDefault2">
+  <label class="form-check-label" for="flexRadioDefault">
+    No
+  </label>  
+</div>
+  <?php }?>
+</div>
+  </td>
+</tr>
+</tbody>
+</table>
+<div class="col-12 text-center justify-content-center row">
+  <a class="btn btn-warning mr-3" style="color: white;" href="<?php echo "ver_consentimientos.php?id_cita=" . $id_cita ."&cod_examen=" . $cod_examen. "&historial=false". "&solicitar=false" ?>">Cancelar</a>
+<input class="btn btn-success btn-acepta" type="submit" name="btnAcepta" id="btnAcepta" value="Aceptar" />    
+                          </div>  
+</form>
+            </div>
+</div>      
+</div>
+</div>
+              <?php }}?>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>   

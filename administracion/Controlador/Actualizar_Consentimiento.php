@@ -25,13 +25,17 @@ $consentimiento= new ConsentimientoDao();
 $codigo = $_POST["codigo_consentimiento"];
 $descripcion = "FORMATO DE CONSENTIMIENTO INFORMADO DE " . $_POST["nombre_procedimiento"];
 $ruta_archivo = $codigo . " " . $descripcion . ".docx";
+//$consentimiento -> Guardar_Consentimiento($codigo,$descripcion,$ruta_archivo);
 try{
 $consentimiento->Eliminar_Consent_Examen($codigo);
 }catch(PDOException $e){
+  //echo $e;
 }
 
 if(!empty($_POST['check_list'])){
   foreach($_POST['check_list'] as $selected){
+ 
+      //if($consentimiento->Buscar_Relacion($selected,$codigo)== ""){
         try{
  $consentimiento -> Guardar_Consentimiento_Examen($selected,$codigo);
 }catch(PDOException $e){
